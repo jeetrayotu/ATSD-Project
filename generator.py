@@ -14,6 +14,7 @@ import re
 import sys
 from pathlib import Path
 
+
 def to_constant(value):
     if isinstance(value, bool):
         return "true" if value else "false"
@@ -46,8 +47,8 @@ def get_value(obj, *keys, default=None):
 # Model loading
 # ---------------------------------------------------------
 
-class RobotCodeGenerator:
 
+class RobotCodeGenerator:
     def __init__(self, model_path, output_directory):
         self.model_path = Path(model_path)
         self.output_directory = Path(output_directory)
@@ -64,23 +65,11 @@ class RobotCodeGenerator:
             if cls.get("id") == class_id:
                 return cls.get("name", "")
 
-        return get_value(
-            obj,
-            "class",
-            "className",
-            "type",
-            "classifier",
-            default=""
-        )
+        return get_value(obj, "class", "className", "type", "classifier", default="")
 
     def get_attributes(self, obj):
         raw_attributes = get_value(
-            obj,
-            "attributeValues",
-            "attributes",
-            "properties",
-            "values",
-            default={}
+            obj, "attributeValues", "attributes", "properties", "values", default={}
         )
 
         if isinstance(raw_attributes, list):
@@ -122,9 +111,7 @@ class RobotCodeGenerator:
 
     def load_model(self):
         if not self.model_path.exists():
-            raise FileNotFoundError(
-                f"Model file not found: {self.model_path}"
-            )
+            raise FileNotFoundError(f"Model file not found: {self.model_path}")
 
         with open(self.model_path, "r", encoding="utf-8") as file:
             self.model = json.load(file)
@@ -144,22 +131,11 @@ class RobotCodeGenerator:
         return models
 
     def get_model_name(self, model):
-        return get_value(
-            model,
-            "name",
-            "modelName",
-            "title",
-            default="UnnamedModel"
-        )
+        return get_value(model, "name", "modelName", "title", default="UnnamedModel")
 
     def get_model_objects(self, model):
         objects = get_value(
-            model,
-            "objects",
-            "elements",
-            "nodes",
-            "instances",
-            default=[]
+            model, "objects", "elements", "nodes", "instances", default=[]
         )
 
         if isinstance(objects, dict):
@@ -169,7 +145,8 @@ class RobotCodeGenerator:
 
     def find_objects(self, model, class_name):
         return [
-            obj for obj in self.get_model_objects(model)
+            obj
+            for obj in self.get_model_objects(model)
             if self.get_class(obj) == class_name
         ]
 
@@ -187,10 +164,7 @@ class RobotCodeGenerator:
 
     def validate_model(self, model):
         robot_objects = self.find_objects(model, "Robot")
-        controller_objects = self.find_objects(
-            model,
-            "Controller"
-        )
+        controller_objects = self.find_objects(model, "Controller")
 
         if not robot_objects:
             return False
@@ -199,18 +173,12 @@ class RobotCodeGenerator:
             return False
 
         robot_attributes = self.get_attributes(robot_objects[0])
-        controller_attributes = self.get_attributes(
-            controller_objects[0]
-        )
+        controller_attributes = self.get_attributes(controller_objects[0])
 
         if not robot_attributes.get("name"):
             return False
 
-        for key in (
-            "cruiseSpeed",
-            "turnSpeed",
-            "defaultTurnAngle"
-        ):
+        for key in ("cruiseSpeed", "turnSpeed", "defaultTurnAngle"):
             if controller_attributes.get(key) is None:
                 return False
 
@@ -245,17 +213,11 @@ class RobotCodeGenerator:
         robot_name = robot_attributes.get("name", "Robot")
 
         lines.append("// Robot configuration")
-        lines.append(
-            f'const char* ROBOT_NAME = "{robot_name}";'
-        )
+        lines.append(f'const char* ROBOT_NAME = "{robot_name}";')
 
         lines.append("\n// Controller configuration")
 
-        for attribute in (
-            "cruiseSpeed",
-            "turnSpeed",
-            "defaultTurnAngle"
-        ):
+        for attribute in ("cruiseSpeed", "turnSpeed", "defaultTurnAngle"):
             value = controller_attributes.get(attribute, 0)
 
             lines.append(
@@ -266,23 +228,15 @@ class RobotCodeGenerator:
         lines.append("")
 
         # Distance sensors
-        for index, obj in enumerate(
-            self.find_objects(model, "DistanceSensor")
-        ):
+        for index, obj in enumerate(self.find_objects(model, "DistanceSensor")):
             attrs = self.get_attributes(obj)
             prefix = f"DISTANCE_SENSOR_{index}"
 
             lines.append(f"// Distance sensor {index + 1}")
 
-            lines.append(
-                f"const int {prefix}_TRIG_PIN = "
-                f"{attrs.get('trigPIN', 0)};"
-            )
+            lines.append(f"const int {prefix}_TRIG_PIN = {attrs.get('trigPIN', 0)};")
 
-            lines.append(
-                f"const int {prefix}_ECHO_PIN = "
-                f"{attrs.get('echoPIN', 0)};"
-            )
+            lines.append(f"const int {prefix}_ECHO_PIN = {attrs.get('echoPIN', 0)};")
 
             lines.append(
                 f"const int {prefix}_READ_INTERVAL_MS = "
@@ -290,16 +244,13 @@ class RobotCodeGenerator:
             )
 
             lines.append(
-                f'const char* {prefix}_MOUNTING = '
-                f'"{attrs.get("mounting", "unknown")}";'
+                f'const char* {prefix}_MOUNTING = "{attrs.get("mounting", "unknown")}";'
             )
 
             lines.append("")
 
         # Line tracker
-        for index, obj in enumerate(
-            self.find_objects(model, "LineTracker")
-        ):
+        for index, obj in enumerate(self.find_objects(model, "LineTracker")):
             attrs = self.get_attributes(obj)
 
             lines.append("// Line tracker")
@@ -311,20 +262,14 @@ class RobotCodeGenerator:
         lines.append("")
 
         # Status LED
-        for index, obj in enumerate(
-            self.find_objects(model, "StatusLED")
-        ):
+        for index, obj in enumerate(self.find_objects(model, "StatusLED")):
             attrs = self.get_attributes(obj)
 
             lines.append("// Status LED")
-            lines.append(
-                f"const int STATUS_LED_{index}_PIN = "
-                f"{attrs.get('pin', 0)};"
-            )
+            lines.append(f"const int STATUS_LED_{index}_PIN = {attrs.get('pin', 0)};")
 
             lines.append(
-                f"const int STATUS_LED_{index}_LED_COUNT = "
-                f"{attrs.get('ledCount', 1)};"
+                f"const int STATUS_LED_{index}_LED_COUNT = {attrs.get('ledCount', 1)};"
             )
 
             lines.append(
@@ -335,9 +280,7 @@ class RobotCodeGenerator:
         lines.append("")
 
         # Motors
-        for index, obj in enumerate(
-            self.find_objects(model, "Motor")
-        ):
+        for index, obj in enumerate(self.find_objects(model, "Motor")):
             attrs = self.get_attributes(obj)
 
             prefix = f"MOTOR_{index}"
@@ -345,8 +288,7 @@ class RobotCodeGenerator:
             lines.append(f"// Motor {index + 1}")
 
             lines.append(
-                f'const char* {prefix}_SIDE = '
-                f'"{attrs.get("side", "unknown")}";'
+                f'const char* {prefix}_SIDE = "{attrs.get("side", "unknown")}";'
             )
 
             lines.append(
@@ -355,8 +297,7 @@ class RobotCodeGenerator:
             )
 
             lines.append(
-                f"const int {prefix}_DIRECTION_PIN = "
-                f"{attrs.get('directionPin', 0)};"
+                f"const int {prefix}_DIRECTION_PIN = {attrs.get('directionPin', 0)};"
             )
 
             lines.append("")
@@ -376,8 +317,7 @@ class RobotCodeGenerator:
 
             if attrs.get("standbyPin") is not None:
                 lines.append(
-                    f"const int MOTOR_DRIVER_STANDBY_PIN = "
-                    f"{attrs['standbyPin']};"
+                    f"const int MOTOR_DRIVER_STANDBY_PIN = {attrs['standbyPin']};"
                 )
 
             lines.append("")
@@ -444,19 +384,13 @@ float {prefix}_read() {{
         for index, channel in enumerate(channels):
             attrs = self.get_attributes(channel)
 
-            position = safe_name(
-                attrs.get("position", f"channel_{index}")
-            ).lower()
+            position = safe_name(attrs.get("position", f"channel_{index}")).lower()
 
             pin = attrs.get("pin", 0)
 
-            lines.append(
-                f"int line_tracker_read_{position}() {{"
-            )
+            lines.append(f"int line_tracker_read_{position}() {{")
 
-            lines.append(
-                f"    return analogRead({pin});"
-            )
+            lines.append(f"    return analogRead({pin});")
 
             lines.append("}")
 
@@ -486,9 +420,7 @@ float {prefix}_read() {{
             prefix = f"motor_{index}"
 
             # Compensate for opposite motor orientation.
-            direction = (
-                "HIGH" if side == "left" else "LOW"
-            )
+            direction = "HIGH" if side == "left" else "LOW"
 
             lines.append(f"""
 void {prefix}_set_speed(int speed) {{
@@ -510,9 +442,7 @@ void {prefix}_set_speed(int speed) {{
         lines.append("void motor_driver_stop() {")
 
         for index, motor in enumerate(motors):
-            lines.append(
-                f"    analogWrite(MOTOR_{index}_PWM_PIN, 0);"
-            )
+            lines.append(f"    analogWrite(MOTOR_{index}_PWM_PIN, 0);")
 
         lines.append("}")
 
@@ -603,28 +533,18 @@ void status_led_{index}_set_colour(
         lines.append('    Serial.println("Robot initialized");')
 
         # Distance sensors
-        for index, sensor in enumerate(
-            self.find_objects(model, "DistanceSensor")
-        ):
-            lines.append(
-                f"    pinMode(DISTANCE_SENSOR_{index}_TRIG_PIN, OUTPUT);"
-            )
+        for index, sensor in enumerate(self.find_objects(model, "DistanceSensor")):
+            lines.append(f"    pinMode(DISTANCE_SENSOR_{index}_TRIG_PIN, OUTPUT);")
 
-            lines.append(
-                f"    pinMode(DISTANCE_SENSOR_{index}_ECHO_PIN, INPUT);"
-            )
+            lines.append(f"    pinMode(DISTANCE_SENSOR_{index}_ECHO_PIN, INPUT);")
 
         # Motors
         motors = self.find_objects(model, "Motor")
 
         for index, motor in enumerate(motors):
-            lines.append(
-                f"    pinMode(MOTOR_{index}_PWM_PIN, OUTPUT);"
-            )
+            lines.append(f"    pinMode(MOTOR_{index}_PWM_PIN, OUTPUT);")
 
-            lines.append(
-                f"    pinMode(MOTOR_{index}_DIRECTION_PIN, OUTPUT);"
-            )
+            lines.append(f"    pinMode(MOTOR_{index}_DIRECTION_PIN, OUTPUT);")
 
         # Motor driver
         drivers = self.find_objects(model, "MotorDriver")
@@ -633,21 +553,13 @@ void status_led_{index}_set_colour(
             attrs = self.get_attributes(drivers[0])
 
             if attrs.get("standbyPin") is not None:
-                lines.append(
-                    "    pinMode(MOTOR_DRIVER_STANDBY_PIN, OUTPUT);"
-                )
+                lines.append("    pinMode(MOTOR_DRIVER_STANDBY_PIN, OUTPUT);")
 
-                lines.append(
-                    "    digitalWrite(MOTOR_DRIVER_STANDBY_PIN, HIGH);"
-                )
+                lines.append("    digitalWrite(MOTOR_DRIVER_STANDBY_PIN, HIGH);")
 
         # LEDs
-        for index, led in enumerate(
-            self.find_objects(model, "StatusLED")
-        ):
-            lines.append(
-                f"    status_led_{index}_init();"
-            )
+        for index, led in enumerate(self.find_objects(model, "StatusLED")):
+            lines.append(f"    status_led_{index}_init();")
 
         # Line tracker channels
         for channel in self.find_objects(model, "LineChannel"):
@@ -655,9 +567,7 @@ void status_led_{index}_set_colour(
 
             pin = attrs.get("pin", 0)
 
-            lines.append(
-                f"    pinMode({pin}, INPUT);"
-            )
+            lines.append(f"    pinMode({pin}, INPUT);")
 
         lines.append("}")
         lines.append("")
@@ -672,9 +582,7 @@ void status_led_{index}_set_colour(
         lines = ["void loop() {"]
 
         # Read distance sensors periodically.
-        for index, sensor in enumerate(
-            self.find_objects(model, "DistanceSensor")
-        ):
+        for index, sensor in enumerate(self.find_objects(model, "DistanceSensor")):
             lines.append(f"""
     static unsigned long last_distance_{index} = 0;
 
@@ -700,13 +608,10 @@ void status_led_{index}_set_colour(
             for index, channel in enumerate(channels):
                 attrs = self.get_attributes(channel)
 
-                position = safe_name(
-                    attrs.get("position", f"channel_{index}")
-                ).lower()
+                position = safe_name(attrs.get("position", f"channel_{index}")).lower()
 
                 lines.append(
-                    f"    int line_{position} = "
-                    f"line_tracker_read_{position}();"
+                    f"    int line_{position} = line_tracker_read_{position}();"
                 )
 
         lines.append("    delay(10);")
@@ -722,9 +627,7 @@ void status_led_{index}_set_colour(
         model_name = self.get_model_name(model)
 
         if not self.validate_model(model):
-            print(
-                f"Skipping invalid model: {model_name}"
-            )
+            print(f"Skipping invalid model: {model_name}")
             return None
 
         sections = [
@@ -735,29 +638,22 @@ void status_led_{index}_set_colour(
             self.generate_motor_functions(model),
             self.generate_led_functions(model),
             self.generate_setup(model),
-            self.generate_loop(model)
+            self.generate_loop(model),
         ]
 
-        return "\n".join(
-            section for section in sections if section
-        )
+        return "\n".join(section for section in sections if section)
 
     # -----------------------------------------------------
     # Generate all models
     # -----------------------------------------------------
 
     def generate_all(self):
-        self.output_directory.mkdir(
-            parents=True,
-            exist_ok=True
-        )
+        self.output_directory.mkdir(parents=True, exist_ok=True)
 
         models = self.get_instance_models()
 
         if not models:
-            raise ValueError(
-                "No instance models were found in the JSON file."
-            )
+            raise ValueError("No instance models were found in the JSON file.")
 
         for model in models:
             model_name = self.get_model_name(model)
@@ -768,21 +664,14 @@ void status_led_{index}_set_colour(
 
             if sketch is None:
                 continue
-        
+
             model_directory = self.output_directory / safe_name(model_name)
-            model_directory.mkdir(
-                parents=True,
-                exist_ok=True
-            )
+            model_directory.mkdir(parents=True, exist_ok=True)
 
             filename = safe_name(model_name) + ".ino"
             output_path = model_directory / filename
 
-            with open(
-                output_path,
-                "w",
-                encoding="utf-8"
-            ) as file:
+            with open(output_path, "w", encoding="utf-8") as file:
                 file.write(sketch)
 
             self.generated_files.append(output_path)
@@ -790,36 +679,25 @@ void status_led_{index}_set_colour(
             print(f"Created: {output_path}")
 
         print("\nGeneration complete.")
-        print(
-            f"Generated {len(self.generated_files)} Arduino sketches."
-        )
+        print(f"Generated {len(self.generated_files)} Arduino sketches.")
 
 
 # ---------------------------------------------------------
 # Main program
 # ---------------------------------------------------------
 
+
 def main():
 
     if len(sys.argv) < 2:
-        print(
-            "Usage: python generator.py "
-            "<model.json> [output_directory]"
-        )
+        print("Usage: python generator.py <model.json> [output_directory]")
         sys.exit(1)
 
     model_path = sys.argv[1]
 
-    output_directory = (
-        sys.argv[2]
-        if len(sys.argv) > 2
-        else "generated"
-    )
+    output_directory = sys.argv[2] if len(sys.argv) > 2 else "generated"
 
-    generator = RobotCodeGenerator(
-        model_path,
-        output_directory
-    )
+    generator = RobotCodeGenerator(model_path, output_directory)
 
     try:
         generator.load_model()
