@@ -42,54 +42,6 @@ def get_value(obj, *keys, default=None):
     return default
 
 
-def get_class(obj):
-    return get_value(
-        obj,
-        "class",
-        "className",
-        "type",
-        "classifier",
-        default=""
-    )
-
-
-def get_attributes(obj):
-    attributes = get_value(
-        obj,
-        "attributeValues",
-        "attributes",
-        "properties",
-        "values",
-        default={}
-    )
-
-    if isinstance(attributes, dict):
-        return attributes
-
-    result = {}
-
-    if isinstance(attributes, list):
-        for attribute in attributes:
-            if isinstance(attribute, dict):
-                name = get_value(
-                    attribute,
-                    "name",
-                    "attribute",
-                    "key"
-                )
-
-                value = get_value(
-                    attribute,
-                    "value",
-                    "defaultValue"
-                )
-
-                if name is not None:
-                    result[name] = value
-
-    return result
-
-
 # ---------------------------------------------------------
 # Model loading
 # ---------------------------------------------------------
@@ -102,6 +54,71 @@ class RobotCodeGenerator:
 
         self.model = {}
         self.generated_files = []
+
+    def get_class(self, obj):
+        class_id = obj.get("classId")
+
+        meta_classes = self.model.get("metaModel", {}).get("classes", [])
+
+        for cls in meta_classes:
+            if cls.get("id") == class_id:
+                return cls.get("name", "")
+
+        return get_value(
+            obj,
+            "class",
+            "className",
+            "type",
+            "classifier",
+            default=""
+        )
+
+    def get_attributes(self, obj):
+        raw_attributes = get_value(
+            obj,
+            "attributeValues",
+            "attributes",
+            "properties",
+            "values",
+            default={}
+        )
+
+        if isinstance(raw_attributes, list):
+            result = {}
+
+            for attribute in raw_attributes:
+                if isinstance(attribute, dict):
+                    name = get_value(attribute, "name", "attribute", "key")
+                    value = get_value(attribute, "value", "defaultValue")
+
+                    if name is not None:
+                        result[name] = value
+
+            return result
+
+        if not isinstance(raw_attributes, dict):
+            return {}
+
+        class_id = obj.get("classId")
+
+        meta_classes = self.model.get("metaModel", {}).get("classes", [])
+
+        attr_id_to_name = {}
+
+        for cls in meta_classes:
+            if cls.get("id") == class_id:
+                for attr in cls.get("attributes", []):
+                    attr_id_to_name[attr.get("id")] = attr.get("name")
+
+                break
+
+        resolved = {}
+
+        for key, value in raw_attributes.items():
+            name = attr_id_to_name.get(key, key)
+            resolved[name] = value
+    
+        return resolved
 
     def load_model(self):
         if not self.model_path.exists():
@@ -153,7 +170,7 @@ class RobotCodeGenerator:
     def find_objects(self, model, class_name):
         return [
             obj for obj in self.get_model_objects(model)
-            if get_class(obj) == class_name
+            if self.get_class(obj) == class_name
         ]
 
     def get_object_attributes(self, model, class_name):
@@ -162,7 +179,7 @@ class RobotCodeGenerator:
         if not objects:
             return {}
 
-        return get_attributes(objects[0])
+        return self.get_attributes(objects[0])
 
     # -----------------------------------------------------
     # Model validation
@@ -181,8 +198,8 @@ class RobotCodeGenerator:
         if not controller_objects:
             return False
 
-        robot_attributes = get_attributes(robot_objects[0])
-        controller_attributes = get_attributes(
+        robot_attributes = self.get_attributes(robot_objects[0])
+        controller_attributes = self.get_attributes(
             controller_objects[0]
         )
 
@@ -222,8 +239,8 @@ class RobotCodeGenerator:
         robot = self.find_objects(model, "Robot")[0]
         controller = self.find_objects(model, "Controller")[0]
 
-        robot_attributes = get_attributes(robot)
-        controller_attributes = get_attributes(controller)
+        robot_attributes = self.get_attributes(robot)
+        controller_attributes = self.get_attributes(controller)
 
         robot_name = robot_attributes.get("name", "Robot")
 
@@ -252,7 +269,7 @@ class RobotCodeGenerator:
         for index, obj in enumerate(
             self.find_objects(model, "DistanceSensor")
         ):
-            attrs = get_attributes(obj)
+            attrs = self.get_attributes(obj)
             prefix = f"DISTANCE_SENSOR_{index}"
 
             lines.append(f"// Distance sensor {index + 1}")
@@ -283,7 +300,7 @@ class RobotCodeGenerator:
         for index, obj in enumerate(
             self.find_objects(model, "LineTracker")
         ):
-            attrs = get_attributes(obj)
+            attrs = self.get_attributes(obj)
 
             lines.append("// Line tracker")
             lines.append(
@@ -297,7 +314,7 @@ class RobotCodeGenerator:
         for index, obj in enumerate(
             self.find_objects(model, "StatusLED")
         ):
-            attrs = get_attributes(obj)
+            attrs = self.get_attributes(obj)
 
             lines.append("// Status LED")
             lines.append(
@@ -321,7 +338,7 @@ class RobotCodeGenerator:
         for index, obj in enumerate(
             self.find_objects(model, "Motor")
         ):
-            attrs = get_attributes(obj)
+            attrs = self.get_attributes(obj)
 
             prefix = f"MOTOR_{index}"
 
@@ -348,7 +365,7 @@ class RobotCodeGenerator:
         drivers = self.find_objects(model, "MotorDriver")
 
         if drivers:
-            attrs = get_attributes(drivers[0])
+            attrs = self.get_attributes(drivers[0])
 
             lines.append("// Motor driver")
 
@@ -425,7 +442,7 @@ float {prefix}_read() {{
         lines.append("// Line tracker functions")
 
         for index, channel in enumerate(channels):
-            attrs = get_attributes(channel)
+            attrs = self.get_attributes(channel)
 
             position = safe_name(
                 attrs.get("position", f"channel_{index}")
@@ -463,7 +480,7 @@ float {prefix}_read() {{
         lines.append("// Motor control functions")
 
         for index, motor in enumerate(motors):
-            attrs = get_attributes(motor)
+            attrs = self.get_attributes(motor)
 
             side = str(attrs.get("side", "")).lower()
             prefix = f"motor_{index}"
@@ -500,7 +517,7 @@ void {prefix}_set_speed(int speed) {{
         lines.append("}")
 
         if drivers:
-            attrs = get_attributes(drivers[0])
+            attrs = self.get_attributes(drivers[0])
 
             if attrs.get("standbyPin") is not None:
                 lines.append("""
@@ -528,7 +545,7 @@ void motor_driver_disable() {
         lines = ["// Status LED functions"]
 
         for index, led in enumerate(leds):
-            attrs = get_attributes(led)
+            attrs = self.get_attributes(led)
 
             count = max(1, int(attrs.get("ledCount", 1)))
 
@@ -613,7 +630,7 @@ void status_led_{index}_set_colour(
         drivers = self.find_objects(model, "MotorDriver")
 
         if drivers:
-            attrs = get_attributes(drivers[0])
+            attrs = self.get_attributes(drivers[0])
 
             if attrs.get("standbyPin") is not None:
                 lines.append(
@@ -634,7 +651,7 @@ void status_led_{index}_set_colour(
 
         # Line tracker channels
         for channel in self.find_objects(model, "LineChannel"):
-            attrs = get_attributes(channel)
+            attrs = self.get_attributes(channel)
 
             pin = attrs.get("pin", 0)
 
@@ -681,7 +698,7 @@ void status_led_{index}_set_colour(
             lines.append("    // Read line tracker channels")
 
             for index, channel in enumerate(channels):
-                attrs = get_attributes(channel)
+                attrs = self.get_attributes(channel)
 
                 position = safe_name(
                     attrs.get("position", f"channel_{index}")
