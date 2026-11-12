@@ -1489,6 +1489,207 @@
         }
       ],
       "connectors": []
+    },
+    {
+      "id": "ccDKTzoT",
+      "kind": "instancemodel",
+      "name": "ScenarioD_Patrol",
+      "objects": [
+        {
+          "id": "9zuGSCzK",
+          "classId": "vzqeiqv6",
+          "name": "MotorDriver1",
+          "attributeValues": {
+            "aB84yL6L": "120"
+          }
+        },
+        {
+          "id": "AyNW7Xji",
+          "classId": "l3bRYsba",
+          "name": "DistanceSensor1",
+          "attributeValues": {
+            "lkHgd-yD": "13",
+            "-xZ_Dvyr": "12",
+            "sKmUUnhI": "40",
+            "duS6ikJR": "front"
+          }
+        },
+        {
+          "id": "9dEYaHw0",
+          "classId": "8_e5hmF7",
+          "name": "LineTracker1",
+          "attributeValues": {
+            "uFmnPeYv": "750"
+          }
+        },
+        {
+          "id": "EmS739pj",
+          "classId": "vIqfrfWe",
+          "name": "StatusLED1",
+          "attributeValues": {
+            "AtwOfiQP": "4",
+            "jWLSxpSe": "2",
+            "MH_Pvhse": "blue",
+            "aL8qstoB": "250"
+          }
+        },
+        {
+          "id": "APN6uEsY",
+          "classId": "t-W-XEe9",
+          "name": "Controller1",
+          "attributeValues": {
+            "HtT5yGIp": "120",
+            "D3DypPCD": "90",
+            "jhde9deH": "45"
+          }
+        },
+        {
+          "id": "l401kmCg",
+          "classId": "PvHhsMsP",
+          "name": "WarningDistanceThreshold",
+          "attributeValues": {
+            "ynPXy56N": "Warning",
+            "4MUH7vcn": "30"
+          }
+        },
+        {
+          "id": "p6r2UGbH",
+          "classId": "PvHhsMsP",
+          "name": "StopDistanceThreshold",
+          "attributeValues": {
+            "ynPXy56N": "Stop",
+            "4MUH7vcn": "12"
+          }
+        },
+        {
+          "id": "uKEUkaNp",
+          "classId": "0LlJI8it",
+          "name": "PatrolBot",
+          "attributeValues": {
+            "WwROTlkH": "PatrolBot"
+          }
+        },
+        {
+          "id": "zwWadw5x",
+          "classId": "eXLNsRSB",
+          "name": "Motor1",
+          "attributeValues": {
+            "lJHXkt0J": "left",
+            "8VvyV63w": "0",
+            "s8-8KA_W": "0"
+          }
+        },
+        {
+          "id": "43TldRaM",
+          "classId": "eXLNsRSB",
+          "name": "Motor2",
+          "attributeValues": {
+            "lJHXkt0J": "right",
+            "8VvyV63w": "0",
+            "s8-8KA_W": "0"
+          }
+        },
+        {
+          "id": "IvSjrdmK",
+          "classId": "Reshl29f",
+          "name": "LineChannel",
+          "attributeValues": {
+            "nEKXh8O2": "center",
+            "h-nag11G": "0"
+          }
+        }
+      ],
+      "links": [
+        {
+          "id": "lZepyJUq",
+          "relationId": "r63gtSgU",
+          "source": "uKEUkaNp",
+          "target": "APN6uEsY",
+          "sourceHandle": "left",
+          "targetHandle": "right"
+        },
+        {
+          "id": "LMhfhBz3",
+          "relationId": "l5liAAcd",
+          "source": "uKEUkaNp",
+          "target": "EmS739pj",
+          "sourceHandle": "left",
+          "targetHandle": "right"
+        },
+        {
+          "id": "43TovbHz",
+          "relationId": "l5liAAcd",
+          "source": "uKEUkaNp",
+          "target": "AyNW7Xji",
+          "sourceHandle": "top",
+          "targetHandle": "bottom"
+        },
+        {
+          "id": "VHkV1igB",
+          "relationId": "l5liAAcd",
+          "source": "uKEUkaNp",
+          "target": "9dEYaHw0",
+          "sourceHandle": "right",
+          "targetHandle": "left"
+        },
+        {
+          "id": "urAfMFTn",
+          "relationId": "l5liAAcd",
+          "source": "uKEUkaNp",
+          "target": "9zuGSCzK",
+          "sourceHandle": "bottom",
+          "targetHandle": "top"
+        },
+        {
+          "id": "zO8h5MRI",
+          "relationId": "Bv_mqiYt",
+          "source": "APN6uEsY",
+          "target": "9zuGSCzK",
+          "sourceHandle": "bottom",
+          "targetHandle": "left"
+        },
+        {
+          "id": "QFd-6Dv4",
+          "relationId": "nEO9jK3F",
+          "source": "9zuGSCzK",
+          "target": "zwWadw5x",
+          "sourceHandle": "right",
+          "targetHandle": "left"
+        },
+        {
+          "id": "VVSbu-MM",
+          "relationId": "nEO9jK3F",
+          "source": "9zuGSCzK",
+          "target": "43TldRaM",
+          "sourceHandle": "right",
+          "targetHandle": "left"
+        },
+        {
+          "id": "p0vmic5u",
+          "relationId": "peCyWRmY",
+          "source": "AyNW7Xji",
+          "target": "l401kmCg",
+          "sourceHandle": "top",
+          "targetHandle": "bottom"
+        },
+        {
+          "id": "tHEEjvIe",
+          "relationId": "peCyWRmY",
+          "source": "AyNW7Xji",
+          "target": "p6r2UGbH",
+          "sourceHandle": "top",
+          "targetHandle": "bottom"
+        },
+        {
+          "id": "bqYcea36",
+          "relationId": "92bPY3k9",
+          "source": "9dEYaHw0",
+          "target": "IvSjrdmK",
+          "sourceHandle": "top",
+          "targetHandle": "bottom"
+        }
+      ],
+      "connectors": []
     }
   ],
   "layouts": {
@@ -1778,6 +1979,52 @@
       "QOn9Zchf": {
         "x": 254.9439392810823,
         "y": 601.0893890865394
+      }
+    },
+    "im-ccDKTzoT": {
+      "AyNW7Xji": {
+        "x": 56.34041959379624,
+        "y": -178.26717848806837
+      },
+      "9dEYaHw0": {
+        "x": 419.5437523475306,
+        "y": 34.72153704062186
+      },
+      "EmS739pj": {
+        "x": -301.52933377769045,
+        "y": -17.213708718493166
+      },
+      "APN6uEsY": {
+        "x": -207.9978825620537,
+        "y": 192.1482044468478
+      },
+      "l401kmCg": {
+        "x": -259.43683906804324,
+        "y": -336.4225018619851
+      },
+      "p6r2UGbH": {
+        "x": 240.8785893694632,
+        "y": -334.8019634262298
+      },
+      "uKEUkaNp": {
+        "x": 94.5390653719268,
+        "y": 92.25849965222503
+      },
+      "9zuGSCzK": {
+        "x": 393.68849197262966,
+        "y": 218.95484922925505
+      },
+      "43TldRaM": {
+        "x": 728.0445180574025,
+        "y": 268.9677867966122
+      },
+      "zwWadw5x": {
+        "x": 739.6477663296345,
+        "y": 61.73794915690367
+      },
+      "IvSjrdmK": {
+        "x": 584.711674527291,
+        "y": -153.81035717412442
       }
     }
   }

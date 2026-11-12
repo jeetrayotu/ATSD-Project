@@ -1,11 +1,10 @@
-#!/usr/bin/env python3
 """
 Robot Code Generator
 --------------------
-Reads an IML JSON model and generates Arduino C++ sketches.
+Reads an IML JSON model and generates Arduino C++ sketches
 
 Usage:
-    python generator.py NewMetaModel.iml.json generated
+    python generator.py <model.json> [output_directory]
 """
 
 import json
@@ -35,7 +34,6 @@ def safe_name(name):
 def get_value(obj, *keys, default=None):
     if not isinstance(obj, dict):
         return default
-
     for key in keys:
         if key in obj:
             return obj[key]
@@ -58,7 +56,6 @@ class RobotCodeGenerator:
 
     def get_class(self, obj):
         class_id = obj.get("classId")
-
         meta_classes = self.model.get("metaModel", {}).get("classes", [])
 
         for cls in meta_classes:
@@ -79,34 +76,27 @@ class RobotCodeGenerator:
                 if isinstance(attribute, dict):
                     name = get_value(attribute, "name", "attribute", "key")
                     value = get_value(attribute, "value", "defaultValue")
-
                     if name is not None:
                         result[name] = value
-
             return result
 
         if not isinstance(raw_attributes, dict):
             return {}
 
         class_id = obj.get("classId")
-
         meta_classes = self.model.get("metaModel", {}).get("classes", [])
-
         attr_id_to_name = {}
 
         for cls in meta_classes:
             if cls.get("id") == class_id:
                 for attr in cls.get("attributes", []):
                     attr_id_to_name[attr.get("id")] = attr.get("name")
-
                 break
-
         resolved = {}
 
         for key, value in raw_attributes.items():
             name = attr_id_to_name.get(key, key)
             resolved[name] = value
-
         return resolved
 
     def load_model(self):
@@ -140,7 +130,6 @@ class RobotCodeGenerator:
 
         if isinstance(objects, dict):
             return list(objects.values())
-
         return objects
 
     def find_objects(self, model, class_name):
@@ -282,7 +271,6 @@ class RobotCodeGenerator:
         # Motors
         for index, obj in enumerate(self.find_objects(model, "Motor")):
             attrs = self.get_attributes(obj)
-
             prefix = f"MOTOR_{index}"
 
             lines.append(f"// Motor {index + 1}")
@@ -330,7 +318,6 @@ class RobotCodeGenerator:
 
     def generate_distance_functions(self, model):
         lines = []
-
         sensors = self.find_objects(model, "DistanceSensor")
 
         for index, obj in enumerate(sensors):
@@ -372,7 +359,6 @@ float {prefix}_read() {{
 
     def generate_line_functions(self, model):
         lines = []
-
         trackers = self.find_objects(model, "LineTracker")
         channels = self.find_objects(model, "LineChannel")
 
@@ -525,9 +511,7 @@ void status_led_{index}_set_colour(
 
     def generate_setup(self, model):
         lines = []
-
         lines.append("void setup() {")
-
         lines.append("    Serial.begin(9600);")
         lines.append("    Serial.println();")
         lines.append('    Serial.println("Robot initialized");')
@@ -688,7 +672,6 @@ void status_led_{index}_set_colour(
 
 
 def main():
-
     if len(sys.argv) < 2:
         print("Usage: python generator.py <model.json> [output_directory]")
         sys.exit(1)
