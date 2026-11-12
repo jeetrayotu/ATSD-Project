@@ -12,7 +12,6 @@ Requirements:
    ```bash
    python generator.py NewMetaModel.iml.json generated
    ```
-
 Replace `NewMetaModel.iml.json` with your model filename if necessary.
 
 3. The generated Arduino sketches will appear in the `generated` folder, with a separate folder for each instance model.
