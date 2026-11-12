@@ -1,0 +1,187 @@
+/*
+ * Generated Arduino Robot Code
+ *
+ * Instance Model: AllFeatures
+ * Generated automatically by RobotCodeGenerator.
+ */
+
+#include <Arduino.h>
+#include <FastLED.h>
+
+
+// Robot configuration
+const char* ROBOT_NAME = "AllFeaturesBot";
+
+// Controller configuration
+const int CONTROLLER_CRUISESPEED = "0";
+const int CONTROLLER_TURNSPEED = "0";
+const int CONTROLLER_DEFAULTTURNANGLE = "0";
+
+// Distance sensor 1
+const int DISTANCE_SENSOR_0_TRIG_PIN = 0;
+const int DISTANCE_SENSOR_0_ECHO_PIN = 0;
+const int DISTANCE_SENSOR_0_READ_INTERVAL_MS = 0;
+const char* DISTANCE_SENSOR_0_MOUNTING = "front";
+
+// Line tracker
+const int LINE_TRACKER_0_THRESHOLD = 0;
+
+// Status LED
+const int STATUS_LED_0_PIN = 0;
+const int STATUS_LED_0_LED_COUNT = 0;
+const int STATUS_LED_0_BLINK_INTERVAL = 0;
+
+// Motor 1
+const char* MOTOR_0_SIDE = "left";
+const int MOTOR_0_PWM_PIN = 0;
+const int MOTOR_0_DIRECTION_PIN = 0;
+
+// Motor 2
+const char* MOTOR_1_SIDE = "right";
+const int MOTOR_1_PWM_PIN = 0;
+const int MOTOR_1_DIRECTION_PIN = 0;
+
+// Motor driver
+const int MOTOR_DRIVER_DEFAULT_SPEED = 0;
+
+
+// Read distance from distance sensor 1
+float distance_sensor_0_read() {
+
+    digitalWrite(DISTANCE_SENSOR_0_TRIG_PIN, LOW);
+    delayMicroseconds(2);
+
+    digitalWrite(DISTANCE_SENSOR_0_TRIG_PIN, HIGH);
+    delayMicroseconds(10);
+
+    digitalWrite(DISTANCE_SENSOR_0_TRIG_PIN, LOW);
+
+    long duration = pulseIn(
+        DISTANCE_SENSOR_0_ECHO_PIN,
+        HIGH,
+        30000
+    );
+
+    if (duration == 0) {
+        return 0;
+    }
+
+    float distance = duration * 0.0343 / 2.0;
+
+    return distance;
+}
+
+// Line tracker functions
+int line_tracker_read_center() {
+    return analogRead(0);
+}
+
+// Motor control functions
+
+void motor_0_set_speed(int speed) {
+
+    speed = constrain(speed, 0, 255);
+
+    digitalWrite(
+        MOTOR_0_DIRECTION_PIN,
+        HIGH
+    );
+
+    analogWrite(
+        MOTOR_0_PWM_PIN,
+        speed
+    );
+}
+
+
+void motor_1_set_speed(int speed) {
+
+    speed = constrain(speed, 0, 255);
+
+    digitalWrite(
+        MOTOR_1_DIRECTION_PIN,
+        LOW
+    );
+
+    analogWrite(
+        MOTOR_1_PWM_PIN,
+        speed
+    );
+}
+
+void motor_driver_stop() {
+    analogWrite(MOTOR_0_PWM_PIN, 0);
+    analogWrite(MOTOR_1_PWM_PIN, 0);
+}
+// Status LED functions
+
+CRGB status_led_pixels_0[1];
+
+void status_led_0_init() {
+
+    FastLED.addLeds<WS2812B, STATUS_LED_0_PIN, GRB>(
+        status_led_pixels_0,
+        STATUS_LED_0_LED_COUNT
+    );
+
+    FastLED.clear();
+    FastLED.show();
+}
+
+void status_led_0_off() {
+
+    FastLED.clear();
+    FastLED.show();
+}
+
+void status_led_0_set_colour(
+    uint8_t red,
+    uint8_t green,
+    uint8_t blue
+) {
+
+    for (int i = 0; i < STATUS_LED_0_LED_COUNT; i++) {
+        status_led_pixels_0[i] = CRGB(
+            red,
+            green,
+            blue
+        );
+    }
+
+    FastLED.show();
+}
+
+void setup() {
+    Serial.begin(9600);
+    Serial.println();
+    Serial.println("Robot initialized");
+    pinMode(DISTANCE_SENSOR_0_TRIG_PIN, OUTPUT);
+    pinMode(DISTANCE_SENSOR_0_ECHO_PIN, INPUT);
+    pinMode(MOTOR_0_PWM_PIN, OUTPUT);
+    pinMode(MOTOR_0_DIRECTION_PIN, OUTPUT);
+    pinMode(MOTOR_1_PWM_PIN, OUTPUT);
+    pinMode(MOTOR_1_DIRECTION_PIN, OUTPUT);
+    status_led_0_init();
+    pinMode(0, INPUT);
+}
+
+void loop() {
+
+    static unsigned long last_distance_0 = 0;
+
+    if (millis() - last_distance_0 >=
+        DISTANCE_SENSOR_0_READ_INTERVAL_MS) {
+
+        last_distance_0 = millis();
+
+        float distance = distance_sensor_0_read();
+
+        Serial.print("Distance sensor 0: ");
+        Serial.print(distance);
+        Serial.println(" cm");
+    }
+
+    // Read line tracker channels
+    int line_center = line_tracker_read_center();
+    delay(10);
+}
