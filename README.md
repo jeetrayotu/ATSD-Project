@@ -13,7 +13,7 @@ Requirements:
    python generator.py <model.json> [output_directory]
    ```
 
-3. The generated Arduino sketches will appear in the `generated` folder, with a separate folder for each instance model.
+3. The generated Arduino sketches will appear in the `generated` folder by default, with a separate folder for each instance model.
 
 Uploading to Arduino
 - Open the desired `.ino` file in the Arduino IDE.
