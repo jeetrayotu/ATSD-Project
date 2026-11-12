@@ -1,39 +1,24 @@
 # ATSD-Project
-Requirements:
-- Python 3 installed
-- A valid `.json` file
 
+## Usage
 
-## Running the Generator
+### Generate code using uv
 
-1. Open a terminal in the project directory.
-2. Run the following command:
+Install [`uv`](https://docs.astral.sh/uv/getting-started/installation/#installation-methods) (Python ≥ 3.14 required).
 
-   ```bash
-   python generator.py <model.json> [output_directory]
-   ```
+```bash
+git clone https://github.com/jeetrayotu/ATSD-Project.git
+cd ATSD-Project
+uv run atsd generate
+```
 
-3. The generated Arduino sketches will appear in the `generated` folder by default, with a separate folder for each instance model.
+The generated Arduino sketches will appear in the `generated` folder by default, with a separate folder for each instance model.
 
 Uploading to Arduino
 - Open the desired `.ino` file in the Arduino IDE.
 - Select the correct Arduino board and port.
 - Install any required libraries (such as FastLED).
 - Click **Upload** to upload the generated code to the robot.
-
-## Backend Usage
-
-### Run using uv
-
-Install [`uv`](https://docs.astral.sh/uv/getting-started/installation/#installation-methods) (Python ≥ 3.14 required).
-
-```bash
-git clone https://github.com/CORRUPT3D-Code/SQA_Project.git
-cd SQA_Project
-uv run sqa server start
-```
-
-Once the server is up, open http://localhost in your browser.
 
 ## Backend Development
 
