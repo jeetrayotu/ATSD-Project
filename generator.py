@@ -117,7 +117,7 @@ class RobotCodeGenerator:
         for key, value in raw_attributes.items():
             name = attr_id_to_name.get(key, key)
             resolved[name] = value
-    
+
         return resolved
 
     def load_model(self):
@@ -768,9 +768,15 @@ void status_led_{index}_set_colour(
 
             if sketch is None:
                 continue
+        
+            model_directory = self.output_directory / safe_name(model_name)
+            model_directory.mkdir(
+                parents=True,
+                exist_ok=True
+            )
 
             filename = safe_name(model_name) + ".ino"
-            output_path = self.output_directory / filename
+            output_path = model_directory / filename
 
             with open(
                 output_path,
