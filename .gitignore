@@ -218,3 +218,43 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+/bin
+/obj
+.idea
+.nicegui
+
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Testing cache
+.pytest_cache
+.hypothesis
+
+# Ruff cache
+.ruff_cache
+
+# Build Files
+*.build
+*.dist
+*.exe
+*.cmd
+*.onefile-build
+nuitka-crash-report.xml
+
+auth.env
+notes
+
+# C++
+*_results.txt
+*.out
+
+generated2

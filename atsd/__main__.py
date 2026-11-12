@@ -4,6 +4,7 @@ from pathlib import Path
 from rich import print
 from rich.pretty import pprint
 import rich_click as click
+from collections import defaultdict
 
 
 def resolve_path(path):
@@ -23,6 +24,7 @@ class MetaModelClassAttribute(msgspec.Struct):
 
 
 class MetaModelClass(msgspec.Struct):
+    id: str
     name: str
     attributes: list[MetaModelClassAttribute]
 
@@ -43,6 +45,7 @@ class MetaModel(msgspec.Struct):
 
 
 class InstanceModelObject(msgspec.Struct):
+    classId: str
     name: str
     attributeValues: dict[str, str]
 
@@ -61,6 +64,8 @@ current_file = Path(__file__)
 current_dir = current_file.parent
 parent_dir = current_dir.parent
 assets_dir = parent_dir / "assets"
+generated_dir = parent_dir / "generated2"
+generated_dir.mkdir(parents=True, exist_ok=True)
 mustache_template = assets_dir / "template.mustache"
 model_template = resolve_path(assets_dir / "template.iml.json")
 
@@ -74,7 +79,10 @@ def main(): ...
 def chevron(model: Path):  # pyright: ignore [reportRedeclaration]
     model: Model = msgspec.json.decode(model.read_bytes(), type=Model)
     allAttributeValues = {}
+    allClassIDs = {}
     for cls in model.metaModel.classes:
+        assert cls.id not in allClassIDs
+        allClassIDs[cls.id] = cls.name
         for attr in cls.attributes:
             assert attr.id not in allAttributeValues
             allAttributeValues[attr.id] = attr.name
@@ -82,17 +90,25 @@ def chevron(model: Path):  # pyright: ignore [reportRedeclaration]
     instances = {}
     for instance in model.instanceModels:
         instances[instance.name] = {}
+        counts = defaultdict(int)
         for object in instance.objects:
-            instances[instance.name][object.name] = {
+            counts[allClassIDs[object.classId]] += 1
+        for object in instance.objects:
+            count = 0
+            originalObjectName = objectName = allClassIDs[object.classId]
+            if counts[allClassIDs[object.classId]] > 1:
+                objectName = f"{originalObjectName}{count}"
+                while objectName in instances[instance.name]:
+                    count += 1
+                    objectName = f"{originalObjectName}{count}"
+            instances[instance.name][objectName] = {
                 allAttributeValues[k]: v for k, v in object.attributeValues.items()
             }
-    pprint(instances)
-    with mustache_template.open() as f:
-        ...
-        # k: str
-        # v: dict[str, str]
-        # instance = next(iter(instances))
-        # print(render(f, { for k, v in intance} | { "robotName" : instance[""] }))
+    for robot_name, robot_info in instances.items():
+        robot_file = generated_dir / f"{robot_name}.ino"
+        render_data = {k1 + k2[0].upper() + k2[1:]:v2 for k1, v1 in robot_info.items() for k2, v2 in v1.items() }
+        with mustache_template.open() as f:
+            robot_file.write_text(render(f, render_data))
 
 
 if __name__ == "__main__":
