@@ -514,9 +514,9 @@ void motor_driver_disable() {
 
         return "\n".join(lines)
 
-    # -----------------------------------------------------
-    # LED functions
-    # -----------------------------------------------------
+# -----------------------------------------------------
+# LED functions
+# -----------------------------------------------------
 
     def generate_led_functions(self, model):
         leds = self.find_objects(model, "StatusLED")
@@ -773,7 +773,6 @@ void status_led_{index}_set_colour(
         print(
             f"Generated {len(self.generated_files)} Arduino sketches."
         )
-
 
 # ---------------------------------------------------------
 # Main program
