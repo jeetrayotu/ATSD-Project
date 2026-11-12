@@ -1,11 +1,10 @@
-#!/usr/bin/env python3
 """
 Robot Code Generator
 --------------------
-Reads an IML JSON model and generates Arduino C++ sketches.
+Reads an IML JSON model and generates Arduino C++ sketches
 
 Usage:
-    python generator.py NewMetaModel.iml.json generated
+    python generator.py <model.json> [output_directory]
 """
 
 import json
@@ -23,31 +22,26 @@ def to_constant(value):
 
     return str(value)
 
-
 def safe_name(name):
     name = re.sub(r"\W+", "_", str(name))
     name = re.sub(r"^[^a-zA-Z_]+", "", name)
 
     return name or "unnamed"
 
-
 def get_value(obj, *keys, default=None):
     if not isinstance(obj, dict):
         return default
-
     for key in keys:
         if key in obj:
             return obj[key]
 
     return default
 
-
 # ---------------------------------------------------------
 # Model loading
 # ---------------------------------------------------------
 
 class RobotCodeGenerator:
-
     def __init__(self, model_path, output_directory):
         self.model_path = Path(model_path)
         self.output_directory = Path(output_directory)
@@ -57,7 +51,6 @@ class RobotCodeGenerator:
 
     def get_class(self, obj):
         class_id = obj.get("classId")
-
         meta_classes = self.model.get("metaModel", {}).get("classes", [])
 
         for cls in meta_classes:
@@ -90,34 +83,27 @@ class RobotCodeGenerator:
                 if isinstance(attribute, dict):
                     name = get_value(attribute, "name", "attribute", "key")
                     value = get_value(attribute, "value", "defaultValue")
-
                     if name is not None:
                         result[name] = value
-
             return result
 
         if not isinstance(raw_attributes, dict):
             return {}
 
         class_id = obj.get("classId")
-
         meta_classes = self.model.get("metaModel", {}).get("classes", [])
-
         attr_id_to_name = {}
 
         for cls in meta_classes:
             if cls.get("id") == class_id:
                 for attr in cls.get("attributes", []):
                     attr_id_to_name[attr.get("id")] = attr.get("name")
-
                 break
-
         resolved = {}
 
         for key, value in raw_attributes.items():
             name = attr_id_to_name.get(key, key)
             resolved[name] = value
-
         return resolved
 
     def load_model(self):
@@ -125,15 +111,15 @@ class RobotCodeGenerator:
             raise FileNotFoundError(
                 f"Model file not found: {self.model_path}"
             )
-
+        
         with open(self.model_path, "r", encoding="utf-8") as file:
             self.model = json.load(file)
 
         print(f"Loaded model: {self.model_path}")
 
-    # -----------------------------------------------------
-    # Instance model extraction
-    # -----------------------------------------------------
+# -----------------------------------------------------
+# Instance model extraction
+# -----------------------------------------------------
 
     def get_instance_models(self):
         models = self.model.get("instanceModels", [])
@@ -164,7 +150,6 @@ class RobotCodeGenerator:
 
         if isinstance(objects, dict):
             return list(objects.values())
-
         return objects
 
     def find_objects(self, model, class_name):
@@ -181,9 +166,9 @@ class RobotCodeGenerator:
 
         return self.get_attributes(objects[0])
 
-    # -----------------------------------------------------
-    # Model validation
-    # -----------------------------------------------------
+# -----------------------------------------------------
+# Model validation
+# -----------------------------------------------------
 
     def validate_model(self, model):
         robot_objects = self.find_objects(model, "Robot")
@@ -216,9 +201,9 @@ class RobotCodeGenerator:
 
         return True
 
-    # -----------------------------------------------------
-    # Code generation
-    # -----------------------------------------------------
+# -----------------------------------------------------
+# Code generation
+# -----------------------------------------------------
 
     def generate_header(self, model_name):
         return f"""/*
@@ -339,7 +324,6 @@ class RobotCodeGenerator:
             self.find_objects(model, "Motor")
         ):
             attrs = self.get_attributes(obj)
-
             prefix = f"MOTOR_{index}"
 
             lines.append(f"// Motor {index + 1}")
@@ -384,13 +368,12 @@ class RobotCodeGenerator:
 
         return "\n".join(lines)
 
-    # -----------------------------------------------------
-    # Distance sensor functions
-    # -----------------------------------------------------
+# -----------------------------------------------------
+# Distance sensor functions
+# -----------------------------------------------------
 
     def generate_distance_functions(self, model):
         lines = []
-
         sensors = self.find_objects(model, "DistanceSensor")
 
         for index, obj in enumerate(sensors):
@@ -426,13 +409,12 @@ float {prefix}_read() {{
 
         return "\n".join(lines)
 
-    # -----------------------------------------------------
-    # Line tracker functions
-    # -----------------------------------------------------
+# -----------------------------------------------------
+# Line tracker functions
+# -----------------------------------------------------
 
     def generate_line_functions(self, model):
         lines = []
-
         trackers = self.find_objects(model, "LineTracker")
         channels = self.find_objects(model, "LineChannel")
 
@@ -464,9 +446,9 @@ float {prefix}_read() {{
 
         return "\n".join(lines)
 
-    # -----------------------------------------------------
-    # Motor driver functions
-    # -----------------------------------------------------
+# -----------------------------------------------------
+# Motor driver functions
+# -----------------------------------------------------
 
     def generate_motor_functions(self, model):
         lines = []
@@ -589,15 +571,13 @@ void status_led_{index}_set_colour(
 
         return "\n".join(lines)
 
-    # -----------------------------------------------------
-    # Setup function
-    # -----------------------------------------------------
+# -----------------------------------------------------
+# Setup function
+# -----------------------------------------------------
 
     def generate_setup(self, model):
         lines = []
-
         lines.append("void setup() {")
-
         lines.append("    Serial.begin(9600);")
         lines.append("    Serial.println();")
         lines.append('    Serial.println("Robot initialized");')
@@ -664,9 +644,9 @@ void status_led_{index}_set_colour(
 
         return "\n".join(lines)
 
-    # -----------------------------------------------------
-    # Loop function
-    # -----------------------------------------------------
+# -----------------------------------------------------
+# Loop function
+# -----------------------------------------------------
 
     def generate_loop(self, model):
         lines = ["void loop() {"]
@@ -714,9 +694,9 @@ void status_led_{index}_set_colour(
 
         return "\n".join(lines)
 
-    # -----------------------------------------------------
-    # Generate complete Arduino sketch
-    # -----------------------------------------------------
+# -----------------------------------------------------
+# Generate complete Arduino sketch
+# -----------------------------------------------------
 
     def generate_sketch(self, model):
         model_name = self.get_model_name(model)
@@ -742,9 +722,9 @@ void status_led_{index}_set_colour(
             section for section in sections if section
         )
 
-    # -----------------------------------------------------
-    # Generate all models
-    # -----------------------------------------------------
+# -----------------------------------------------------
+# Generate all models
+# -----------------------------------------------------
 
     def generate_all(self):
         self.output_directory.mkdir(
@@ -800,7 +780,6 @@ void status_led_{index}_set_colour(
 # ---------------------------------------------------------
 
 def main():
-
     if len(sys.argv) < 2:
         print(
             "Usage: python generator.py "
