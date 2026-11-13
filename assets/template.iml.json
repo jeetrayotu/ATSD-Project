@@ -494,8 +494,8 @@
           "name": "LeftMotor",
           "attributeValues": {
             "lJHXkt0J": "left",
-            "8VvyV63w": "0",
-            "s8-8KA_W": "0"
+            "8VvyV63w": "6",
+            "s8-8KA_W": "8"
           }
         },
         {
@@ -504,8 +504,8 @@
           "name": "RightMotor",
           "attributeValues": {
             "lJHXkt0J": "right",
-            "8VvyV63w": "0",
-            "s8-8KA_W": "0"
+            "8VvyV63w": "5",
+            "s8-8KA_W": "7"
           }
         },
         {
@@ -513,8 +513,8 @@
           "classId": "l3bRYsba",
           "name": "DistanceSensor",
           "attributeValues": {
-            "lkHgd-yD": "0",
-            "-xZ_Dvyr": "0",
+            "lkHgd-yD": "13",
+            "-xZ_Dvyr": "12",
             "sKmUUnhI": "0",
             "duS6ikJR": "front"
           }
@@ -533,7 +533,7 @@
           "classId": "vIqfrfWe",
           "name": "StatusLED",
           "attributeValues": {
-            "AtwOfiQP": "0",
+            "AtwOfiQP": "4",
             "jWLSxpSe": "0",
             "MH_Pvhse": "red",
             "aL8qstoB": "0"
@@ -655,8 +655,8 @@
           "name": "LeftMotor",
           "attributeValues": {
             "lJHXkt0J": "left",
-            "8VvyV63w": "0",
-            "s8-8KA_W": "0"
+            "8VvyV63w": "6",
+            "s8-8KA_W": "8"
           }
         },
         {
@@ -665,8 +665,8 @@
           "name": "RightMotor",
           "attributeValues": {
             "lJHXkt0J": "right",
-            "8VvyV63w": "0",
-            "s8-8KA_W": "0"
+            "8VvyV63w": "5",
+            "s8-8KA_W": "7"
           }
         },
         {
@@ -683,7 +683,7 @@
           "name": "LeftLineChannel",
           "attributeValues": {
             "nEKXh8O2": "left",
-            "h-nag11G": "0"
+            "h-nag11G": "16"
           }
         },
         {
@@ -692,7 +692,7 @@
           "name": "CenterLineChannel",
           "attributeValues": {
             "nEKXh8O2": "center",
-            "h-nag11G": "0"
+            "h-nag11G": "15"
           }
         },
         {
@@ -701,7 +701,7 @@
           "name": "RightLineChannel",
           "attributeValues": {
             "nEKXh8O2": "right",
-            "h-nag11G": "0"
+            "h-nag11G": "14"
           }
         }
       ],
@@ -818,8 +818,8 @@
           "name": "LeftMotor",
           "attributeValues": {
             "lJHXkt0J": "left",
-            "8VvyV63w": "0",
-            "s8-8KA_W": "0"
+            "8VvyV63w": "6",
+            "s8-8KA_W": "8"
           }
         },
         {
@@ -828,8 +828,8 @@
           "name": "RightMotor",
           "attributeValues": {
             "lJHXkt0J": "right",
-            "8VvyV63w": "0",
-            "s8-8KA_W": "0"
+            "8VvyV63w": "5",
+            "s8-8KA_W": "7"
           }
         },
         {
@@ -837,8 +837,8 @@
           "classId": "l3bRYsba",
           "name": "DistanceSensor",
           "attributeValues": {
-            "lkHgd-yD": "0",
-            "-xZ_Dvyr": "0",
+            "lkHgd-yD": "13",
+            "-xZ_Dvyr": "12",
             "sKmUUnhI": "0",
             "duS6ikJR": "front"
           }
@@ -875,7 +875,7 @@
           "name": "LineChannel",
           "attributeValues": {
             "nEKXh8O2": "center",
-            "h-nag11G": "0"
+            "h-nag11G": "15"
           }
         },
         {
@@ -883,7 +883,7 @@
           "classId": "vIqfrfWe",
           "name": "StatusLED",
           "attributeValues": {
-            "AtwOfiQP": "0",
+            "AtwOfiQP": "4",
             "jWLSxpSe": "0",
             "MH_Pvhse": "green",
             "aL8qstoB": "0"
@@ -1019,8 +1019,8 @@
           "name": "LeftMotor",
           "attributeValues": {
             "lJHXkt0J": "left",
-            "8VvyV63w": "0",
-            "s8-8KA_W": "0"
+            "8VvyV63w": "6",
+            "s8-8KA_W": "8"
           }
         },
         {
@@ -1029,8 +1029,8 @@
           "name": "RightMotor",
           "attributeValues": {
             "lJHXkt0J": "right",
-            "8VvyV63w": "0",
-            "s8-8KA_W": "0"
+            "8VvyV63w": "5",
+            "s8-8KA_W": "7"
           }
         },
         {
@@ -1038,8 +1038,8 @@
           "classId": "l3bRYsba",
           "name": "DistanceSensor1",
           "attributeValues": {
-            "lkHgd-yD": "0",
-            "-xZ_Dvyr": "0",
+            "lkHgd-yD": "13",
+            "-xZ_Dvyr": "12",
             "sKmUUnhI": "0",
             "duS6ikJR": "front"
           }
@@ -1060,6 +1060,17 @@
           "attributeValues": {
             "ynPXy56N": "Danger",
             "4MUH7vcn": "15"
+          }
+        },
+        {
+          "id": "Wzw6d_ma",
+          "classId": "vIqfrfWe",
+          "name": "StatusLED1",
+          "attributeValues": {
+            "AtwOfiQP": "4",
+            "jWLSxpSe": "0",
+            "MH_Pvhse": "red",
+            "aL8qstoB": "0"
           }
         }
       ],
@@ -1127,6 +1138,14 @@
           "target": "_S_28wa8",
           "sourceHandle": "right",
           "targetHandle": "left"
+        },
+        {
+          "id": "wwVmrCyt",
+          "relationId": "l5liAAcd",
+          "source": "H1i6UBrq",
+          "target": "Wzw6d_ma",
+          "sourceHandle": "left",
+          "targetHandle": "right"
         }
       ],
       "connectors": []
@@ -1168,8 +1187,8 @@
           "name": "LeftMotor",
           "attributeValues": {
             "lJHXkt0J": "left",
-            "8VvyV63w": "0",
-            "s8-8KA_W": "0"
+            "8VvyV63w": "6",
+            "s8-8KA_W": "8"
           }
         },
         {
@@ -1178,8 +1197,8 @@
           "name": "RightMotor",
           "attributeValues": {
             "lJHXkt0J": "right",
-            "8VvyV63w": "0",
-            "s8-8KA_W": "0"
+            "8VvyV63w": "5",
+            "s8-8KA_W": "7"
           }
         },
         {
@@ -1187,8 +1206,8 @@
           "classId": "l3bRYsba",
           "name": "FrontDistanceSensor",
           "attributeValues": {
-            "lkHgd-yD": "0",
-            "-xZ_Dvyr": "0",
+            "lkHgd-yD": "13",
+            "-xZ_Dvyr": "12",
             "sKmUUnhI": "0",
             "duS6ikJR": "front"
           }
@@ -1198,8 +1217,8 @@
           "classId": "l3bRYsba",
           "name": "RearDistanceSensor",
           "attributeValues": {
-            "lkHgd-yD": "0",
-            "-xZ_Dvyr": "0",
+            "lkHgd-yD": "2",
+            "-xZ_Dvyr": "11",
             "sKmUUnhI": "0",
             "duS6ikJR": "rear"
           }
@@ -1342,8 +1361,8 @@
           "name": "LeftMotor",
           "attributeValues": {
             "lJHXkt0J": "left",
-            "8VvyV63w": "0",
-            "s8-8KA_W": "0"
+            "8VvyV63w": "6",
+            "s8-8KA_W": "8"
           }
         },
         {
@@ -1352,8 +1371,8 @@
           "name": "RightMotor",
           "attributeValues": {
             "lJHXkt0J": "right",
-            "8VvyV63w": "0",
-            "s8-8KA_W": "0"
+            "8VvyV63w": "5",
+            "s8-8KA_W": "7"
           }
         },
         {
@@ -1371,7 +1390,7 @@
           "classId": "vIqfrfWe",
           "name": "StatusLED",
           "attributeValues": {
-            "AtwOfiQP": "0",
+            "AtwOfiQP": "4",
             "jWLSxpSe": "0",
             "MH_Pvhse": "green",
             "aL8qstoB": "0"
@@ -1575,8 +1594,8 @@
           "name": "Motor1",
           "attributeValues": {
             "lJHXkt0J": "left",
-            "8VvyV63w": "0",
-            "s8-8KA_W": "0"
+            "8VvyV63w": "6",
+            "s8-8KA_W": "8"
           }
         },
         {
@@ -1585,8 +1604,8 @@
           "name": "Motor2",
           "attributeValues": {
             "lJHXkt0J": "right",
-            "8VvyV63w": "0",
-            "s8-8KA_W": "0"
+            "8VvyV63w": "5",
+            "s8-8KA_W": "7"
           }
         },
         {
@@ -1595,7 +1614,7 @@
           "name": "LineChannel",
           "attributeValues": {
             "nEKXh8O2": "center",
-            "h-nag11G": "0"
+            "h-nag11G": "15"
           }
         }
       ],
@@ -1905,6 +1924,10 @@
       "_S_28wa8": {
         "x": 331.74966678945617,
         "y": -24.82734084224169
+      },
+      "Wzw6d_ma": {
+        "x": -208.7820292691244,
+        "y": 43.80130673317093
       }
     },
     "im-m3jVXgEC": {
