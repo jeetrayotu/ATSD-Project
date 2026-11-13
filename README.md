@@ -20,7 +20,7 @@ Uploading to Arduino
 - Install any required libraries (such as FastLED).
 - Click **Upload** to upload the generated code to the robot.
 
-## Backend Development
+## Development
 
 ### Setup
 
