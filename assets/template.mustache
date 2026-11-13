@@ -8,43 +8,58 @@
 #include <Arduino.h>
 #include <FastLED.h>
 
-
+{{#Robot}}
 // Robot configuration
-const char* ROBOT_NAME = "{{ RobotName }}";
+const char* ROBOT_NAME = "{{RobotName}}";
+{{/Robot}}
 
+{{#Controller}}
 // Controller configuration
-const int CONTROLLER_CRUISESPEED = "{{ ControllerCruiseSpeed }}";
-const int CONTROLLER_TURNSPEED = "{{ ControllerTurnSpeed }}";
-const int CONTROLLER_DEFAULTTURNANGLE = "{{ ControllerDefaultTurnAngle }}";
+const int CONTROLLER_CRUISESPEED = "{{ControllerCruiseSpeed}}";
+const int CONTROLLER_TURNSPEED = "{{ControllerTurnSpeed}}";
+const int CONTROLLER_DEFAULTTURNANGLE = "{{ControllerDefaultTurnAngle}}";
+{{/Controller}}
 
+{{#DistanceSensor}}
 // Distance sensor 1
-const int DISTANCE_SENSOR_0_TRIG_PIN = {{ DistanceSensorTrigPIN }};
-const int DISTANCE_SENSOR_0_ECHO_PIN = {{ DistanceSensorEchoPIN }};
-const int DISTANCE_SENSOR_0_READ_INTERVAL_MS = {{ DistanceSensorReadIntervalMs }};
-const char* DISTANCE_SENSOR_0_MOUNTING = "{{ DistanceSensorMounting }}";
+const int DISTANCE_SENSOR_0_TRIG_PIN = {{DistanceSensorTrigPIN}};
+const int DISTANCE_SENSOR_0_ECHO_PIN = {{DistanceSensorEchoPIN}};
+const int DISTANCE_SENSOR_0_READ_INTERVAL_MS = {{DistanceSensorReadIntervalMs}};
+const char* DISTANCE_SENSOR_0_MOUNTING = "{{DistanceSensorMounting}}";
+{{/DistanceSensor}}
 
+{{#LineTracker}}
 // Line tracker
-const int LINE_TRACKER_0_THRESHOLD = {{ LineTrackerDarknessThreshold }};
+const int LINE_TRACKER_0_THRESHOLD = {{LineTrackerDarknessThreshold}};
+{{/LineTracker}}
 
+{{#StatusLED}}
 // Status LED
-const int STATUS_LED_0_PIN = {{ StatusLEDPin }};
-const int STATUS_LED_0_LED_COUNT = {{ StatusLEDLedCount }};
-const int STATUS_LED_0_BLINK_INTERVAL = {{ StatusLEDBlinkIntervalMs }};
+const int STATUS_LED_0_PIN = {{StatusLEDPin}};
+const int STATUS_LED_0_LED_COUNT = {{StatusLEDLedCount}};
+const int STATUS_LED_0_BLINK_INTERVAL = {{StatusLEDBlinkIntervalMs}};
+{{/StatusLED}}
 
+{{#Motor0}}
 // Motor 1
-const char* MOTOR_0_SIDE = "{{ Motor0Side }}";
-const int MOTOR_0_PWM_PIN = {{ Motor0PwnPin }};
-const int MOTOR_0_DIRECTION_PIN = {{ Motor0DirectionPin }};
+const char* MOTOR_0_SIDE = "{{Motor0Side}}";
+const int MOTOR_0_PWM_PIN = {{Motor0PwnPin}};
+const int MOTOR_0_DIRECTION_PIN = {{Motor0DirectionPin}};
+{{/Motor0}}
 
+{{#Motor1}}
 // Motor 2
-const char* MOTOR_1_SIDE = "{{ Motor1Side }}";
-const int MOTOR_1_PWM_PIN = {{ Motor1PwnPin }};
-const int MOTOR_1_DIRECTION_PIN = {{ Motor1DirectionPin }};
+const char* MOTOR_1_SIDE = "{{Motor1Side}}";
+const int MOTOR_1_PWM_PIN = {{Motor1PwnPin}};
+const int MOTOR_1_DIRECTION_PIN = {{Motor1DirectionPin}};
+{{/Motor1}}
 
+{{#MotorDriver}}
 // Motor driver
-const int MOTOR_DRIVER_DEFAULT_SPEED = {{ MotorDriverDefaultSpeed }};
+const int MOTOR_DRIVER_DEFAULT_SPEED = {{MotorDriverDefaultSpeed}};
+{{/MotorDriver}}
 
-
+{{#DistanceSensor}}
 // Read distance from distance sensor 1
 float distance_sensor_0_read() {
 
@@ -70,14 +85,17 @@ float distance_sensor_0_read() {
 
     return distance;
 }
+{{/DistanceSensor}}
 
+{{#LineTracker}}
 // Line tracker functions
 int line_tracker_read_center() {
     return analogRead(0);
 }
+{{/LineTracker}}
 
+{{#Motor0}}
 // Motor control functions
-
 void motor_0_set_speed(int speed) {
 
     speed = constrain(speed, 0, 255);
@@ -92,8 +110,9 @@ void motor_0_set_speed(int speed) {
         speed
     );
 }
+{{/Motor0}}
 
-
+{{#Motor1}}
 void motor_1_set_speed(int speed) {
 
     speed = constrain(speed, 0, 255);
@@ -108,13 +127,17 @@ void motor_1_set_speed(int speed) {
         speed
     );
 }
+{{/Motor1}}
 
+{{#MotorDriver}}
 void motor_driver_stop() {
     analogWrite(MOTOR_0_PWM_PIN, 0);
     analogWrite(MOTOR_1_PWM_PIN, 0);
 }
-// Status LED functions
+{{/MotorDriver}}
 
+{{#StatusLED}}
+// Status LED functions
 CRGB status_led_pixels_0[1];
 
 void status_led_0_init() {
@@ -150,23 +173,33 @@ void status_led_0_set_colour(
 
     FastLED.show();
 }
+{{/StatusLED}}
 
 void setup() {
     Serial.begin(9600);
     Serial.println();
     Serial.println("Robot initialized");
+    {{#DistanceSensor}}
     pinMode(DISTANCE_SENSOR_0_TRIG_PIN, OUTPUT);
     pinMode(DISTANCE_SENSOR_0_ECHO_PIN, INPUT);
+    {{/DistanceSensor}}
+    {{#Motor0}}
     pinMode(MOTOR_0_PWM_PIN, OUTPUT);
     pinMode(MOTOR_0_DIRECTION_PIN, OUTPUT);
+    {{/Motor0}}
+    {{#Motor1}}
     pinMode(MOTOR_1_PWM_PIN, OUTPUT);
     pinMode(MOTOR_1_DIRECTION_PIN, OUTPUT);
+    {{/Motor1}}
+    {{#StatusLED}}
     status_led_0_init();
+    {{/StatusLED}}
     pinMode(0, INPUT);
 }
 
 void loop() {
 
+    {{#DistanceSensor}}
     static unsigned long last_distance_0 = 0;
 
     if (millis() - last_distance_0 >=
@@ -180,8 +213,11 @@ void loop() {
         Serial.print(distance);
         Serial.println(" cm");
     }
+    {{/DistanceSensor}}
 
+    {{#LineTracker}}
     // Read line tracker channels
     int line_center = line_tracker_read_center();
     delay(10);
+    {{/LineTracker}}
 }
