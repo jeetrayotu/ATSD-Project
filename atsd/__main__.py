@@ -1,14 +1,20 @@
 from chevron import render
-import msgspec
+from collections import defaultdict
 from pathlib import Path
 from rich import print
 from rich.pretty import pprint
+import msgspec
 import rich_click as click
-from collections import defaultdict
 
-
+# Expands user directories in Pathlib Path objects and resolves them
+# to their absolute path.
 def resolve_path(path):
+
+    # Convert `path` into a Pathlib Path object if
+    # it isn't one already.
     path = path if isinstance(path, Path) else Path(path)
+
+    # Expand user directories and resolve to absolute path.
     return path.expanduser().resolve() if path else path
 
 
@@ -86,7 +92,6 @@ def generate(model: Path):  # pyright: ignore [reportRedeclaration]
         for attr in cls.attributes:
             assert attr.id not in allAttributeValues
             allAttributeValues[attr.id] = attr.name
-    # pprint(model)
     instances = {}
     for instance in model.instanceModels:
         instances[instance.name] = {}

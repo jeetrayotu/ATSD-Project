@@ -14,35 +14,35 @@ const char* ROBOT_NAME = "{{ RobotName }}";
 
 // Controller configuration
 const int CONTROLLER_CRUISESPEED = "{{ ControllerCruiseSpeed }}";
-const int CONTROLLER_TURNSPEED = "0";
-const int CONTROLLER_DEFAULTTURNANGLE = "0";
+const int CONTROLLER_TURNSPEED = "{{ ControllerTurnSpeed }}";
+const int CONTROLLER_DEFAULTTURNANGLE = "{{ ControllerDefaultTurnAngle }}";
 
 // Distance sensor 1
-const int DISTANCE_SENSOR_0_TRIG_PIN = 0;
-const int DISTANCE_SENSOR_0_ECHO_PIN = 0;
-const int DISTANCE_SENSOR_0_READ_INTERVAL_MS = 0;
-const char* DISTANCE_SENSOR_0_MOUNTING = "front";
+const int DISTANCE_SENSOR_0_TRIG_PIN = {{ DistanceSensorTrigPIN }};
+const int DISTANCE_SENSOR_0_ECHO_PIN = {{ DistanceSensorEchoPIN }};
+const int DISTANCE_SENSOR_0_READ_INTERVAL_MS = {{ DistanceSensorReadIntervalMs }};
+const char* DISTANCE_SENSOR_0_MOUNTING = "{{ DistanceSensorMounting }}";
 
 // Line tracker
-const int LINE_TRACKER_0_THRESHOLD = 0;
+const int LINE_TRACKER_0_THRESHOLD = {{ LineTrackerDarknessThreshold }};
 
 // Status LED
-const int STATUS_LED_0_PIN = 0;
-const int STATUS_LED_0_LED_COUNT = 0;
-const int STATUS_LED_0_BLINK_INTERVAL = 0;
+const int STATUS_LED_0_PIN = {{ StatusLEDPin }};
+const int STATUS_LED_0_LED_COUNT = {{ StatusLEDLedCount }};
+const int STATUS_LED_0_BLINK_INTERVAL = {{ StatusLEDBlinkIntervalMs }};
 
 // Motor 1
-const char* MOTOR_0_SIDE = "left";
-const int MOTOR_0_PWM_PIN = 0;
-const int MOTOR_0_DIRECTION_PIN = 0;
+const char* MOTOR_0_SIDE = "{{ Motor0Side }}";
+const int MOTOR_0_PWM_PIN = {{ Motor0PwnPin }};
+const int MOTOR_0_DIRECTION_PIN = {{ Motor0DirectionPin }};
 
 // Motor 2
-const char* MOTOR_1_SIDE = "right";
-const int MOTOR_1_PWM_PIN = 0;
-const int MOTOR_1_DIRECTION_PIN = 0;
+const char* MOTOR_1_SIDE = "{{ Motor1Side }}";
+const int MOTOR_1_PWM_PIN = {{ Motor1PwnPin }};
+const int MOTOR_1_DIRECTION_PIN = {{ Motor1DirectionPin }};
 
 // Motor driver
-const int MOTOR_DRIVER_DEFAULT_SPEED = 0;
+const int MOTOR_DRIVER_DEFAULT_SPEED = {{ MotorDriverDefaultSpeed }};
 
 
 // Read distance from distance sensor 1
