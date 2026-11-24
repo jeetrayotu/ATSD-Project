@@ -35,6 +35,50 @@
             "upperBound": 1,
             "defaultValue": ""
           }
+        ],
+        "ports": [
+          {
+            "id": "RNVi7MPL",
+            "name": "distance",
+            "protocolId": "ESMzh0n2",
+            "conjugated": true
+          },
+          {
+            "id": "OaOjoKte",
+            "name": "line",
+            "protocolId": "zr1dZtcA",
+            "conjugated": true
+          },
+          {
+            "id": "xX0cGOGf",
+            "name": "button",
+            "protocolId": "GWIzM8Sr",
+            "conjugated": true
+          },
+          {
+            "id": "tGVF21sc",
+            "name": "motors",
+            "protocolId": "-3IzcoFw",
+            "conjugated": true
+          },
+          {
+            "id": "ePIYHMXD",
+            "name": "led",
+            "protocolId": "mgQvHNcI",
+            "conjugated": true
+          },
+          {
+            "id": "13rmnKy5",
+            "name": "timer",
+            "protocolId": "sys-timing",
+            "conjugated": false
+          },
+          {
+            "id": "otWECNcB",
+            "name": "log",
+            "protocolId": "sys-log",
+            "conjugated": false
+          }
         ]
       },
       {
@@ -113,6 +157,14 @@
             "defaultValue": "",
             "enumId": "rhdDE0fz"
           }
+        ],
+        "ports": [
+          {
+            "id": "VQMq_OWD",
+            "name": "toController",
+            "protocolId": "ESMzh0n2",
+            "conjugated": false
+          }
         ]
       },
       {
@@ -128,6 +180,23 @@
             "lowerBound": 1,
             "upperBound": 1,
             "defaultValue": ""
+          },
+          {
+            "id": "pOnC1_4E",
+            "name": "readIntervalMs",
+            "type": "INT",
+            "visibility": "PUBLIC",
+            "lowerBound": 1,
+            "upperBound": 1,
+            "defaultValue": ""
+          }
+        ],
+        "ports": [
+          {
+            "id": "XOe1SZTN",
+            "name": "toController",
+            "protocolId": "zr1dZtcA",
+            "conjugated": false
           }
         ]
       },
@@ -144,6 +213,14 @@
             "lowerBound": 1,
             "upperBound": 1,
             "defaultValue": ""
+          }
+        ],
+        "ports": [
+          {
+            "id": "UvxxDRx7",
+            "name": "toController",
+            "protocolId": "-3IzcoFw",
+            "conjugated": false
           }
         ]
       },
@@ -188,6 +265,14 @@
             "lowerBound": 0,
             "upperBound": 1,
             "defaultValue": ""
+          }
+        ],
+        "ports": [
+          {
+            "id": "36iDrs9a",
+            "name": "toController",
+            "protocolId": "mgQvHNcI",
+            "conjugated": false
           }
         ]
       },
@@ -274,6 +359,357 @@
             "lowerBound": 1,
             "upperBound": 1,
             "defaultValue": ""
+          }
+        ]
+      },
+      {
+        "id": "1T2-3xhH",
+        "name": "Button",
+        "isAbstract": false,
+        "attributes": [
+          {
+            "id": "Jp9x7Mj_",
+            "name": "pin",
+            "type": "INT",
+            "visibility": "PUBLIC",
+            "lowerBound": 1,
+            "upperBound": 1,
+            "defaultValue": "2"
+          },
+          {
+            "id": "Zz5ocG0d",
+            "name": "readIntervalMs",
+            "type": "INT",
+            "visibility": "PUBLIC",
+            "lowerBound": 1,
+            "upperBound": 1,
+            "defaultValue": ""
+          }
+        ],
+        "ports": [
+          {
+            "id": "A9TP0GcA",
+            "name": "toController",
+            "protocolId": "GWIzM8Sr",
+            "conjugated": false
+          }
+        ]
+      },
+      {
+        "id": "wUY_k4Im",
+        "name": "ObstacleStopController",
+        "isAbstract": false,
+        "attributes": [
+          {
+            "id": "LOzAxzXM",
+            "name": "stopDistanceCm",
+            "type": "INT",
+            "visibility": "PUBLIC",
+            "lowerBound": 1,
+            "upperBound": 1,
+            "defaultValue": ""
+          }
+        ],
+        "ports": [
+          {
+            "id": "575yx8xm",
+            "name": "distance",
+            "protocolId": "ESMzh0n2",
+            "conjugated": true
+          },
+          {
+            "id": "5MslfY5u",
+            "name": "line",
+            "protocolId": "zr1dZtcA",
+            "conjugated": true
+          },
+          {
+            "id": "biheyEd7",
+            "name": "button",
+            "protocolId": "GWIzM8Sr",
+            "conjugated": true
+          },
+          {
+            "id": "P4zDL-ak",
+            "name": "motors",
+            "protocolId": "-3IzcoFw",
+            "conjugated": true
+          },
+          {
+            "id": "6J0kGODK",
+            "name": "led",
+            "protocolId": "mgQvHNcI",
+            "conjugated": true
+          },
+          {
+            "id": "dinZnLXi",
+            "name": "timer",
+            "protocolId": "sys-timing",
+            "conjugated": false
+          },
+          {
+            "id": "caBAg8WY",
+            "name": "log",
+            "protocolId": "sys-log",
+            "conjugated": false
+          }
+        ]
+      },
+      {
+        "id": "pQYWvsRw",
+        "name": "LineFollowerController",
+        "isAbstract": false,
+        "attributes": [
+          {
+            "id": "cU1vsHiQ",
+            "name": "lineThreshold",
+            "type": "INT",
+            "visibility": "PUBLIC",
+            "lowerBound": 1,
+            "upperBound": 1,
+            "defaultValue": ""
+          }
+        ],
+        "ports": [
+          {
+            "id": "1jzIRlNQ",
+            "name": "distance",
+            "protocolId": "ESMzh0n2",
+            "conjugated": true
+          },
+          {
+            "id": "b0prFmbh",
+            "name": "line",
+            "protocolId": "zr1dZtcA",
+            "conjugated": true
+          },
+          {
+            "id": "7_wy5yq1",
+            "name": "button",
+            "protocolId": "GWIzM8Sr",
+            "conjugated": true
+          },
+          {
+            "id": "XoY1BaIM",
+            "name": "motors",
+            "protocolId": "-3IzcoFw",
+            "conjugated": true
+          },
+          {
+            "id": "cAxYmfsB",
+            "name": "led",
+            "protocolId": "mgQvHNcI",
+            "conjugated": true
+          },
+          {
+            "id": "4HbQLXjj",
+            "name": "timer",
+            "protocolId": "sys-timing",
+            "conjugated": false
+          },
+          {
+            "id": "lAFbVV6q",
+            "name": "log",
+            "protocolId": "sys-log",
+            "conjugated": false
+          }
+        ]
+      },
+      {
+        "id": "7OA28lQi",
+        "name": "PatrolController",
+        "isAbstract": false,
+        "attributes": [
+          {
+            "id": "MaRiNTN9",
+            "name": "stopDistanceCm",
+            "type": "INT",
+            "visibility": "PUBLIC",
+            "lowerBound": 1,
+            "upperBound": 1,
+            "defaultValue": ""
+          },
+          {
+            "id": "Ox98whGc",
+            "name": "warningDistanceCm",
+            "type": "INT",
+            "visibility": "PUBLIC",
+            "lowerBound": 1,
+            "upperBound": 1,
+            "defaultValue": ""
+          },
+          {
+            "id": "TZc1UWb5",
+            "name": "lineThreshold",
+            "type": "INT",
+            "visibility": "PUBLIC",
+            "lowerBound": 1,
+            "upperBound": 1,
+            "defaultValue": ""
+          }
+        ],
+        "ports": [
+          {
+            "id": "9rXxtNDF",
+            "name": "distance",
+            "protocolId": "ESMzh0n2",
+            "conjugated": true
+          },
+          {
+            "id": "yuzX9k1g",
+            "name": "line",
+            "protocolId": "zr1dZtcA",
+            "conjugated": true
+          },
+          {
+            "id": "nneGEYG1",
+            "name": "button",
+            "protocolId": "GWIzM8Sr",
+            "conjugated": true
+          },
+          {
+            "id": "_LwiqD9j",
+            "name": "motors",
+            "protocolId": "-3IzcoFw",
+            "conjugated": true
+          },
+          {
+            "id": "JBAciI05",
+            "name": "led",
+            "protocolId": "mgQvHNcI",
+            "conjugated": true
+          },
+          {
+            "id": "FhfwKVql",
+            "name": "timer",
+            "protocolId": "sys-timing",
+            "conjugated": false
+          },
+          {
+            "id": "Ur5Qrec8",
+            "name": "log",
+            "protocolId": "sys-log",
+            "conjugated": false
+          }
+        ]
+      },
+      {
+        "id": "OAYGSTWj",
+        "name": "ObstacleTurnController",
+        "isAbstract": false,
+        "attributes": [
+          {
+            "id": "akoKm5b_",
+            "name": "stopDistanceCm",
+            "type": "INT",
+            "visibility": "PUBLIC",
+            "lowerBound": 1,
+            "upperBound": 1,
+            "defaultValue": ""
+          }
+        ],
+        "ports": [
+          {
+            "id": "RlLK6sNd",
+            "name": "distance",
+            "protocolId": "ESMzh0n2",
+            "conjugated": true
+          },
+          {
+            "id": "VU72lZ-o",
+            "name": "line",
+            "protocolId": "zr1dZtcA",
+            "conjugated": true
+          },
+          {
+            "id": "2_YH19dC",
+            "name": "button",
+            "protocolId": "GWIzM8Sr",
+            "conjugated": true
+          },
+          {
+            "id": "qgn28s9D",
+            "name": "motors",
+            "protocolId": "-3IzcoFw",
+            "conjugated": true
+          },
+          {
+            "id": "p68GZN9Z",
+            "name": "led",
+            "protocolId": "mgQvHNcI",
+            "conjugated": true
+          },
+          {
+            "id": "3zLIbet6",
+            "name": "timer",
+            "protocolId": "sys-timing",
+            "conjugated": false
+          },
+          {
+            "id": "_UzH_7-3",
+            "name": "log",
+            "protocolId": "sys-log",
+            "conjugated": false
+          }
+        ]
+      },
+      {
+        "id": "y0s5bla5",
+        "name": "BlackFloorTurnController",
+        "isAbstract": false,
+        "attributes": [
+          {
+            "id": "x29iI-Vm",
+            "name": "lineThreshold",
+            "type": "INT",
+            "visibility": "PUBLIC",
+            "lowerBound": 1,
+            "upperBound": 1,
+            "defaultValue": ""
+          }
+        ],
+        "ports": [
+          {
+            "id": "kzFpfITt",
+            "name": "distance",
+            "protocolId": "ESMzh0n2",
+            "conjugated": true
+          },
+          {
+            "id": "aO_rC8qL",
+            "name": "line",
+            "protocolId": "zr1dZtcA",
+            "conjugated": true
+          },
+          {
+            "id": "k1urN0Xt",
+            "name": "button",
+            "protocolId": "GWIzM8Sr",
+            "conjugated": true
+          },
+          {
+            "id": "zWbnXjgS",
+            "name": "motors",
+            "protocolId": "-3IzcoFw",
+            "conjugated": true
+          },
+          {
+            "id": "Tdd8PM5P",
+            "name": "led",
+            "protocolId": "mgQvHNcI",
+            "conjugated": true
+          },
+          {
+            "id": "p-7vtA3R",
+            "name": "timer",
+            "protocolId": "sys-timing",
+            "conjugated": false
+          },
+          {
+            "id": "6DiZezwf",
+            "name": "log",
+            "protocolId": "sys-log",
+            "conjugated": false
           }
         ]
       }
@@ -421,6 +857,72 @@
         "targetMultiplicity": "",
         "sourceHandle": "top",
         "targetHandle": "bottom"
+      },
+      {
+        "id": "zl7SLqDd",
+        "kind": "INHERITANCE",
+        "source": "1T2-3xhH",
+        "target": "IJMIaCcj",
+        "name": "",
+        "sourceMultiplicity": "",
+        "targetMultiplicity": "",
+        "sourceHandle": "top",
+        "targetHandle": "left"
+      },
+      {
+        "id": "vUs0_KTn",
+        "kind": "INHERITANCE",
+        "source": "wUY_k4Im",
+        "target": "t-W-XEe9",
+        "name": "",
+        "sourceMultiplicity": "",
+        "targetMultiplicity": "",
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
+      },
+      {
+        "id": "Zn-yYlLY",
+        "kind": "INHERITANCE",
+        "source": "pQYWvsRw",
+        "target": "t-W-XEe9",
+        "name": "",
+        "sourceMultiplicity": "",
+        "targetMultiplicity": "",
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
+      },
+      {
+        "id": "ne8_QweC",
+        "kind": "INHERITANCE",
+        "source": "7OA28lQi",
+        "target": "t-W-XEe9",
+        "name": "",
+        "sourceMultiplicity": "",
+        "targetMultiplicity": "",
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
+      },
+      {
+        "id": "eLO6m4H5",
+        "kind": "INHERITANCE",
+        "source": "OAYGSTWj",
+        "target": "t-W-XEe9",
+        "name": "",
+        "sourceMultiplicity": "",
+        "targetMultiplicity": "",
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
+      },
+      {
+        "id": "g5y9cqBr",
+        "kind": "INHERITANCE",
+        "source": "y0s5bla5",
+        "target": "t-W-XEe9",
+        "name": "",
+        "sourceMultiplicity": "",
+        "targetMultiplicity": "",
+        "sourceHandle": "bottom",
+        "targetHandle": "top"
       }
     ],
     "enumerations": [
@@ -442,7 +944,8 @@
           "green",
           "blue",
           "white",
-          "off"
+          "off",
+          "yellow"
         ]
       },
       {
@@ -463,8 +966,770 @@
         ]
       }
     ],
-    "behaviours": {},
-    "protocols": []
+    "behaviours": {
+      "wUY_k4Im": {
+        "states": [
+          {
+            "id": "0pIRZsZJ",
+            "kind": "initial",
+            "name": "",
+            "entry": "",
+            "exit": ""
+          },
+          {
+            "id": "l-W9WfLa",
+            "kind": "simple",
+            "name": "Driving",
+            "entry": "led.green();\nmotors.forward((int) cruiseSpeed);\nlog.log(\"Driving\");",
+            "exit": ""
+          },
+          {
+            "id": "-fZTcdfn",
+            "kind": "simple",
+            "name": "Stopped",
+            "entry": "motors.stop();\nled.red();\nlog.log(\"Obstacle: stopped\");",
+            "exit": ""
+          }
+        ],
+        "transitions": [
+          {
+            "id": "HmucNI--",
+            "source": "0pIRZsZJ",
+            "target": "l-W9WfLa",
+            "trigger": "",
+            "guard": "",
+            "effect": "",
+            "sourceHandle": "right",
+            "targetHandle": "left"
+          },
+          {
+            "id": "6BSFlnzY",
+            "source": "l-W9WfLa",
+            "target": "-fZTcdfn",
+            "trigger": "distance.reading",
+            "guard": "cm > 0 && cm < stopDistanceCm",
+            "effect": "",
+            "sourceHandle": "bottom",
+            "targetHandle": "top",
+            "labelT": 0.31666666666666665
+          },
+          {
+            "id": "kJNEp9Pa",
+            "source": "-fZTcdfn",
+            "target": "l-W9WfLa",
+            "trigger": "distance.reading",
+            "guard": "cm == 0 || cm >= stopDistanceCm",
+            "effect": "",
+            "sourceHandle": "right",
+            "targetHandle": "right",
+            "labelT": 0.5
+          }
+        ]
+      },
+      "pQYWvsRw": {
+        "states": [
+          {
+            "id": "ty3znd7w",
+            "kind": "initial",
+            "name": "",
+            "entry": "",
+            "exit": ""
+          },
+          {
+            "id": "Lx3806bj",
+            "kind": "simple",
+            "name": "Forward",
+            "entry": "led.green();\nmotors.forward((int) cruiseSpeed);",
+            "exit": ""
+          },
+          {
+            "id": "uUj3Ewz_",
+            "kind": "simple",
+            "name": "TurnLeft",
+            "entry": "motors.turnLeft((int) turnSpeed);",
+            "exit": ""
+          },
+          {
+            "id": "ZS-0DQUa",
+            "kind": "simple",
+            "name": "TurnRight",
+            "entry": "motors.turnRight((int) turnSpeed);",
+            "exit": ""
+          },
+          {
+            "id": "UgHNKBwk",
+            "kind": "simple",
+            "name": "Lost",
+            "entry": "motors.stop();\nled.red();\nlog.log(\"Line lost\");",
+            "exit": ""
+          }
+        ],
+        "transitions": [
+          {
+            "id": "CpX3c3d0",
+            "source": "ty3znd7w",
+            "target": "Lx3806bj",
+            "trigger": "",
+            "guard": "",
+            "effect": "",
+            "sourceHandle": "right",
+            "targetHandle": "left"
+          },
+          {
+            "id": "KVMfUqob",
+            "source": "Lx3806bj",
+            "target": "uUj3Ewz_",
+            "trigger": "line.readings",
+            "guard": "left >= lineThreshold && centre < lineThreshold && right < lineThreshold",
+            "effect": "",
+            "sourceHandle": "left",
+            "targetHandle": "top"
+          },
+          {
+            "id": "ROvwBR9B",
+            "source": "Lx3806bj",
+            "target": "ZS-0DQUa",
+            "trigger": "line.readings",
+            "guard": "right >= lineThreshold && centre < lineThreshold && left < lineThreshold",
+            "effect": "",
+            "sourceHandle": "right",
+            "targetHandle": "top"
+          },
+          {
+            "id": "wEVteDLi",
+            "source": "Lx3806bj",
+            "target": "UgHNKBwk",
+            "trigger": "line.readings",
+            "guard": "left < lineThreshold && centre < lineThreshold && right < lineThreshold",
+            "effect": "",
+            "sourceHandle": "bottom",
+            "targetHandle": "top"
+          },
+          {
+            "id": "3Sn0FiXd",
+            "source": "uUj3Ewz_",
+            "target": "ZS-0DQUa",
+            "trigger": "line.readings",
+            "guard": "right >= lineThreshold && centre < lineThreshold && left < lineThreshold",
+            "effect": "",
+            "sourceHandle": "right",
+            "targetHandle": "top"
+          },
+          {
+            "id": "MbThUp5i",
+            "source": "uUj3Ewz_",
+            "target": "UgHNKBwk",
+            "trigger": "line.readings",
+            "guard": "left < lineThreshold && centre < lineThreshold && right < lineThreshold",
+            "effect": "",
+            "sourceHandle": "bottom",
+            "targetHandle": "top"
+          },
+          {
+            "id": "osFitoDU",
+            "source": "uUj3Ewz_",
+            "target": "Lx3806bj",
+            "trigger": "line.readings",
+            "guard": "centre >= lineThreshold",
+            "effect": "",
+            "sourceHandle": "top",
+            "targetHandle": "bottom"
+          },
+          {
+            "id": "4_54tUWU",
+            "source": "ZS-0DQUa",
+            "target": "uUj3Ewz_",
+            "trigger": "line.readings",
+            "guard": "left >= lineThreshold && centre < lineThreshold && right < lineThreshold",
+            "effect": "",
+            "sourceHandle": "left",
+            "targetHandle": "top"
+          },
+          {
+            "id": "eVoRSVZ8",
+            "source": "ZS-0DQUa",
+            "target": "UgHNKBwk",
+            "trigger": "line.readings",
+            "guard": "left < lineThreshold && centre < lineThreshold && right < lineThreshold",
+            "effect": "",
+            "sourceHandle": "bottom",
+            "targetHandle": "top"
+          },
+          {
+            "id": "MdpfnWTW",
+            "source": "ZS-0DQUa",
+            "target": "Lx3806bj",
+            "trigger": "line.readings",
+            "guard": "centre >= lineThreshold",
+            "effect": "",
+            "sourceHandle": "top",
+            "targetHandle": "bottom",
+            "labelT": 0.03333333333333333
+          },
+          {
+            "id": "-ySAyfdF",
+            "source": "UgHNKBwk",
+            "target": "uUj3Ewz_",
+            "trigger": "line.readings",
+            "guard": "left >= lineThreshold && centre < lineThreshold && right < lineThreshold",
+            "effect": "",
+            "sourceHandle": "left",
+            "targetHandle": "top"
+          },
+          {
+            "id": "8T6-6SYr",
+            "source": "UgHNKBwk",
+            "target": "ZS-0DQUa",
+            "trigger": "line.readings",
+            "guard": "right >= lineThreshold && centre < lineThreshold && left < lineThreshold",
+            "effect": "",
+            "sourceHandle": "right",
+            "targetHandle": "top"
+          },
+          {
+            "id": "sYK38PPD",
+            "source": "UgHNKBwk",
+            "target": "Lx3806bj",
+            "trigger": "line.readings",
+            "guard": "centre >= lineThreshold",
+            "effect": "",
+            "sourceHandle": "top",
+            "targetHandle": "bottom"
+          }
+        ]
+      },
+      "7OA28lQi": {
+        "states": [
+          {
+            "id": "fU8Ni6GR",
+            "kind": "initial",
+            "name": "",
+            "entry": "",
+            "exit": ""
+          },
+          {
+            "id": "ZaqPipdP",
+            "kind": "simple",
+            "name": "Idle",
+            "entry": "motors.stop();\nled.off();\nlog.log(\"Idle: press button\");",
+            "exit": ""
+          },
+          {
+            "id": "6YgbCx0x",
+            "kind": "simple",
+            "name": "Patrolling",
+            "entry": "led.green();\nmotors.forward((int) cruiseSpeed);\nlog.log(\"Patrolling\");",
+            "exit": ""
+          },
+          {
+            "id": "PiqfTApu",
+            "kind": "simple",
+            "name": "Warning",
+            "entry": "led.yellow();\nmotors.forward((int) (cruiseSpeed / 2));\nlog.log(\"Warning: obstacle ahead\");",
+            "exit": ""
+          },
+          {
+            "id": "4svUDBs5",
+            "kind": "simple",
+            "name": "Avoiding",
+            "entry": "led.red();\nmotors.turnLeft((int) turnSpeed);\ntimer.informIn((int) (defaultTurnAngle * 10));\nlog.log(\"Avoiding\");",
+            "exit": ""
+          }
+        ],
+        "transitions": [
+          {
+            "id": "MU3-Lriu",
+            "source": "fU8Ni6GR",
+            "target": "ZaqPipdP",
+            "trigger": "",
+            "guard": "",
+            "effect": "",
+            "sourceHandle": "top",
+            "targetHandle": "left"
+          },
+          {
+            "id": "q5HgH_OP",
+            "source": "ZaqPipdP",
+            "target": "6YgbCx0x",
+            "trigger": "button.pressed",
+            "guard": "",
+            "effect": "",
+            "sourceHandle": "right",
+            "targetHandle": "top"
+          },
+          {
+            "id": "tHcqFYc1",
+            "source": "6YgbCx0x",
+            "target": "ZaqPipdP",
+            "trigger": "button.pressed",
+            "guard": "",
+            "effect": "",
+            "sourceHandle": "right",
+            "targetHandle": "top"
+          },
+          {
+            "id": "IT-ayoZM",
+            "source": "PiqfTApu",
+            "target": "ZaqPipdP",
+            "trigger": "button.pressed",
+            "guard": "",
+            "effect": "",
+            "sourceHandle": "left",
+            "targetHandle": "bottom"
+          },
+          {
+            "id": "6GBGFc5m",
+            "source": "6YgbCx0x",
+            "target": "PiqfTApu",
+            "trigger": "distance.reading",
+            "guard": "cm >= stopDistanceCm && cm < warningDistanceCm",
+            "effect": "",
+            "sourceHandle": "bottom",
+            "targetHandle": "right",
+            "labelT": 0.5666666666666667
+          },
+          {
+            "id": "TY4ltPSD",
+            "source": "6YgbCx0x",
+            "target": "4svUDBs5",
+            "trigger": "distance.reading",
+            "guard": "cm > 0 && cm < stopDistanceCm",
+            "effect": "",
+            "sourceHandle": "bottom",
+            "targetHandle": "top"
+          },
+          {
+            "id": "s2BmHWPH",
+            "source": "PiqfTApu",
+            "target": "4svUDBs5",
+            "trigger": "distance.reading",
+            "guard": "cm > 0 && cm < stopDistanceCm",
+            "effect": "",
+            "sourceHandle": "top",
+            "targetHandle": "top"
+          },
+          {
+            "id": "EVbPHPLH",
+            "source": "PiqfTApu",
+            "target": "6YgbCx0x",
+            "trigger": "distance.reading",
+            "guard": "cm == 0 || cm >= warningDistanceCm",
+            "effect": "",
+            "sourceHandle": "right",
+            "targetHandle": "right",
+            "labelT": 0.6666666666666666
+          },
+          {
+            "id": "r9evWRYN",
+            "source": "6YgbCx0x",
+            "target": "4svUDBs5",
+            "trigger": "line.readings",
+            "guard": "left >= lineThreshold || centre >= lineThreshold || right >= lineThreshold",
+            "effect": "",
+            "sourceHandle": "left",
+            "targetHandle": "left",
+            "labelT": 0.5333333333333333
+          },
+          {
+            "id": "WHlGj2Dk",
+            "source": "PiqfTApu",
+            "target": "4svUDBs5",
+            "trigger": "line.readings",
+            "guard": "left >= lineThreshold || centre >= lineThreshold || right >= lineThreshold",
+            "effect": "",
+            "sourceHandle": "bottom",
+            "targetHandle": "bottom"
+          },
+          {
+            "id": "VeAGMeMP",
+            "source": "4svUDBs5",
+            "target": "6YgbCx0x",
+            "trigger": "timer.timeout",
+            "guard": "",
+            "effect": "",
+            "sourceHandle": "right",
+            "targetHandle": "left",
+            "labelT": 0.5
+          }
+        ]
+      },
+      "OAYGSTWj": {
+        "states": [
+          {
+            "id": "uxXI21kX",
+            "kind": "initial",
+            "name": "",
+            "entry": "",
+            "exit": ""
+          },
+          {
+            "id": "NxSwH7-1",
+            "kind": "simple",
+            "name": "Idle",
+            "entry": "motors.stop();\nled.red();",
+            "exit": ""
+          },
+          {
+            "id": "K7wP94pJ",
+            "kind": "simple",
+            "name": "Driving",
+            "entry": "motors.forward((int) cruiseSpeed);\nled.green();\ntimer.informIn(5000);",
+            "exit": ""
+          },
+          {
+            "id": "mBDal6Q0",
+            "kind": "simple",
+            "name": "Turning",
+            "entry": "motors.turnRight((int) turnSpeed);\nled.yellow();\nlog.log(\"turning right\");\ntimer.informIn((int) (defaultTurnAngle * 8));",
+            "exit": ""
+          }
+        ],
+        "transitions": [
+          {
+            "id": "xdTuTBoJ",
+            "source": "uxXI21kX",
+            "target": "NxSwH7-1",
+            "trigger": "",
+            "guard": "",
+            "effect": "",
+            "sourceHandle": "right",
+            "targetHandle": "left"
+          },
+          {
+            "id": "BLIqmHm3",
+            "source": "NxSwH7-1",
+            "target": "K7wP94pJ",
+            "trigger": "button.pressed",
+            "guard": "",
+            "effect": "",
+            "sourceHandle": "right",
+            "targetHandle": "left"
+          },
+          {
+            "id": "vnhTxnOJ",
+            "source": "K7wP94pJ",
+            "target": "NxSwH7-1",
+            "trigger": "button.pressed",
+            "guard": "",
+            "effect": "",
+            "sourceHandle": "top",
+            "targetHandle": "top"
+          },
+          {
+            "id": "iLOuHGib",
+            "source": "K7wP94pJ",
+            "target": "mBDal6Q0",
+            "trigger": "distance.reading",
+            "guard": "cm > 0 && cm <= stopDistanceCm",
+            "effect": "",
+            "sourceHandle": "bottom",
+            "targetHandle": "top"
+          },
+          {
+            "id": "0G1bhmEc",
+            "source": "mBDal6Q0",
+            "target": "K7wP94pJ",
+            "trigger": "timer.timeout",
+            "guard": "",
+            "effect": "",
+            "sourceHandle": "right",
+            "targetHandle": "right"
+          },
+          {
+            "id": "NpmSO6eZ",
+            "source": "K7wP94pJ",
+            "target": "NxSwH7-1",
+            "trigger": "timer.timeout",
+            "guard": "",
+            "effect": "log.log(\"time up\");",
+            "sourceHandle": "bottom",
+            "targetHandle": "bottom",
+            "labelT": 0.6166666666666667
+          }
+        ]
+      },
+      "y0s5bla5": {
+        "states": [
+          {
+            "id": "OB72pVGX",
+            "kind": "initial",
+            "name": "",
+            "entry": "",
+            "exit": ""
+          },
+          {
+            "id": "LTh3dKQL",
+            "kind": "simple",
+            "name": "Idle",
+            "entry": "motors.stop();\nled.red();",
+            "exit": ""
+          },
+          {
+            "id": "pM1OcRzh",
+            "kind": "simple",
+            "name": "Driving",
+            "entry": "motors.forward((int) cruiseSpeed);\nled.green();",
+            "exit": ""
+          },
+          {
+            "id": "ouppeqTM",
+            "kind": "simple",
+            "name": "Turning",
+            "entry": "motors.turnLeft((int) turnSpeed);\nled.yellow();\nlog.log(\"black floor, turning left\");\ntimer.informIn((int) (defaultTurnAngle * 8));",
+            "exit": ""
+          }
+        ],
+        "transitions": [
+          {
+            "id": "d2qT1XWE",
+            "source": "OB72pVGX",
+            "target": "LTh3dKQL",
+            "trigger": "",
+            "guard": "",
+            "effect": "",
+            "sourceHandle": "right",
+            "targetHandle": "left"
+          },
+          {
+            "id": "1CqxdYGs",
+            "source": "LTh3dKQL",
+            "target": "pM1OcRzh",
+            "trigger": "button.pressed",
+            "guard": "",
+            "effect": "",
+            "sourceHandle": "right",
+            "targetHandle": "left"
+          },
+          {
+            "id": "DccJ91HO",
+            "source": "pM1OcRzh",
+            "target": "LTh3dKQL",
+            "trigger": "button.pressed",
+            "guard": "",
+            "effect": "",
+            "sourceHandle": "top",
+            "targetHandle": "top"
+          },
+          {
+            "id": "rlweHROh",
+            "source": "pM1OcRzh",
+            "target": "ouppeqTM",
+            "trigger": "line.readings",
+            "guard": "centre > lineThreshold",
+            "effect": "",
+            "sourceHandle": "bottom",
+            "targetHandle": "top"
+          },
+          {
+            "id": "bF8hCtZU",
+            "source": "ouppeqTM",
+            "target": "pM1OcRzh",
+            "trigger": "timer.timeout",
+            "guard": "",
+            "effect": "",
+            "sourceHandle": "right",
+            "targetHandle": "right",
+            "labelT": 0.35
+          }
+        ]
+      }
+    },
+    "protocols": [
+      {
+        "id": "ESMzh0n2",
+        "name": "DistanceProtocol",
+        "signals": [
+          {
+            "id": "BIJgEv3k",
+            "name": "reading",
+            "direction": "out",
+            "parameters": [
+              {
+                "id": "kkyqs47_",
+                "name": "cm",
+                "type": "INT"
+              }
+            ],
+            "params": [
+              {
+                "id": "GTd7Fguo",
+                "name": "cm",
+                "type": "INT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "zr1dZtcA",
+        "name": "LineProtocol",
+        "signals": [
+          {
+            "id": "YhlU0vR_",
+            "name": "readings",
+            "direction": "out",
+            "parameters": [
+              {
+                "id": "lrEpMX0H",
+                "name": "left",
+                "type": "INT"
+              },
+              {
+                "id": "0k_emnH7",
+                "name": "centre",
+                "type": "INT"
+              },
+              {
+                "id": "lBPfDogL",
+                "name": "right",
+                "type": "INT"
+              }
+            ],
+            "params": [
+              {
+                "id": "V8FWnFbB",
+                "name": "left",
+                "type": "INT"
+              },
+              {
+                "id": "0JxXujr4",
+                "name": "centre",
+                "type": "INT"
+              },
+              {
+                "id": "qqaaABvv",
+                "name": "right",
+                "type": "INT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "GWIzM8Sr",
+        "name": "ButtonProtocol",
+        "signals": [
+          {
+            "id": "rEXrXjo0",
+            "name": "pressed",
+            "direction": "out"
+          }
+        ]
+      },
+      {
+        "id": "-3IzcoFw",
+        "name": "MotorProtocol",
+        "signals": [
+          {
+            "id": "408Xv-MU",
+            "name": "stop",
+            "direction": "in"
+          },
+          {
+            "id": "iIVil_Vk",
+            "name": "forward",
+            "direction": "in",
+            "parameters": [
+              {
+                "id": "OX670afz",
+                "name": "speed",
+                "type": "INT"
+              }
+            ],
+            "params": [
+              {
+                "id": "Xy6qjWKU",
+                "name": "speed",
+                "type": "INT"
+              }
+            ]
+          },
+          {
+            "id": "pgVBJ9Pm",
+            "name": "backward",
+            "direction": "in",
+            "parameters": [
+              {
+                "id": "a4U9UaaU",
+                "name": "speed",
+                "type": "INT"
+              }
+            ],
+            "params": [
+              {
+                "id": "Qx_un9AW",
+                "name": "speed",
+                "type": "INT"
+              }
+            ]
+          },
+          {
+            "id": "py5Yvtda",
+            "name": "turnLeft",
+            "direction": "in",
+            "parameters": [
+              {
+                "id": "Uo1Cm_l-",
+                "name": "speed",
+                "type": "INT"
+              }
+            ],
+            "params": [
+              {
+                "id": "GnYf56i_",
+                "name": "speed",
+                "type": "INT"
+              }
+            ]
+          },
+          {
+            "id": "V-BrRBGA",
+            "name": "turnRight",
+            "direction": "in",
+            "parameters": [
+              {
+                "id": "AJeYDYBt",
+                "name": "speed",
+                "type": "INT"
+              }
+            ],
+            "params": [
+              {
+                "id": "n0h-ct_l",
+                "name": "speed",
+                "type": "INT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "mgQvHNcI",
+        "name": "LedProtocol",
+        "signals": [
+          {
+            "id": "BhPFwiL3",
+            "name": "off",
+            "direction": "in"
+          },
+          {
+            "id": "uBRn2tZP",
+            "name": "red",
+            "direction": "in"
+          },
+          {
+            "id": "G0vEKbzY",
+            "name": "green",
+            "direction": "in"
+          },
+          {
+            "id": "537vepDd",
+            "name": "yellow",
+            "direction": "in"
+          }
+        ]
+      }
+    ]
   },
   "instanceModels": [
     {
@@ -541,12 +1806,13 @@
         },
         {
           "id": "E9ibNqlY",
-          "classId": "t-W-XEe9",
+          "classId": "wUY_k4Im",
           "name": "Controller",
           "attributeValues": {
             "HtT5yGIp": "0",
             "D3DypPCD": "0",
-            "jhde9deH": "0"
+            "jhde9deH": "0",
+            "LOzAxzXM": "20"
           }
         }
       ],
@@ -614,9 +1880,47 @@
           "target": "rTLsDySb",
           "sourceHandle": "right",
           "targetHandle": "left"
+        },
+        {
+          "id": "jmvJN5hD",
+          "relationId": "P7NoK1Uk",
+          "source": "E9ibNqlY",
+          "target": "3S6m9f_W",
+          "sourceHandle": "bottom",
+          "targetHandle": "top"
+        },
+        {
+          "id": "UuPOiO0d",
+          "relationId": "Bv_mqiYt",
+          "source": "E9ibNqlY",
+          "target": "rTLsDySb",
+          "sourceHandle": "bottom",
+          "targetHandle": "top"
         }
       ],
-      "connectors": []
+      "connectors": [
+        {
+          "id": "wS3mvjXV",
+          "sourceObjectId": "E9ibNqlY",
+          "sourcePortId": "575yx8xm",
+          "targetObjectId": "3S6m9f_W",
+          "targetPortId": "VQMq_OWD"
+        },
+        {
+          "id": "iUBcg2TZ",
+          "sourceObjectId": "E9ibNqlY",
+          "sourcePortId": "P4zDL-ak",
+          "targetObjectId": "ALtz8U5t",
+          "targetPortId": "UvxxDRx7"
+        },
+        {
+          "id": "Z62zD3i0",
+          "sourceObjectId": "E9ibNqlY",
+          "sourcePortId": "6J0kGODK",
+          "targetObjectId": "rTLsDySb",
+          "targetPortId": "36iDrs9a"
+        }
+      ]
     },
     {
       "id": "O2ktarLR",
@@ -641,12 +1945,13 @@
         },
         {
           "id": "Z6BIX-0v",
-          "classId": "t-W-XEe9",
+          "classId": "pQYWvsRw",
           "name": "Controller",
           "attributeValues": {
             "HtT5yGIp": "0",
             "D3DypPCD": "0",
-            "jhde9deH": "0"
+            "jhde9deH": "0",
+            "cU1vsHiQ": "750"
           }
         },
         {
@@ -674,7 +1979,8 @@
           "classId": "8_e5hmF7",
           "name": "LineTracker",
           "attributeValues": {
-            "uFmnPeYv": "0"
+            "uFmnPeYv": "0",
+            "pOnC1_4E": "20"
           }
         },
         {
@@ -777,9 +2083,32 @@
           "target": "xkUXkMUE",
           "sourceHandle": "right",
           "targetHandle": "left"
+        },
+        {
+          "id": "MK5-FnlT",
+          "relationId": "P7NoK1Uk",
+          "source": "Z6BIX-0v",
+          "target": "xkUXkMUE",
+          "sourceHandle": "bottom",
+          "targetHandle": "top"
         }
       ],
-      "connectors": []
+      "connectors": [
+        {
+          "id": "ytkU9q_t",
+          "sourceObjectId": "Z6BIX-0v",
+          "sourcePortId": "b0prFmbh",
+          "targetObjectId": "xkUXkMUE",
+          "targetPortId": "XOe1SZTN"
+        },
+        {
+          "id": "A2Axl7sW",
+          "sourceObjectId": "Z6BIX-0v",
+          "sourcePortId": "XoY1BaIM",
+          "targetObjectId": "4lIo4OUk",
+          "targetPortId": "UvxxDRx7"
+        }
+      ]
     },
     {
       "id": "6-9TDAay",
@@ -866,7 +2195,8 @@
           "classId": "8_e5hmF7",
           "name": "LineTracker",
           "attributeValues": {
-            "uFmnPeYv": "0"
+            "uFmnPeYv": "0",
+            "pOnC1_4E": "20"
           }
         },
         {
@@ -1538,7 +2868,8 @@
           "classId": "8_e5hmF7",
           "name": "LineTracker1",
           "attributeValues": {
-            "uFmnPeYv": "750"
+            "uFmnPeYv": "750",
+            "pOnC1_4E": "20"
           }
         },
         {
@@ -1554,12 +2885,15 @@
         },
         {
           "id": "APN6uEsY",
-          "classId": "t-W-XEe9",
+          "classId": "7OA28lQi",
           "name": "Controller1",
           "attributeValues": {
             "HtT5yGIp": "120",
             "D3DypPCD": "90",
-            "jhde9deH": "45"
+            "jhde9deH": "45",
+            "MaRiNTN9": "12",
+            "Ox98whGc": "30",
+            "TZc1UWb5": "750"
           }
         },
         {
@@ -1615,6 +2949,15 @@
           "attributeValues": {
             "nEKXh8O2": "center",
             "h-nag11G": "15"
+          }
+        },
+        {
+          "id": "kjZmhyu2",
+          "classId": "1T2-3xhH",
+          "name": "StartButton",
+          "attributeValues": {
+            "Jp9x7Mj_": "2",
+            "Zz5ocG0d": "20"
           }
         }
       ],
@@ -1706,9 +3049,542 @@
           "target": "IvSjrdmK",
           "sourceHandle": "top",
           "targetHandle": "bottom"
+        },
+        {
+          "id": "yiocxZr2",
+          "relationId": "l5liAAcd",
+          "source": "uKEUkaNp",
+          "target": "kjZmhyu2",
+          "sourceHandle": "top",
+          "targetHandle": "top"
+        },
+        {
+          "id": "hlKqWrnu",
+          "relationId": "P7NoK1Uk",
+          "source": "APN6uEsY",
+          "target": "AyNW7Xji",
+          "sourceHandle": "bottom",
+          "targetHandle": "top"
+        },
+        {
+          "id": "x1w1yZT3",
+          "relationId": "P7NoK1Uk",
+          "source": "APN6uEsY",
+          "target": "9dEYaHw0",
+          "sourceHandle": "bottom",
+          "targetHandle": "top"
+        },
+        {
+          "id": "l9BAgyTf",
+          "relationId": "P7NoK1Uk",
+          "source": "APN6uEsY",
+          "target": "kjZmhyu2",
+          "sourceHandle": "bottom",
+          "targetHandle": "top"
+        },
+        {
+          "id": "vEPqwbik",
+          "relationId": "Bv_mqiYt",
+          "source": "APN6uEsY",
+          "target": "EmS739pj",
+          "sourceHandle": "bottom",
+          "targetHandle": "top"
         }
       ],
-      "connectors": []
+      "connectors": [
+        {
+          "id": "BxUIv0b7",
+          "sourceObjectId": "APN6uEsY",
+          "sourcePortId": "9rXxtNDF",
+          "targetObjectId": "AyNW7Xji",
+          "targetPortId": "VQMq_OWD"
+        },
+        {
+          "id": "szigaAS0",
+          "sourceObjectId": "APN6uEsY",
+          "sourcePortId": "yuzX9k1g",
+          "targetObjectId": "9dEYaHw0",
+          "targetPortId": "XOe1SZTN"
+        },
+        {
+          "id": "5fxkrFvA",
+          "sourceObjectId": "APN6uEsY",
+          "sourcePortId": "nneGEYG1",
+          "targetObjectId": "kjZmhyu2",
+          "targetPortId": "A9TP0GcA"
+        },
+        {
+          "id": "PUEu2rJZ",
+          "sourceObjectId": "APN6uEsY",
+          "sourcePortId": "_LwiqD9j",
+          "targetObjectId": "9zuGSCzK",
+          "targetPortId": "UvxxDRx7"
+        },
+        {
+          "id": "0Mjbh--b",
+          "sourceObjectId": "APN6uEsY",
+          "sourcePortId": "JBAciI05",
+          "targetObjectId": "EmS739pj",
+          "targetPortId": "36iDrs9a"
+        }
+      ]
+    },
+    {
+      "id": "DJRzVT66",
+      "kind": "instancemodel",
+      "name": "ScenarioE_ObstacleTurn",
+      "objects": [
+        {
+          "id": "8Nyu0t_a",
+          "classId": "0LlJI8it",
+          "name": "TurnBot",
+          "attributeValues": {
+            "WwROTlkH": "TurnBot"
+          }
+        },
+        {
+          "id": "T0ewkMVH",
+          "classId": "OAYGSTWj",
+          "name": "Controller1",
+          "attributeValues": {
+            "HtT5yGIp": "130",
+            "D3DypPCD": "100",
+            "jhde9deH": "90",
+            "akoKm5b_": "15"
+          }
+        },
+        {
+          "id": "rmcBNfYW",
+          "classId": "1T2-3xhH",
+          "name": "StartButton",
+          "attributeValues": {
+            "Jp9x7Mj_": "2",
+            "Zz5ocG0d": "20"
+          }
+        },
+        {
+          "id": "unksXQHN",
+          "classId": "vzqeiqv6",
+          "name": "MotorDriver1",
+          "attributeValues": {
+            "aB84yL6L": "120"
+          }
+        },
+        {
+          "id": "fyuLLKTr",
+          "classId": "eXLNsRSB",
+          "name": "Motor1",
+          "attributeValues": {
+            "lJHXkt0J": "left",
+            "8VvyV63w": "6",
+            "s8-8KA_W": "8"
+          }
+        },
+        {
+          "id": "Xyb92Tvd",
+          "classId": "eXLNsRSB",
+          "name": "Motor2",
+          "attributeValues": {
+            "lJHXkt0J": "right",
+            "8VvyV63w": "5",
+            "s8-8KA_W": "7"
+          }
+        },
+        {
+          "id": "wOsudoaV",
+          "classId": "vIqfrfWe",
+          "name": "StatusLED1",
+          "attributeValues": {
+            "AtwOfiQP": "4",
+            "jWLSxpSe": "2",
+            "MH_Pvhse": "green"
+          }
+        },
+        {
+          "id": "iVMBtFqn",
+          "classId": "l3bRYsba",
+          "name": "DistanceSensor1",
+          "attributeValues": {
+            "lkHgd-yD": "13",
+            "-xZ_Dvyr": "12",
+            "sKmUUnhI": "50",
+            "duS6ikJR": "front"
+          }
+        }
+      ],
+      "links": [
+        {
+          "id": "P_njWHMp",
+          "relationId": "r63gtSgU",
+          "source": "8Nyu0t_a",
+          "target": "T0ewkMVH",
+          "sourceHandle": "left",
+          "targetHandle": "top"
+        },
+        {
+          "id": "S8-pFT6S",
+          "relationId": "l5liAAcd",
+          "source": "8Nyu0t_a",
+          "target": "iVMBtFqn",
+          "sourceHandle": "top",
+          "targetHandle": "bottom"
+        },
+        {
+          "id": "kil-NHCv",
+          "relationId": "l5liAAcd",
+          "source": "8Nyu0t_a",
+          "target": "rmcBNfYW",
+          "sourceHandle": "right",
+          "targetHandle": "right"
+        },
+        {
+          "id": "P3QP-ZOw",
+          "relationId": "l5liAAcd",
+          "source": "8Nyu0t_a",
+          "target": "unksXQHN",
+          "sourceHandle": "bottom",
+          "targetHandle": "top"
+        },
+        {
+          "id": "z7CSS0WB",
+          "relationId": "l5liAAcd",
+          "source": "8Nyu0t_a",
+          "target": "wOsudoaV",
+          "sourceHandle": "bottom",
+          "targetHandle": "left"
+        },
+        {
+          "id": "t4q3IQpO",
+          "relationId": "P7NoK1Uk",
+          "source": "T0ewkMVH",
+          "target": "iVMBtFqn",
+          "sourceHandle": "bottom",
+          "targetHandle": "right"
+        },
+        {
+          "id": "I4HsIDQs",
+          "relationId": "P7NoK1Uk",
+          "source": "T0ewkMVH",
+          "target": "rmcBNfYW",
+          "sourceHandle": "right",
+          "targetHandle": "bottom"
+        },
+        {
+          "id": "pIL6ZZcQ",
+          "relationId": "Bv_mqiYt",
+          "source": "T0ewkMVH",
+          "target": "unksXQHN",
+          "sourceHandle": "right",
+          "targetHandle": "left"
+        },
+        {
+          "id": "0Rm-A2TQ",
+          "relationId": "Bv_mqiYt",
+          "source": "T0ewkMVH",
+          "target": "wOsudoaV",
+          "sourceHandle": "left",
+          "targetHandle": "bottom"
+        },
+        {
+          "id": "hZwbIGqQ",
+          "relationId": "nEO9jK3F",
+          "source": "unksXQHN",
+          "target": "fyuLLKTr",
+          "sourceHandle": "right",
+          "targetHandle": "left"
+        },
+        {
+          "id": "189RbeCp",
+          "relationId": "nEO9jK3F",
+          "source": "unksXQHN",
+          "target": "Xyb92Tvd",
+          "sourceHandle": "right",
+          "targetHandle": "left"
+        }
+      ],
+      "connectors": [
+        {
+          "id": "IPcA6JVk",
+          "sourceObjectId": "T0ewkMVH",
+          "sourcePortId": "RlLK6sNd",
+          "targetObjectId": "iVMBtFqn",
+          "targetPortId": "VQMq_OWD"
+        },
+        {
+          "id": "ybmtQC7A",
+          "sourceObjectId": "T0ewkMVH",
+          "sourcePortId": "2_YH19dC",
+          "targetObjectId": "rmcBNfYW",
+          "targetPortId": "A9TP0GcA"
+        },
+        {
+          "id": "vNk1rndI",
+          "sourceObjectId": "T0ewkMVH",
+          "sourcePortId": "qgn28s9D",
+          "targetObjectId": "unksXQHN",
+          "targetPortId": "UvxxDRx7"
+        },
+        {
+          "id": "1fxD8RRS",
+          "sourceObjectId": "T0ewkMVH",
+          "sourcePortId": "p68GZN9Z",
+          "targetObjectId": "wOsudoaV",
+          "targetPortId": "36iDrs9a"
+        }
+      ]
+    },
+    {
+      "id": "O9G_PGe_",
+      "kind": "instancemodel",
+      "name": "ScenarioF_BlackFloorTurn",
+      "objects": [
+        {
+          "id": "rc9UG7zV",
+          "classId": "0LlJI8it",
+          "name": "TapeBot",
+          "attributeValues": {
+            "WwROTlkH": "TapeBot"
+          }
+        },
+        {
+          "id": "JZMBg0iM",
+          "classId": "y0s5bla5",
+          "name": "Controller1",
+          "attributeValues": {
+            "HtT5yGIp": "110",
+            "D3DypPCD": "90",
+            "jhde9deH": "90",
+            "x29iI-Vm": "750"
+          }
+        },
+        {
+          "id": "9lP_ORUx",
+          "classId": "1T2-3xhH",
+          "name": "StartButton",
+          "attributeValues": {
+            "Jp9x7Mj_": "2",
+            "Zz5ocG0d": "20"
+          }
+        },
+        {
+          "id": "jwGXnBd7",
+          "classId": "vzqeiqv6",
+          "name": "MotorDriver1",
+          "attributeValues": {
+            "aB84yL6L": "120"
+          }
+        },
+        {
+          "id": "EA2qBI_r",
+          "classId": "eXLNsRSB",
+          "name": "Motor1",
+          "attributeValues": {
+            "lJHXkt0J": "left",
+            "8VvyV63w": "6",
+            "s8-8KA_W": "8"
+          }
+        },
+        {
+          "id": "PUYyttsq",
+          "classId": "eXLNsRSB",
+          "name": "Motor2",
+          "attributeValues": {
+            "lJHXkt0J": "right",
+            "8VvyV63w": "5",
+            "s8-8KA_W": "7"
+          }
+        },
+        {
+          "id": "heJMwrIT",
+          "classId": "vIqfrfWe",
+          "name": "StatusLED1",
+          "attributeValues": {
+            "AtwOfiQP": "4",
+            "jWLSxpSe": "2",
+            "MH_Pvhse": "green"
+          }
+        },
+        {
+          "id": "q6vxgxt0",
+          "classId": "8_e5hmF7",
+          "name": "LineTracker1",
+          "attributeValues": {
+            "uFmnPeYv": "750",
+            "pOnC1_4E": "20"
+          }
+        },
+        {
+          "id": "_dMCUl70",
+          "classId": "Reshl29f",
+          "name": "Channel_left",
+          "attributeValues": {
+            "nEKXh8O2": "left",
+            "h-nag11G": "16"
+          }
+        },
+        {
+          "id": "TGQduyl2",
+          "classId": "Reshl29f",
+          "name": "Channel_center",
+          "attributeValues": {
+            "nEKXh8O2": "center",
+            "h-nag11G": "15"
+          }
+        },
+        {
+          "id": "u226UAN4",
+          "classId": "Reshl29f",
+          "name": "Channel_right",
+          "attributeValues": {
+            "nEKXh8O2": "right",
+            "h-nag11G": "14"
+          }
+        }
+      ],
+      "links": [
+        {
+          "id": "tPsf8ahm",
+          "relationId": "92bPY3k9",
+          "source": "q6vxgxt0",
+          "target": "_dMCUl70",
+          "sourceHandle": "top",
+          "targetHandle": "bottom"
+        },
+        {
+          "id": "3zvEC-BV",
+          "relationId": "92bPY3k9",
+          "source": "q6vxgxt0",
+          "target": "TGQduyl2",
+          "sourceHandle": "top",
+          "targetHandle": "bottom"
+        },
+        {
+          "id": "9lBzokTu",
+          "relationId": "92bPY3k9",
+          "source": "q6vxgxt0",
+          "target": "u226UAN4",
+          "sourceHandle": "top",
+          "targetHandle": "bottom"
+        },
+        {
+          "id": "owA3y2ds",
+          "relationId": "r63gtSgU",
+          "source": "rc9UG7zV",
+          "target": "JZMBg0iM",
+          "sourceHandle": "left",
+          "targetHandle": "right"
+        },
+        {
+          "id": "IKUYb96I",
+          "relationId": "l5liAAcd",
+          "source": "rc9UG7zV",
+          "target": "q6vxgxt0",
+          "sourceHandle": "right",
+          "targetHandle": "top"
+        },
+        {
+          "id": "T_rnsCT6",
+          "relationId": "l5liAAcd",
+          "source": "rc9UG7zV",
+          "target": "9lP_ORUx",
+          "sourceHandle": "top",
+          "targetHandle": "right"
+        },
+        {
+          "id": "WgPGk77S",
+          "relationId": "l5liAAcd",
+          "source": "rc9UG7zV",
+          "target": "jwGXnBd7",
+          "sourceHandle": "right",
+          "targetHandle": "top"
+        },
+        {
+          "id": "mJLekfi5",
+          "relationId": "l5liAAcd",
+          "source": "rc9UG7zV",
+          "target": "heJMwrIT",
+          "sourceHandle": "bottom",
+          "targetHandle": "top"
+        },
+        {
+          "id": "nX69ctOr",
+          "relationId": "P7NoK1Uk",
+          "source": "JZMBg0iM",
+          "target": "q6vxgxt0",
+          "sourceHandle": "bottom",
+          "targetHandle": "left"
+        },
+        {
+          "id": "dnYlvGcf",
+          "relationId": "P7NoK1Uk",
+          "source": "JZMBg0iM",
+          "target": "9lP_ORUx",
+          "sourceHandle": "top",
+          "targetHandle": "bottom"
+        },
+        {
+          "id": "jpQtN8EP",
+          "relationId": "Bv_mqiYt",
+          "source": "JZMBg0iM",
+          "target": "jwGXnBd7",
+          "sourceHandle": "right",
+          "targetHandle": "top"
+        },
+        {
+          "id": "7FZEO1f_",
+          "relationId": "Bv_mqiYt",
+          "source": "JZMBg0iM",
+          "target": "heJMwrIT",
+          "sourceHandle": "left",
+          "targetHandle": "right"
+        },
+        {
+          "id": "Fx4yo8W9",
+          "relationId": "nEO9jK3F",
+          "source": "jwGXnBd7",
+          "target": "EA2qBI_r",
+          "sourceHandle": "right",
+          "targetHandle": "left"
+        },
+        {
+          "id": "c-BXe7rL",
+          "relationId": "nEO9jK3F",
+          "source": "jwGXnBd7",
+          "target": "PUYyttsq",
+          "sourceHandle": "right",
+          "targetHandle": "left"
+        }
+      ],
+      "connectors": [
+        {
+          "id": "EOI3dTvp",
+          "sourceObjectId": "JZMBg0iM",
+          "sourcePortId": "aO_rC8qL",
+          "targetObjectId": "q6vxgxt0",
+          "targetPortId": "XOe1SZTN"
+        },
+        {
+          "id": "VBjv6Zon",
+          "sourceObjectId": "JZMBg0iM",
+          "sourcePortId": "k1urN0Xt",
+          "targetObjectId": "9lP_ORUx",
+          "targetPortId": "A9TP0GcA"
+        },
+        {
+          "id": "1ZaFzgHv",
+          "sourceObjectId": "JZMBg0iM",
+          "sourcePortId": "zWbnXjgS",
+          "targetObjectId": "jwGXnBd7",
+          "targetPortId": "UvxxDRx7"
+        },
+        {
+          "id": "IVkGveBo",
+          "sourceObjectId": "JZMBg0iM",
+          "sourcePortId": "Tdd8PM5P",
+          "targetObjectId": "heJMwrIT",
+          "targetPortId": "36iDrs9a"
+        }
+      ]
     }
   ],
   "layouts": {
@@ -1776,6 +3652,30 @@
       "eXLNsRSB": {
         "x": 668.080680598221,
         "y": 953.7139623339742
+      },
+      "1T2-3xhH": {
+        "x": -53.25413196728381,
+        "y": 767.9479006866701
+      },
+      "wUY_k4Im": {
+        "x": -168.1041986266597,
+        "y": 61.533672108992334
+      },
+      "pQYWvsRw": {
+        "x": 7.481572795662487,
+        "y": 61.533672108992334
+      },
+      "7OA28lQi": {
+        "x": 180,
+        "y": 60
+      },
+      "OAYGSTWj": {
+        "x": -552.0973529156142,
+        "y": 60.512062604972115
+      },
+      "y0s5bla5": {
+        "x": -355.9987170355196,
+        "y": 62.44471838698745
       }
     },
     "im-RF1uG96d": {
@@ -2048,6 +3948,184 @@
       "IvSjrdmK": {
         "x": 584.711674527291,
         "y": -153.81035717412442
+      },
+      "kjZmhyu2": {
+        "x": 0,
+        "y": -420
+      }
+    },
+    "sm-wUY_k4Im": {
+      "0pIRZsZJ": {
+        "x": 100,
+        "y": 100
+      },
+      "l-W9WfLa": {
+        "x": 300,
+        "y": 100
+      },
+      "-fZTcdfn": {
+        "x": 300,
+        "y": 330
+      }
+    },
+    "sm-pQYWvsRw": {
+      "ty3znd7w": {
+        "x": 100,
+        "y": 100
+      },
+      "Lx3806bj": {
+        "x": 300,
+        "y": 100
+      },
+      "uUj3Ewz_": {
+        "x": -284.0340672509573,
+        "y": 297.1999373166442
+      },
+      "ZS-0DQUa": {
+        "x": 908.7191256824779,
+        "y": 210.63333072152682
+      },
+      "UgHNKBwk": {
+        "x": 300,
+        "y": 560
+      }
+    },
+    "sm-7OA28lQi": {
+      "fU8Ni6GR": {
+        "x": 100,
+        "y": 100
+      },
+      "ZaqPipdP": {
+        "x": 135.85547243347784,
+        "y": -111.0624964126129
+      },
+      "6YgbCx0x": {
+        "x": 938.5390571829798,
+        "y": -41.32421602742942
+      },
+      "PiqfTApu": {
+        "x": 861.7382803851834,
+        "y": 576.6171797486815
+      },
+      "4svUDBs5": {
+        "x": 73.17968846090727,
+        "y": 561.6523406430664
+      }
+    },
+    "sm-OAYGSTWj": {
+      "uxXI21kX": {
+        "x": 80,
+        "y": 120
+      },
+      "NxSwH7-1": {
+        "x": 260,
+        "y": 120
+      },
+      "K7wP94pJ": {
+        "x": 658.5314301917986,
+        "y": -66.63012071623005
+      },
+      "mBDal6Q0": {
+        "x": 313.09182787231686,
+        "y": 487.80497656279124
+      }
+    },
+    "sm-y0s5bla5": {
+      "OB72pVGX": {
+        "x": 127.52692515133808,
+        "y": 139.7062860383597
+      },
+      "LTh3dKQL": {
+        "x": 260,
+        "y": 120
+      },
+      "pM1OcRzh": {
+        "x": 627.2332111896978,
+        "y": 117.6816134072518
+      },
+      "ouppeqTM": {
+        "x": 624.9148245969496,
+        "y": 398.54709274198564
+      }
+    },
+    "im-DJRzVT66": {
+      "8Nyu0t_a": {
+        "x": 168.6141779788839,
+        "y": 41.35746606334841
+      },
+      "T0ewkMVH": {
+        "x": -175.46666666666667,
+        "y": 278.9333333333333
+      },
+      "rmcBNfYW": {
+        "x": 35.47028657616892,
+        "y": -311.6368024132729
+      },
+      "unksXQHN": {
+        "x": 440.53333333333336,
+        "y": 256.2666666666667
+      },
+      "fyuLLKTr": {
+        "x": 740,
+        "y": 60
+      },
+      "Xyb92Tvd": {
+        "x": 740,
+        "y": 270
+      },
+      "wOsudoaV": {
+        "x": -300,
+        "y": -20
+      },
+      "iVMBtFqn": {
+        "x": 411.6911010558068,
+        "y": -247.2434389140271
+      }
+    },
+    "im-O9G_PGe_": {
+      "rc9UG7zV": {
+        "x": 158.80257502451948,
+        "y": 46.61723112299646
+      },
+      "JZMBg0iM": {
+        "x": -200,
+        "y": 200
+      },
+      "9lP_ORUx": {
+        "x": 16.825035606112095,
+        "y": -197.59344080752444
+      },
+      "jwGXnBd7": {
+        "x": 444.4997416131338,
+        "y": 191.3143126332946
+      },
+      "EA2qBI_r": {
+        "x": 740,
+        "y": 60
+      },
+      "PUYyttsq": {
+        "x": 740,
+        "y": 270
+      },
+      "heJMwrIT": {
+        "x": -369.5022624434389,
+        "y": -112.30769230769232
+      },
+      "q6vxgxt0": {
+        "x": 445.8731330107886,
+        "y": -47.0420600196156
+      },
+      "_dMCUl70": {
+        "x": 214.85720366997373,
+        "y": -255.3831401213008
+      },
+      "TGQduyl2": {
+        "x": 432.6596314558765,
+        "y": -324.1829995316859
+      },
+      "u226UAN4": {
+        "x": 736.55567560825,
+        "y": -258.23234359101787
       }
     }
   }

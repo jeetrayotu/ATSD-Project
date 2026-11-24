@@ -1,11 +1,12 @@
 from chevron import render
 from collections import defaultdict
+from collections import namedtuple
 from pathlib import Path
 from rich import print
 from rich.pretty import pprint
+import enum
 import msgspec
 import rich_click as click
-from collections import namedtuple
 
 # A named tuple of an attribute name and default value.
 # The `name` and `default` values for instances of this tuple
@@ -48,12 +49,22 @@ class MetaModelClassAttribute(msgspec.Struct):
     type: str
     defaultValue: str
 
+# A `msgspec` structure for a metamodel class port,
+# storing an id, a name, a protocol id, and a conjugation status.
+class MetaModelClassPort(msgspec.Struct):
+    id: str
+    name: str
+    protocolId: str
+    conjugated: bool
+
 # A `msgspec` structure for a metamodel class,
-# storing an id, a name, and a list of metamodel class attributes.
+# storing an id, a name, a list of metamodel class attributes,
+# and a list of metamodel class ports.
 class MetaModelClass(msgspec.Struct):
     id: str
     name: str
     attributes: list[MetaModelClassAttribute]
+    ports: list[MetaModelClassPort]
 
 # A `msgspec` structure for a metamodel relation,
 # storing a name and the kind of relationship.
@@ -61,19 +72,98 @@ class MetaModelRelation(msgspec.Struct):
     name: str
     kind: str
 
+class MountPosition(enum.Enum):
+    front = "front"
+    rear = "rear"
+    left = "left"
+    right = "right"
+
+class Colour(enum.Enum):
+    red = "red"
+    green = "green"
+    blue = "blue"
+    white = "white"
+    off = "off"
+    yellow = "yellow"
+
+class ChannelPosition(enum.Enum):
+    left = "left"
+    center = "center"
+    right = "right"
+
+class Side(enum.Enum):
+    left = "left"
+    right = "right"
+
 # A `msgspec` structure for a metamodel enumeration,
 # storing a name.
 class MetaModelEnumeration(msgspec.Struct):
     name: str
 
+# A `msgspec` structure for a metamodel behaviour state,
+# storing an id, the kind of behaviour, a name,
+# an entry command, and an exit command.
+class MetaModelBehaviourState(msgspec.Struct):
+    id: str
+    kind: str
+    name: str
+    entry: str
+    exit: str
+
+# A `msgspec` structure for a metamodel behaviour transition,
+# storing an id, a source, a target, a trigger, a guard,
+# an effect, a source handle, and a target handle.
+class MetaModelBehaviourTransition(msgspec.Struct):
+    id: str
+    source: str
+    target: str
+    trigger: str
+    guard: str
+    effect: str
+    sourceHandle: str
+    targetHandle: str
+
+# A `msgspec` structure for a metamodel behaviour,
+# storing a list of metamodel behaviour states and
+# a list of metamodel behaviour transitions.
+class MetaModelBehaviour(msgspec.Struct):
+    states: list[MetaModelBehaviourState]
+    transitions: list[MetaModelBehaviourTransition]
+
+# A `msgspec` structure for a metamodel protocol signal parameter,
+# storing an id, a name, and a type.
+class MetaModelProtocolSignalParameter(msgspec.Struct):
+    id: str
+    name: str
+    type: str
+
+# A `msgspec` structure for a metamodel protocol signal,
+# storing an id, a name, a direction, and a list of metamodel protocol signal parameters.
+class MetaModelProtocolSignal(msgspec.Struct):
+    id: str
+    name: str
+    direction: str
+    parameters: list[MetaModelProtocolSignalParameter]
+
+# A `msgspec` structure for a metamodel protocol,
+# storing an id, a name, and a list of metamodel protocol signals.
+class MetaModelProtocol(msgspec.Struct):
+    id: str
+    name: str
+    signals: list[MetaModelProtocolSignal]
+
 # A `msgspec` structure for a metamodel,
 # storing a list of metamodel classes,
-# a list of metamodel relations, and
-# a list of metamodel enumerations.
+# a list of metamodel relations,
+# a list of metamodel enumerations,
+# a list of dictionaries of strings and metamodel behaviours,
+# and a list of metamodel protocols.
 class MetaModel(msgspec.Struct):
     classes: list[MetaModelClass]
     relations: list[MetaModelRelation]
     enumerations: list[MetaModelEnumeration]
+    behaviours: list[dict[str, MetaModelBehaviour]]
+    protocols: list[MetaModelProtocol]
 
 # A `msgspec` structure for an instance model object,
 # storing a class ID, a name, and a dictionary

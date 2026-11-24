@@ -183,6 +183,11 @@ void setup() {
     pinMode(DISTANCE_SENSOR_0_TRIG_PIN, OUTPUT);
     pinMode(DISTANCE_SENSOR_0_ECHO_PIN, INPUT);
     {{/DistanceSensor}}
+
+    {{#LineTracker}}
+
+    {{/LineTracker}}
+
     {{#Motor0}}
     pinMode(MOTOR_0_PWM_PIN, OUTPUT);
     pinMode(MOTOR_0_DIRECTION_PIN, OUTPUT);
