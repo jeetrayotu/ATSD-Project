@@ -18,23 +18,15 @@ const {{{RobotName_type}}} ROBOT_NAME = {{{RobotName}}};
 const {{{ControllerCruiseSpeed_type}}} CONTROLLER_CRUISE_SPEED = {{{ControllerCruiseSpeed}}};
 const {{{ControllerTurnSpeed_type}}} CONTROLLER_TURN_SPEED = {{{ControllerTurnSpeed}}};
 const {{{ControllerDefaultTurnAngle_type}}} CONTROLLER_DEFAULT_TURN_ANGLE = {{{ControllerDefaultTurnAngle}}};
-{{#ObstacleStopController}}
+{{#ControllerStopDistanceCm}}
 const {{{ControllerStopDistanceCm_type}}} CONTROLLER_STOP_DISTANCE_CM = {{ControllerStopDistanceCm}};
-{{/ObstacleStopController}}
-{{#LineFollowerController}}
+{{/ControllerStopDistanceCm}}
+{{#ControllerLineThreshold}}
 const {{{ControllerLineThreshold_type}}} CONTROLLER_LINE_THRESHOLD = {{ControllerLineThreshold}};
-{{/LineFollowerController}}
-{{#PatrolController}}
-const {{{ControllerStopDistanceCm_type}}} CONTROLLER_STOP_DISTANCE_CM = {{ControllerStopDistanceCm}};
+{{/ControllerLineThreshold}}
+{{#CONTROLLER_WARNING_DISTANCE_CM}}
 const {{{ControllerWarningDistanceCm_type}}} CONTROLLER_WARNING_DISTANCE_CM = {{ControllerWarningDistanceCm}};
-const {{{ControllerLineThreshold_type}}} CONTROLLER_LINE_THRESHOLD = {{ControllerLineThreshold}};
-{{/PatrolController}}
-{{#ObstacleTurnController}}
-const {{{ControllerStopDistanceCm_type}}} CONTROLLER_STOP_DISTANCE_CM = {{ControllerStopDistanceCm}};
-{{/ObstacleTurnController}}
-{{#BlackFloorTurnController}}
-const {{{ControllerLineThreshold_type}}} CONTROLLER_LINE_THRESHOLD = {{ControllerLineThreshold}};
-{{/BlackFloorTurnController}}
+{{/CONTROLLER_WARNING_DISTANCE_CM}}
 {{/Controller}}
 
 {{#DistanceSensor}}
@@ -45,11 +37,41 @@ const {{{DistanceSensorReadIntervalMs_type}}} DISTANCE_SENSOR_0_READ_INTERVAL_MS
 const {{{DistanceSensorMounting_type}}} DISTANCE_SENSOR_0_MOUNTING = {{{DistanceSensorMounting}}};
 {{/DistanceSensor}}
 
+{{#DistanceThreshold0}}
+// Distance threshold 1
+const {{{DistanceThreshold0Name_type}}} DISTANCE_THRESHOLD_0_NAME = {{{DistanceThreshold0Name}}};
+const {{{DistanceThreshold0DistanceCm_type}}} DISTANCE_THRESHOLD_0_CM = {{{DistanceThreshold0DistanceCm}}};
+{{/DistanceThreshold0}}
+
+{{#DistanceThreshold1}}
+// Distance threshold 2
+const {{{DistanceThreshold1Name_type}}} DISTANCE_THRESHOLD_1_NAME = {{{DistanceThreshold1Name}}};
+const {{{DistanceThreshold1DistanceCm_type}}} DISTANCE_THRESHOLD_1_CM = {{{DistanceThreshold1DistanceCm}}};
+{{/DistanceThreshold1}}
+
 {{#LineTracker}}
 // Line tracker
 const {{{LineTrackerDarknessThreshold_type}}} LINE_TRACKER_0_THRESHOLD = {{{LineTrackerDarknessThreshold}}};
 const {{{LineTrackerReadIntervalMs_type}}} LINE_TRACKER_0_READ_INTERVAL_MS = {{{LineTrackerReadIntervalMs}}};
 {{/LineTracker}}
+
+{{#LineChannel0}}
+// Line channel 1
+const {{{LineChannel0Position_type}}} LINE_CHANNEL_0_POSITION = {{{LineChannel0Position}}};
+const {{{LineChannel0Pin_type}}} LINE_CHANNEL_0_PIN = {{{LineChannel0Pin}}};
+{{/LineChannel0}}
+
+{{#LineChannel1}}
+// Line channel 2
+const {{{LineChannel1Position_type}}} LINE_CHANNEL_1_POSITION = {{{LineChannel1Position}}};
+const {{{LineChannel1Pin_type}}} LINE_CHANNEL_1_PIN = {{{LineChannel1Pin}}};
+{{/LineChannel1}}
+
+{{#LineChannel2}}
+// Line channel 3
+const {{{LineChannel2Position_type}}} LINE_CHANNEL_2_POSITION = {{{LineChannel2Position}}};
+const {{{LineChannel2Pin_type}}} LINE_CHANNEL_2_PIN = {{{LineChannel2Pin}}};
+{{/LineChannel2}}
 
 {{#Button}}
 // Button configuration
@@ -112,9 +134,35 @@ float distance_sensor_0_read() {
 {{/DistanceSensor}}
 
 {{#LineTracker}}
-// Line tracker functions
-int line_tracker_read_center() {
-    return analogRead(0);
+// Line tracker functions: raw analog readings, 0 for a channel that is not present
+void line_tracker_read(int &left, int &centre, int &right) {
+    left = 0;
+    centre = 0;
+    right = 0;
+    {{#LineChannel0}}
+    {
+        int value = analogRead(LINE_CHANNEL_0_PIN);
+        if (strcmp(LINE_CHANNEL_0_POSITION, "left") == 0) { left = value; }
+        else if (strcmp(LINE_CHANNEL_0_POSITION, "center") == 0) { centre = value; }
+        else if (strcmp(LINE_CHANNEL_0_POSITION, "right") == 0) { right = value; }
+    }
+    {{/LineChannel0}}
+    {{#LineChannel1}}
+    {
+        int value = analogRead(LINE_CHANNEL_1_PIN);
+        if (strcmp(LINE_CHANNEL_1_POSITION, "left") == 0) { left = value; }
+        else if (strcmp(LINE_CHANNEL_1_POSITION, "center") == 0) { centre = value; }
+        else if (strcmp(LINE_CHANNEL_1_POSITION, "right") == 0) { right = value; }
+    }
+    {{/LineChannel1}}
+    {{#LineChannel2}}
+    {
+        int value = analogRead(LINE_CHANNEL_2_PIN);
+        if (strcmp(LINE_CHANNEL_2_POSITION, "left") == 0) { left = value; }
+        else if (strcmp(LINE_CHANNEL_2_POSITION, "center") == 0) { centre = value; }
+        else if (strcmp(LINE_CHANNEL_2_POSITION, "right") == 0) { right = value; }
+    }
+    {{/LineChannel2}}
 }
 {{/LineTracker}}
 
@@ -129,16 +177,16 @@ bool button_0_is_pressed() {
 // Motor control functions
 void motor_0_set_speed(int speed) {
 
-    speed = constrain(speed, 0, 255);
+    speed = constrain(speed, -255, 255);
 
     digitalWrite(
         MOTOR_0_DIRECTION_PIN,
-        HIGH
+        speed >= 0 ? HIGH : LOW
     );
 
     analogWrite(
         MOTOR_0_PWM_PIN,
-        speed
+        abs(speed)
     );
 }
 {{/Motor0}}
@@ -146,30 +194,94 @@ void motor_0_set_speed(int speed) {
 {{#Motor1}}
 void motor_1_set_speed(int speed) {
 
-    speed = constrain(speed, 0, 255);
+    speed = constrain(speed, -255, 255);
 
     digitalWrite(
         MOTOR_1_DIRECTION_PIN,
-        LOW
+        speed >= 0 ? LOW : HIGH
     );
 
     analogWrite(
         MOTOR_1_PWM_PIN,
-        speed
+        abs(speed)
     );
 }
 {{/Motor1}}
 
+// Drive the motor mounted on the given side ("left" or "right")
+void motor_set_side(const char* side, int speed) {
+    {{#Motor0}}
+    if (strcmp(side, MOTOR_0_SIDE) == 0) { motor_0_set_speed(speed); }
+    {{/Motor0}}
+    {{#Motor1}}
+    if (strcmp(side, MOTOR_1_SIDE) == 0) { motor_1_set_speed(speed); }
+    {{/Motor1}}
+}
+
 {{#MotorDriver}}
 void motor_driver_stop() {
+    {{#Motor0}}
     analogWrite(MOTOR_0_PWM_PIN, 0);
+    {{/Motor0}}
+    {{#Motor1}}
     analogWrite(MOTOR_1_PWM_PIN, 0);
+    {{/Motor1}}
 }
 {{/MotorDriver}}
 
 {{#StatusLED}}
 // Status LED functions
-CRGB status_led_pixels_0[1];
+CRGB status_led_pixels_0[STATUS_LED_0_LED_COUNT > 0 ? STATUS_LED_0_LED_COUNT : 1];
+uint8_t status_led_0_red = 0;
+uint8_t status_led_0_green = 0;
+uint8_t status_led_0_blue = 0;
+bool status_led_0_visible = true;
+unsigned long status_led_0_last_toggle = 0;
+
+void status_led_0_show() {
+
+    for (int i = 0; i < STATUS_LED_0_LED_COUNT; i++) {
+        if (status_led_0_visible) {
+            status_led_pixels_0[i] = CRGB(
+                status_led_0_red,
+                status_led_0_green,
+                status_led_0_blue
+            );
+        } else {
+            status_led_pixels_0[i] = CRGB(0, 0, 0);
+        }
+    }
+
+    FastLED.show();
+}
+
+void status_led_0_set_colour(
+    uint8_t red,
+    uint8_t green,
+    uint8_t blue
+) {
+
+    status_led_0_red = red;
+    status_led_0_green = green;
+    status_led_0_blue = blue;
+    status_led_0_visible = true;
+
+    status_led_0_show();
+}
+
+void status_led_0_set_named_colour(const char* colour) {
+
+    if (strcmp(colour, "red") == 0) { status_led_0_set_colour(255, 0, 0); }
+    else if (strcmp(colour, "green") == 0) { status_led_0_set_colour(0, 255, 0); }
+    else if (strcmp(colour, "blue") == 0) { status_led_0_set_colour(0, 0, 255); }
+    else if (strcmp(colour, "white") == 0) { status_led_0_set_colour(255, 255, 255); }
+    else if (strcmp(colour, "yellow") == 0) { status_led_0_set_colour(255, 180, 0); }
+    else { status_led_0_set_colour(0, 0, 0); }
+}
+
+void status_led_0_off() {
+    status_led_0_set_colour(0, 0, 0);
+}
 
 void status_led_0_init() {
 
@@ -180,31 +292,159 @@ void status_led_0_init() {
 
     FastLED.clear();
     FastLED.show();
+
+    status_led_0_set_named_colour(STATUS_LED_0_DEFAULT_COLOUR);
 }
 
-void status_led_0_off() {
+// Non-blocking blink, only active when a blink interval is configured
+void status_led_0_update() {
 
-    FastLED.clear();
-    FastLED.show();
-}
-
-void status_led_0_set_colour(
-    uint8_t red,
-    uint8_t green,
-    uint8_t blue
-) {
-
-    for (int i = 0; i < STATUS_LED_0_LED_COUNT; i++) {
-        status_led_pixels_0[i] = CRGB(
-            red,
-            green,
-            blue
-        );
+    if (STATUS_LED_0_BLINK_INTERVAL <= 0) {
+        return;
     }
 
-    FastLED.show();
+    if (millis() - status_led_0_last_toggle >= (unsigned long) STATUS_LED_0_BLINK_INTERVAL) {
+        status_led_0_last_toggle = millis();
+        status_led_0_visible = !status_led_0_visible;
+        status_led_0_show();
+    }
 }
 {{/StatusLED}}
+
+// ---------------------------------------------------------------------------
+// Behaviour (state machine)
+// Port objects used by the action code (led.green(), motors.forward(...), ...)
+// ---------------------------------------------------------------------------
+struct LedPort {
+    void off()    { {{#StatusLED}}status_led_0_off();{{/StatusLED}} }
+    void red()    { {{#StatusLED}}status_led_0_set_colour(255, 0, 0);{{/StatusLED}} }
+    void green()  { {{#StatusLED}}status_led_0_set_colour(0, 255, 0);{{/StatusLED}} }
+    void yellow() { {{#StatusLED}}status_led_0_set_colour(255, 180, 0);{{/StatusLED}} }
+};
+
+struct MotorPort {
+    void stop() {
+        {{#MotorDriver}}
+        motor_driver_stop();
+        {{/MotorDriver}}
+    }
+    void forward(int speed) {
+        motor_set_side("left", speed);
+        motor_set_side("right", speed);
+    }
+    void backward(int speed) {
+        motor_set_side("left", -speed);
+        motor_set_side("right", -speed);
+    }
+    void turnLeft(int speed) {
+        motor_set_side("left", -speed);
+        motor_set_side("right", speed);
+    }
+    void turnRight(int speed) {
+        motor_set_side("left", speed);
+        motor_set_side("right", -speed);
+    }
+};
+
+struct LogPort {
+    void log(const char* message) {
+        Serial.println(message);
+    }
+};
+
+// One-shot timer: informIn(ms) arms it, "timer.timeout" fires when it expires.
+// A pending timer is cancelled whenever a transition is taken.
+struct TimerPort {
+    bool active = false;
+    unsigned long deadline = 0;
+
+    void informIn(int ms) {
+        deadline = millis() + (unsigned long) ms;
+        active = true;
+    }
+
+    void cancel() {
+        active = false;
+    }
+
+    bool expired() {
+        return active && (long) (millis() - deadline) >= 0;
+    }
+};
+
+enum State {
+    STATE_NONE,
+    {{#States}}
+    STATE_{{StateName}},
+    {{/States}}
+};
+
+struct Behaviour {
+    // Members (not globals) so that "log" does not clash with math.h
+    LedPort led;
+    MotorPort motors;
+    LogPort log;
+    TimerPort timer;
+    State state = STATE_NONE;
+
+    void enter(State s) {
+        switch (s) {
+        {{#States}}
+        case STATE_{{StateName}}: {
+            {{{StateEntry}}}
+            break;
+        }
+        {{/States}}
+        default:
+            break;
+        }
+    }
+
+    void leave(State s) {
+        switch (s) {
+        {{#States}}
+        case STATE_{{StateName}}: {
+            {{{StateExit}}}
+            break;
+        }
+        {{/States}}
+        default:
+            break;
+        }
+    }
+
+    void start() {
+        {{#InitialStateName}}
+        state = STATE_{{InitialStateName}};
+        enter(state);
+        {{/InitialStateName}}
+    }
+
+    // Signal parameters: distance.reading -> cm, line.readings -> left, centre, right
+    void fire(const char* trigger, int cm, int left, int centre, int right) {
+        switch (state) {
+        {{#States}}
+        case STATE_{{StateName}}:
+            {{#Transitions}}
+            if (strcmp(trigger, "{{TransitionTrigger}}") == 0 &&
+                ({{#TransitionGuard}}{{{TransitionGuard}}}{{/TransitionGuard}}{{^TransitionGuard}}true{{/TransitionGuard}})) {
+                timer.cancel();
+                leave(state);
+                {{{TransitionEffect}}}
+                state = STATE_{{TransitionTarget}};
+                enter(state);
+                return;
+            }
+            {{/Transitions}}
+            break;
+        {{/States}}
+        default:
+            break;
+        }
+    }
+};
+
+Behaviour behaviour;
 
 void setup() {
     Serial.begin(9600);
@@ -215,13 +455,19 @@ void setup() {
     pinMode(DISTANCE_SENSOR_0_ECHO_PIN, INPUT);
     {{/DistanceSensor}}
 
+    {{#LineChannel0}}
+    pinMode(LINE_CHANNEL_0_PIN, INPUT);
+    {{/LineChannel0}}
+    {{#LineChannel1}}
+    pinMode(LINE_CHANNEL_1_PIN, INPUT);
+    {{/LineChannel1}}
+    {{#LineChannel2}}
+    pinMode(LINE_CHANNEL_2_PIN, INPUT);
+    {{/LineChannel2}}
+
     {{#Button}}
     pinMode(BUTTON_0_PIN, INPUT_PULLUP);
     {{/Button}}
-
-    {{#LineTracker}}
-
-    {{/LineTracker}}
 
     {{#Motor0}}
     pinMode(MOTOR_0_PWM_PIN, OUTPUT);
@@ -235,7 +481,7 @@ void setup() {
     status_led_0_init();
     {{/StatusLED}}
 
-    pinMode(0, INPUT);
+    behaviour.start();
 }
 
 void loop() {
@@ -244,15 +490,17 @@ void loop() {
     static unsigned long last_distance_0 = 0;
 
     if (millis() - last_distance_0 >=
-        (unsigned long)DISTANCE_SENSOR_0_READ_INTERVAL_MS) {
+        DISTANCE_SENSOR_0_READ_INTERVAL_MS) {
 
         last_distance_0 = millis();
 
-        float distance = distance_sensor_0_read();
+        int cm = (int) distance_sensor_0_read();
 
         Serial.print("Distance sensor 0: ");
-        Serial.print(distance);
+        Serial.print(cm);
         Serial.println(" cm");
+
+        behaviour.fire("distance.reading", cm, 0, 0, 0);
     }
     {{/DistanceSensor}}
 
@@ -260,24 +508,45 @@ void loop() {
     static unsigned long last_line_0 = 0;
 
     if (millis() - last_line_0 >=
-        (unsigned long)LINE_TRACKER_0_READ_INTERVAL_MS) {
+        LINE_TRACKER_0_READ_INTERVAL_MS) {
 
         last_line_0 = millis();
-        int line_center = line_tracker_read_center();
-        (void)line_center;
+
+        int line_left;
+        int line_centre;
+        int line_right;
+        line_tracker_read(line_left, line_centre, line_right);
+
+        behaviour.fire("line.readings", 0, line_left, line_centre, line_right);
     }
     {{/LineTracker}}
 
     {{#Button}}
     static unsigned long last_button_0 = 0;
+    static bool button_0_was_pressed = false;
 
     if (millis() - last_button_0 >=
-        (unsigned long)BUTTON_0_READ_INTERVAL_MS) {
+        BUTTON_0_READ_INTERVAL_MS) {
 
         last_button_0 = millis();
-        if (button_0_is_pressed()) {
-            Serial.println("Button pressed");
+
+        bool pressed = button_0_is_pressed();
+
+        // Fire once per press (rising edge)
+        if (pressed && !button_0_was_pressed) {
+            behaviour.fire("button.pressed", 0, 0, 0, 0);
         }
+
+        button_0_was_pressed = pressed;
     }
     {{/Button}}
+
+    {{#StatusLED}}
+    status_led_0_update();
+    {{/StatusLED}}
+
+    if (behaviour.timer.expired()) {
+        behaviour.timer.cancel();
+        behaviour.fire("timer.timeout", 0, 0, 0, 0);
+    }
 }

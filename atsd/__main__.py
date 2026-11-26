@@ -211,6 +211,9 @@ generated_dir.mkdir(parents=True, exist_ok=True)
 mustache_template = assets_dir / "template.mustache"
 model_template = assets_dir / "template.iml.json"
 
+# The list of classes with subclasses
+classes_with_subclasses = ("Controller",)
+
 @click.group()
 def main():
     """
@@ -302,19 +305,26 @@ def generate(model: Path):  # pyright: ignore [reportRedeclaration]
             # This enables or disables sections of the code related to
             # present or missing components.
             render_data[k1] = True
-            if "Controller" in k1:
-                render_data["Controller"] = True
+            for cls in classes_with_subclasses:
+                if cls in k1 and not k1.startswith(cls):
+                    render_data[cls] = True
 
             # Combine the name of the component with a capitalized
             # version of the attribute name, and set its value
             # to the attribute value.
             for k2, v2 in v1.items():
+
+                # TODO: Anything that has a controller in the name, remove everything before controller.
                 name = (k1 + k2.name[0].upper() + k2.name[1:]).removeprefix(instance_model_name)
+                for cls in classes_with_subclasses:
+                    if cls in name and not name.startswith(cls):
+                        cls_index = name.find(cls)
+                        name = name[cls_index:]
+
                 render_data[name] = f'"{v2}"' if k2.type == "char*" else v2
                 render_data[f"{name}_type"] = k2.type
 
-        if instance_model_name == "ObstacleStop":
-            pprint(render_data)
+        pprint(render_data)
 
         # Read the mustache template and replace all the placeholders with
         # the provided render data, then write it to the Arduino C++ file.
