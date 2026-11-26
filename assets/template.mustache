@@ -1,7 +1,7 @@
 /*
  * Generated Arduino Robot Code
  *
- * Instance Model: AllFeatures
+ * Instance Model: {{{InstanceModelName}}}
  * Generated automatically by RobotCodeGenerator.
  */
 
@@ -10,53 +10,77 @@
 
 {{#Robot}}
 // Robot configuration
-const char* ROBOT_NAME = "{{RobotName}}";
+const {{{RobotName_type}}} ROBOT_NAME = {{{RobotName}}};
 {{/Robot}}
 
 {{#Controller}}
 // Controller configuration
-const int CONTROLLER_CRUISESPEED = {{ControllerCruiseSpeed}};
-const int CONTROLLER_TURNSPEED = {{ControllerTurnSpeed}};
-const int CONTROLLER_DEFAULTTURNANGLE = {{ControllerDefaultTurnAngle}};
+const {{{ControllerCruiseSpeed_type}}} CONTROLLER_CRUISE_SPEED = {{{ControllerCruiseSpeed}}};
+const {{{ControllerTurnSpeed_type}}} CONTROLLER_TURN_SPEED = {{{ControllerTurnSpeed}}};
+const {{{ControllerDefaultTurnAngle_type}}} CONTROLLER_DEFAULT_TURN_ANGLE = {{{ControllerDefaultTurnAngle}}};
+{{#ObstacleStopController}}
+const {{{ControllerStopDistanceCm_type}}} CONTROLLER_STOP_DISTANCE_CM = {{ControllerStopDistanceCm}};
+{{/ObstacleStopController}}
+{{#LineFollowerController}}
+const {{{ControllerLineThreshold_type}}} CONTROLLER_LINE_THRESHOLD = {{ControllerLineThreshold}};
+{{/LineFollowerController}}
+{{#PatrolController}}
+const {{{ControllerStopDistanceCm_type}}} CONTROLLER_STOP_DISTANCE_CM = {{ControllerStopDistanceCm}};
+const {{{ControllerWarningDistanceCm_type}}} CONTROLLER_WARNING_DISTANCE_CM = {{ControllerWarningDistanceCm}};
+const {{{ControllerLineThreshold_type}}} CONTROLLER_LINE_THRESHOLD = {{ControllerLineThreshold}};
+{{/PatrolController}}
+{{#ObstacleTurnController}}
+const {{{ControllerStopDistanceCm_type}}} CONTROLLER_STOP_DISTANCE_CM = {{ControllerStopDistanceCm}};
+{{/ObstacleTurnController}}
+{{#BlackFloorTurnController}}
+const {{{ControllerLineThreshold_type}}} CONTROLLER_LINE_THRESHOLD = {{ControllerLineThreshold}};
+{{/BlackFloorTurnController}}
 {{/Controller}}
 
 {{#DistanceSensor}}
 // Distance sensor 1
-const int DISTANCE_SENSOR_0_TRIG_PIN = {{DistanceSensorTrigPIN}};
-const int DISTANCE_SENSOR_0_ECHO_PIN = {{DistanceSensorEchoPIN}};
-const int DISTANCE_SENSOR_0_READ_INTERVAL_MS = {{DistanceSensorReadIntervalMs}};
-const char* DISTANCE_SENSOR_0_MOUNTING = "{{DistanceSensorMounting}}";
+const {{{DistanceSensorTrigPIN_type}}} DISTANCE_SENSOR_0_TRIG_PIN = {{{DistanceSensorTrigPIN}}};
+const {{{DistanceSensorEchoPIN_type}}} DISTANCE_SENSOR_0_ECHO_PIN = {{{DistanceSensorEchoPIN}}};
+const {{{DistanceSensorReadIntervalMs_type}}} DISTANCE_SENSOR_0_READ_INTERVAL_MS = {{{DistanceSensorReadIntervalMs}}};
+const {{{DistanceSensorMounting_type}}} DISTANCE_SENSOR_0_MOUNTING = {{{DistanceSensorMounting}}};
 {{/DistanceSensor}}
 
 {{#LineTracker}}
 // Line tracker
-const int LINE_TRACKER_0_THRESHOLD = {{LineTrackerDarknessThreshold}};
+const {{{LineTrackerDarknessThreshold_type}}} LINE_TRACKER_0_THRESHOLD = {{{LineTrackerDarknessThreshold}}};
+const {{{LineTrackerReadIntervalMs_type}}} LINE_TRACKER_0_READ_INTERVAL_MS = {{{LineTrackerReadIntervalMs}}};
 {{/LineTracker}}
+
+{{#Button}}
+// Button configuration
+const {{{ButtonPin_type}}} BUTTON_0_PIN = {{{ButtonPin}}};
+const {{{ButtonReadIntervalMs_type}}} BUTTON_0_READ_INTERVAL_MS = {{{ButtonReadIntervalMs}}};
+{{/Button}}
 
 {{#StatusLED}}
 // Status LED
-const int STATUS_LED_0_PIN = {{StatusLEDPin}};
-const int STATUS_LED_0_LED_COUNT = {{StatusLEDLedCount}};
-const int STATUS_LED_0_BLINK_INTERVAL = {{StatusLEDBlinkIntervalMs}};
+const {{{StatusLEDPin_type}}} STATUS_LED_0_PIN = {{{StatusLEDPin}}};
+const {{{StatusLEDLedCount_type}}} STATUS_LED_0_LED_COUNT = {{{StatusLEDLedCount}}};
+const {{{StatusLEDBlinkIntervalMs_type}}} STATUS_LED_0_BLINK_INTERVAL = {{{StatusLEDBlinkIntervalMs}}};
 {{/StatusLED}}
 
 {{#Motor0}}
 // Motor 1
-const char* MOTOR_0_SIDE = "{{Motor0Side}}";
-const int MOTOR_0_PWM_PIN = {{Motor0PwnPin}};
-const int MOTOR_0_DIRECTION_PIN = {{Motor0DirectionPin}};
+const {{{Motor0Side_type}}} MOTOR_0_SIDE = {{{Motor0Side}}};
+const {{{Motor0PwnPin_type}}} MOTOR_0_PWM_PIN = {{{Motor0PwnPin}}};
+const {{{Motor0DirectionPin_type}}} MOTOR_0_DIRECTION_PIN = {{{Motor0DirectionPin}}};
 {{/Motor0}}
 
 {{#Motor1}}
 // Motor 2
-const char* MOTOR_1_SIDE = "{{Motor1Side}}";
-const int MOTOR_1_PWM_PIN = {{Motor1PwnPin}};
-const int MOTOR_1_DIRECTION_PIN = {{Motor1DirectionPin}};
+const {{{Motor1Side_type}}} MOTOR_1_SIDE = {{{Motor1Side}}};
+const {{{Motor1PwnPin_type}}} MOTOR_1_PWM_PIN = {{{Motor1PwnPin}}};
+const {{{Motor1DirectionPin_type}}} MOTOR_1_DIRECTION_PIN = {{{Motor1DirectionPin}}};
 {{/Motor1}}
 
 {{#MotorDriver}}
 // Motor driver
-const int MOTOR_DRIVER_DEFAULT_SPEED = {{MotorDriverDefaultSpeed}};
+const {{{MotorDriverDefaultSpeed_type}}} MOTOR_DRIVER_DEFAULT_SPEED = {{{MotorDriverDefaultSpeed}}};
 {{/MotorDriver}}
 
 {{#DistanceSensor}}
@@ -93,6 +117,13 @@ int line_tracker_read_center() {
     return analogRead(0);
 }
 {{/LineTracker}}
+
+{{#Button}}
+// Button helper
+bool button_0_is_pressed() {
+    return digitalRead(BUTTON_0_PIN) == LOW;
+}
+{{/Button}}
 
 {{#Motor0}}
 // Motor control functions
@@ -184,6 +215,10 @@ void setup() {
     pinMode(DISTANCE_SENSOR_0_ECHO_PIN, INPUT);
     {{/DistanceSensor}}
 
+    {{#Button}}
+    pinMode(BUTTON_0_PIN, INPUT_PULLUP);
+    {{/Button}}
+
     {{#LineTracker}}
 
     {{/LineTracker}}
@@ -199,6 +234,7 @@ void setup() {
     {{#StatusLED}}
     status_led_0_init();
     {{/StatusLED}}
+
     pinMode(0, INPUT);
 }
 
@@ -208,7 +244,7 @@ void loop() {
     static unsigned long last_distance_0 = 0;
 
     if (millis() - last_distance_0 >=
-        DISTANCE_SENSOR_0_READ_INTERVAL_MS) {
+        (unsigned long)DISTANCE_SENSOR_0_READ_INTERVAL_MS) {
 
         last_distance_0 = millis();
 
@@ -221,8 +257,27 @@ void loop() {
     {{/DistanceSensor}}
 
     {{#LineTracker}}
-    // Read line tracker channels
-    int line_center = line_tracker_read_center();
-    delay(10);
+    static unsigned long last_line_0 = 0;
+
+    if (millis() - last_line_0 >=
+        (unsigned long)LINE_TRACKER_0_READ_INTERVAL_MS) {
+
+        last_line_0 = millis();
+        int line_center = line_tracker_read_center();
+        (void)line_center;
+    }
     {{/LineTracker}}
+
+    {{#Button}}
+    static unsigned long last_button_0 = 0;
+
+    if (millis() - last_button_0 >=
+        (unsigned long)BUTTON_0_READ_INTERVAL_MS) {
+
+        last_button_0 = millis();
+        if (button_0_is_pressed()) {
+            Serial.println("Button pressed");
+        }
+    }
+    {{/Button}}
 }

@@ -11,7 +11,7 @@ import rich_click as click
 # A named tuple of an attribute name and default value.
 # The `name` and `default` values for instances of this tuple
 # can be accessed using indices or attribute names.
-AttributeNameDefault = namedtuple("AttributeNameDefault", "name,default")
+AttributeNameDefault = namedtuple("AttributeNameDefaultType", "name,default,type")
 
 def resolve_path(path):
     """
@@ -64,7 +64,7 @@ class MetaModelClass(msgspec.Struct):
     id: str
     name: str
     attributes: list[MetaModelClassAttribute]
-    ports: list[MetaModelClassPort]
+    ports: list[MetaModelClassPort] = []
 
 # A `msgspec` structure for a metamodel relation,
 # storing a name and the kind of relationship.
@@ -143,7 +143,7 @@ class MetaModelProtocolSignal(msgspec.Struct):
     id: str
     name: str
     direction: str
-    parameters: list[MetaModelProtocolSignalParameter]
+    parameters: list[MetaModelProtocolSignalParameter] = []
 
 # A `msgspec` structure for a metamodel protocol,
 # storing an id, a name, and a list of metamodel protocol signals.
@@ -162,7 +162,7 @@ class MetaModel(msgspec.Struct):
     classes: list[MetaModelClass]
     relations: list[MetaModelRelation]
     enumerations: list[MetaModelEnumeration]
-    behaviours: list[dict[str, MetaModelBehaviour]]
+    behaviours: dict[str, MetaModelBehaviour]
     protocols: list[MetaModelProtocol]
 
 # A `msgspec` structure for an instance model object,
@@ -246,6 +246,9 @@ def generate(model: Path):  # pyright: ignore [reportRedeclaration]
             # name, ID, and default.
             assert attr.id not in allAttributeValues
             default: str = attr.defaultValue
+            t: str = attr.type.lower()
+            if attr.type in ("STRING", "ENUM"):
+                t = "char*"
             if not default:
                 match attr.type:
                     case "INT":
@@ -254,7 +257,7 @@ def generate(model: Path):  # pyright: ignore [reportRedeclaration]
                         default = "0.0"
                     case "STRING":
                         default = ""
-            allAttributeValues[attr.id] = AttributeNameDefault(attr.name, default)
+            allAttributeValues[attr.id] = AttributeNameDefault(attr.name, default, t)
 
     instances = {}
     for instance in model.instanceModels:
@@ -284,27 +287,34 @@ def generate(model: Path):  # pyright: ignore [reportRedeclaration]
             # For every attribute of every component in an instance model object,
             # replace the attribute ID with the attribute name, and keep the value.
             instances[instance.name][objectName] = {
-                allAttributeValues[k].name: v for k, v in object.attributeValues.items()
+                allAttributeValues[k]: v for k, v in object.attributeValues.items()
             }
 
-    for robot_name, robot_info in instances.items():
+    for instance_model_name, instance_model_info in instances.items():
 
         # Set the path of the Arduino C++ file and create its parent diretory.
-        robot_file = generated_dir / robot_name / f"{robot_name}.ino"
+        robot_file = generated_dir / instance_model_name / f"{instance_model_name}.ino"
         robot_file.parent.mkdir(parents=True, exist_ok=True)
 
-        render_data = {}
-        for k1, v1 in robot_info.items():
+        render_data = {"InstanceModelName": instance_model_name}
+        for k1, v1 in instance_model_info.items():
 
             # This enables or disables sections of the code related to
             # present or missing components.
             render_data[k1] = True
+            if "Controller" in k1:
+                render_data["Controller"] = True
 
             # Combine the name of the component with a capitalized
             # version of the attribute name, and set its value
             # to the attribute value.
             for k2, v2 in v1.items():
-                render_data[k1 + k2[0].upper() + k2[1:]] = v2
+                name = (k1 + k2.name[0].upper() + k2.name[1:]).removeprefix(instance_model_name)
+                render_data[name] = f'"{v2}"' if k2.type == "char*" else v2
+                render_data[f"{name}_type"] = k2.type
+
+        if instance_model_name == "ObstacleStop":
+            pprint(render_data)
 
         # Read the mustache template and replace all the placeholders with
         # the provided render data, then write it to the Arduino C++ file.
