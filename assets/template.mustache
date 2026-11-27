@@ -2,7 +2,7 @@
  * Generated Arduino Robot Code
  *
  * Instance Model: {{{InstanceModelName}}}
- * Generated automatically by RobotCodeGenerator.
+ * Generated automatically by the ATSD Project M2T Generator.
  */
 
 #include <Arduino.h>
@@ -83,7 +83,13 @@ const {{{ButtonReadIntervalMs_type}}} BUTTON_0_READ_INTERVAL_MS = {{{ButtonReadI
 // Status LED
 const {{{StatusLEDPin_type}}} STATUS_LED_0_PIN = {{{StatusLEDPin}}};
 const {{{StatusLEDLedCount_type}}} STATUS_LED_0_LED_COUNT = {{{StatusLEDLedCount}}};
+const {{{StatusLEDDefaultColour_type}}} STATUS_LED_0_DEFAULT_COLOUR = {{{StatusLEDDefaultColour}}};
+{{#StatusLEDBlinkIntervalMs}}
 const {{{StatusLEDBlinkIntervalMs_type}}} STATUS_LED_0_BLINK_INTERVAL = {{{StatusLEDBlinkIntervalMs}}};
+{{/StatusLEDBlinkIntervalMs}}
+{{^StatusLEDBlinkIntervalMs}}
+const int STATUS_LED_0_BLINK_INTERVAL = 0;
+{{/StatusLEDBlinkIntervalMs}}
 {{/StatusLED}}
 
 {{#Motor0}}

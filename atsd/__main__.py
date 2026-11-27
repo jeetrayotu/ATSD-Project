@@ -13,6 +13,9 @@ import rich_click as click
 # can be accessed using indices or attribute names.
 AttributeNameDefault = namedtuple("AttributeNameDefaultType", "name,default,type")
 
+
+ObjectNameID = namedtuple("ObjectNameID", "name,id")
+
 def resolve_path(path):
     """
     Expands user directories in Pathlib Path objects and resolves them
@@ -41,6 +44,7 @@ def Pathback(ctx, param, value):
     # Return a resolved filesystem path.
     return resolve_path(value)
 
+
 # A `msgspec` structure for a metamodel class attribute,
 # storing an id, a name, a type, and a default value.
 class MetaModelClassAttribute(msgspec.Struct):
@@ -49,6 +53,7 @@ class MetaModelClassAttribute(msgspec.Struct):
     type: str
     defaultValue: str
 
+
 # A `msgspec` structure for a metamodel class port,
 # storing an id, a name, a protocol id, and a conjugation status.
 class MetaModelClassPort(msgspec.Struct):
@@ -56,6 +61,7 @@ class MetaModelClassPort(msgspec.Struct):
     name: str
     protocolId: str
     conjugated: bool
+
 
 # A `msgspec` structure for a metamodel class,
 # storing an id, a name, a list of metamodel class attributes,
@@ -66,17 +72,20 @@ class MetaModelClass(msgspec.Struct):
     attributes: list[MetaModelClassAttribute]
     ports: list[MetaModelClassPort] = []
 
+
 # A `msgspec` structure for a metamodel relation,
 # storing a name and the kind of relationship.
 class MetaModelRelation(msgspec.Struct):
     name: str
     kind: str
 
+
 class MountPosition(enum.Enum):
     front = "front"
     rear = "rear"
     left = "left"
     right = "right"
+
 
 class Colour(enum.Enum):
     red = "red"
@@ -86,19 +95,23 @@ class Colour(enum.Enum):
     off = "off"
     yellow = "yellow"
 
+
 class ChannelPosition(enum.Enum):
     left = "left"
     center = "center"
     right = "right"
 
+
 class Side(enum.Enum):
     left = "left"
     right = "right"
+
 
 # A `msgspec` structure for a metamodel enumeration,
 # storing a name.
 class MetaModelEnumeration(msgspec.Struct):
     name: str
+
 
 # A `msgspec` structure for a metamodel behaviour state,
 # storing an id, the kind of behaviour, a name,
@@ -110,9 +123,9 @@ class MetaModelBehaviourState(msgspec.Struct):
     entry: str
     exit: str
 
+
 # A `msgspec` structure for a metamodel behaviour transition,
-# storing an id, a source, a target, a trigger, a guard,
-# an effect, a source handle, and a target handle.
+# storing an id, a source, a target, a trigger, a guard, and an effect.
 class MetaModelBehaviourTransition(msgspec.Struct):
     id: str
     source: str
@@ -120,8 +133,7 @@ class MetaModelBehaviourTransition(msgspec.Struct):
     trigger: str
     guard: str
     effect: str
-    sourceHandle: str
-    targetHandle: str
+
 
 # A `msgspec` structure for a metamodel behaviour,
 # storing a list of metamodel behaviour states and
@@ -130,12 +142,14 @@ class MetaModelBehaviour(msgspec.Struct):
     states: list[MetaModelBehaviourState]
     transitions: list[MetaModelBehaviourTransition]
 
+
 # A `msgspec` structure for a metamodel protocol signal parameter,
 # storing an id, a name, and a type.
 class MetaModelProtocolSignalParameter(msgspec.Struct):
     id: str
     name: str
     type: str
+
 
 # A `msgspec` structure for a metamodel protocol signal,
 # storing an id, a name, a direction, and a list of metamodel protocol signal parameters.
@@ -145,12 +159,14 @@ class MetaModelProtocolSignal(msgspec.Struct):
     direction: str
     parameters: list[MetaModelProtocolSignalParameter] = []
 
+
 # A `msgspec` structure for a metamodel protocol,
 # storing an id, a name, and a list of metamodel protocol signals.
 class MetaModelProtocol(msgspec.Struct):
     id: str
     name: str
     signals: list[MetaModelProtocolSignal]
+
 
 # A `msgspec` structure for a metamodel,
 # storing a list of metamodel classes,
@@ -165,6 +181,7 @@ class MetaModel(msgspec.Struct):
     behaviours: dict[str, MetaModelBehaviour]
     protocols: list[MetaModelProtocol]
 
+
 # A `msgspec` structure for an instance model object,
 # storing a class ID, a name, and a dictionary
 # of string attribute values.
@@ -173,17 +190,20 @@ class InstanceModelObject(msgspec.Struct):
     name: str
     attributeValues: dict[str, str]
 
+
 # A `msgspec` structure for an instance model,
 # storing a name and a list of instance model objects.
 class InstanceModel(msgspec.Struct):
     name: str
     objects: list[InstanceModelObject]
 
+
 # A `msgspec` structure for a model, storing a metamodel
 # and a list of instance models.
 class Model(msgspec.Struct):
     metaModel: MetaModel
     instanceModels: list[InstanceModel]
+
 
 # The python file currently running as a Pathlib Path object.
 current_file = Path(__file__)
@@ -214,11 +234,13 @@ model_template = assets_dir / "template.iml.json"
 # The list of classes with subclasses
 classes_with_subclasses = ("Controller",)
 
+
 @click.group()
 def main():
     """
     The entrypoint of the `atsd` application.
     """
+
 
 @main.command()
 @click.argument("model", default=resolve_path(model_template), callback=Pathback)
@@ -234,7 +256,6 @@ def generate(model: Path):  # pyright: ignore [reportRedeclaration]
     allAttributeValues = {}
     allClassIDs = {}
     for cls in model.metaModel.classes:
-
         # Ensure that the class ID doesn't already exist
         # in the dictionary of class IDs. If not,
         # add its name and ID.
@@ -242,7 +263,6 @@ def generate(model: Path):  # pyright: ignore [reportRedeclaration]
         allClassIDs[cls.id] = cls.name
 
         for attr in cls.attributes:
-
             # Ensure that the attribute ID doesn't already exist
             # in the dictionary of attribute IDs. If not, get or
             # set its default values before adding it using its
@@ -274,7 +294,6 @@ def generate(model: Path):  # pyright: ignore [reportRedeclaration]
             counts[allClassIDs[object.classId]] += 1
 
         for object in instance.objects:
-
             # If more than one instance of a component exists,
             # add the current instance number to the component name.
             # TODO: Does not use multiplicities. This may conflict with
@@ -289,33 +308,42 @@ def generate(model: Path):  # pyright: ignore [reportRedeclaration]
 
             # For every attribute of every component in an instance model object,
             # replace the attribute ID with the attribute name, and keep the value.
-            instances[instance.name][objectName] = {
+            instances[instance.name][ObjectNameID(objectName, object.classId)] = {
                 allAttributeValues[k]: v for k, v in object.attributeValues.items()
             }
 
     for instance_model_name, instance_model_info in instances.items():
-
         # Set the path of the Arduino C++ file and create its parent diretory.
         robot_file = generated_dir / instance_model_name / f"{instance_model_name}.ino"
         robot_file.parent.mkdir(parents=True, exist_ok=True)
 
         render_data = {"InstanceModelName": instance_model_name}
         for k1, v1 in instance_model_info.items():
+            object_name = k1.name
+            object_id = k1.id
+            if object_id in model.metaModel.behaviours:
+                behaviours = model.metaModel.behaviours[object_id]
+
+                # TODO: Switch all the mustache checks to this format.
+                render_data["States"] = [{"StateName": state.name} for state in behaviours.states if state.name]
+                states = {state.id:state for state in behaviours.states}
+                render_data["Transitions"] = [{"Transition" + k[0].upper() + k[1:]:(states[v].name if k == "target" else v) for k, v in msgspec.structs.asdict(transition).items()} for transition in behaviours.transitions]
 
             # This enables or disables sections of the code related to
             # present or missing components.
-            render_data[k1] = True
+            render_data[object_name] = True
             for cls in classes_with_subclasses:
-                if cls in k1 and not k1.startswith(cls):
+                if cls in object_name and not object_name.startswith(cls):
                     render_data[cls] = True
 
             # Combine the name of the component with a capitalized
             # version of the attribute name, and set its value
             # to the attribute value.
             for k2, v2 in v1.items():
-
                 # TODO: Anything that has a controller in the name, remove everything before controller.
-                name = (k1 + k2.name[0].upper() + k2.name[1:]).removeprefix(instance_model_name)
+                name = (object_name + k2.name[0].upper() + k2.name[1:]).removeprefix(
+                    instance_model_name
+                )
                 for cls in classes_with_subclasses:
                     if cls in name and not name.startswith(cls):
                         cls_index = name.find(cls)
@@ -324,12 +352,11 @@ def generate(model: Path):  # pyright: ignore [reportRedeclaration]
                 render_data[name] = f'"{v2}"' if k2.type == "char*" else v2
                 render_data[f"{name}_type"] = k2.type
 
-        pprint(render_data)
-
         # Read the mustache template and replace all the placeholders with
         # the provided render data, then write it to the Arduino C++ file.
         with mustache_template.open() as f:
             robot_file.write_text(render(f, render_data))
+
 
 # If running as a script, use the entrypoint.
 if __name__ == "__main__":
