@@ -339,12 +339,15 @@ def generate(model: Path):  # pyright: ignore [reportRedeclaration]
             # Combine the name of the component with a capitalized
             # version of the attribute name, and set its value
             # to the attribute value.
-            pattern = re.compile(r"(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])")
+
+            # Adapted From:
+            # Answer: https://stackoverflow.com/a/1176023
+            pattern = re.compile(r"(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])|(?<=[A-Za-z])(?=\d)|(?<=\d)(?=[A-Za-z])")
+
             componentTemplateName = {}
             for k2, v2 in v1.items():
                 componentTemplateName[k2.name] = removeSubclassName(f"{pattern.sub('_', object_name)}_{pattern.sub('_', k2.name)}").upper()
                 name = removeSubclassName(object_name + k2.name[0].upper() + k2.name[1:])
-                print(object_name, name, k2.name, "\n")
                 render_data[name] = f'"{v2}"' if k2.type == "char*" else v2
                 render_data[f"{name}_type"] = k2.type
 
