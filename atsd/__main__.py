@@ -7,6 +7,7 @@ from rich.pretty import pprint
 import enum
 import msgspec
 import rich_click as click
+import re
 
 # A named tuple of an attribute name and default value.
 # The `name` and `default` values for instances of this tuple
@@ -234,6 +235,12 @@ model_template = assets_dir / "template.iml.json"
 # The list of classes with subclasses
 classes_with_subclasses = ("Controller",)
 
+def removeSubclassName(name):
+    for cls in classes_with_subclasses:
+        if cls in name and not name.startswith(cls):
+            cls_index = name.find(cls)
+            name = name[cls_index:]
+    return name
 
 @click.group()
 def main():
@@ -302,7 +309,7 @@ def generate(model: Path):  # pyright: ignore [reportRedeclaration]
             originalObjectName = objectName = allClassIDs[object.classId]
             if counts[allClassIDs[object.classId]] > 1:
                 objectName = f"{originalObjectName}{count}"
-                while objectName in instances[instance.name]:
+                while (objectName, object.classId) in instances[instance.name]:
                     count += 1
                     objectName = f"{originalObjectName}{count}"
 
@@ -321,13 +328,6 @@ def generate(model: Path):  # pyright: ignore [reportRedeclaration]
         for k1, v1 in instance_model_info.items():
             object_name = k1.name
             object_id = k1.id
-            if object_id in model.metaModel.behaviours:
-                behaviours = model.metaModel.behaviours[object_id]
-
-                # TODO: Switch all the mustache checks to this format.
-                render_data["States"] = [{"StateName": state.name} for state in behaviours.states if state.name]
-                states = {state.id:state for state in behaviours.states}
-                render_data["Transitions"] = [{"Transition" + k[0].upper() + k[1:]:(states[v].name if k == "target" else v) for k, v in msgspec.structs.asdict(transition).items()} for transition in behaviours.transitions]
 
             # This enables or disables sections of the code related to
             # present or missing components.
@@ -339,18 +339,33 @@ def generate(model: Path):  # pyright: ignore [reportRedeclaration]
             # Combine the name of the component with a capitalized
             # version of the attribute name, and set its value
             # to the attribute value.
+            pattern = re.compile(r"(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])")
+            componentTemplateName = {}
             for k2, v2 in v1.items():
-                # TODO: Anything that has a controller in the name, remove everything before controller.
-                name = (object_name + k2.name[0].upper() + k2.name[1:]).removeprefix(
-                    instance_model_name
-                )
-                for cls in classes_with_subclasses:
-                    if cls in name and not name.startswith(cls):
-                        cls_index = name.find(cls)
-                        name = name[cls_index:]
-
+                componentTemplateName[k2.name] = removeSubclassName(f"{pattern.sub('_', object_name)}_{pattern.sub('_', k2.name)}").upper()
+                name = removeSubclassName(object_name + k2.name[0].upper() + k2.name[1:])
+                print(object_name, name, k2.name, "\n")
                 render_data[name] = f'"{v2}"' if k2.type == "char*" else v2
                 render_data[f"{name}_type"] = k2.type
+
+            if object_id in model.metaModel.behaviours:
+                behaviours = model.metaModel.behaviours[object_id]
+
+                # TODO: Switch all the mustache checks to this format.
+                render_data["States"] = [{"StateName": state.name} for state in behaviours.states if state.name]
+                states = {state.id:state for state in behaviours.states}
+                render_data["Transitions"] = []
+                for transition in behaviours.transitions:
+                    transition_data = {}
+                    for k3, v3 in msgspec.structs.asdict(transition).items():
+                        d = states[v3].name if k3 == "target" else v3
+                        if k3 == "guard":
+                            for k4, v4 in componentTemplateName.items():
+                                d = d.replace(k4, v4)
+                        transition_data["Transition" + k3[0].upper() + k3[1:]] = d
+                    render_data["Transitions"].append(transition_data)
+
+        # pprint(render_data)
 
         # Read the mustache template and replace all the placeholders with
         # the provided render data, then write it to the Arduino C++ file.

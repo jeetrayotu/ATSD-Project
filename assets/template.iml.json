@@ -1080,7 +1080,7 @@
             "source": "Lx3806bj",
             "target": "uUj3Ewz_",
             "trigger": "line.readings",
-            "guard": "left >= lineThreshold && centre < lineThreshold && right < lineThreshold",
+            "guard": "left >= lineThreshold && center < lineThreshold && right < lineThreshold",
             "effect": "",
             "sourceHandle": "left",
             "targetHandle": "top"
@@ -1090,7 +1090,7 @@
             "source": "Lx3806bj",
             "target": "ZS-0DQUa",
             "trigger": "line.readings",
-            "guard": "right >= lineThreshold && centre < lineThreshold && left < lineThreshold",
+            "guard": "right >= lineThreshold && center < lineThreshold && left < lineThreshold",
             "effect": "",
             "sourceHandle": "right",
             "targetHandle": "top"
@@ -1100,7 +1100,7 @@
             "source": "Lx3806bj",
             "target": "UgHNKBwk",
             "trigger": "line.readings",
-            "guard": "left < lineThreshold && centre < lineThreshold && right < lineThreshold",
+            "guard": "left < lineThreshold && center < lineThreshold && right < lineThreshold",
             "effect": "",
             "sourceHandle": "bottom",
             "targetHandle": "top"
@@ -1110,7 +1110,7 @@
             "source": "uUj3Ewz_",
             "target": "ZS-0DQUa",
             "trigger": "line.readings",
-            "guard": "right >= lineThreshold && centre < lineThreshold && left < lineThreshold",
+            "guard": "right >= lineThreshold && center < lineThreshold && left < lineThreshold",
             "effect": "",
             "sourceHandle": "right",
             "targetHandle": "top"
@@ -1120,7 +1120,7 @@
             "source": "uUj3Ewz_",
             "target": "UgHNKBwk",
             "trigger": "line.readings",
-            "guard": "left < lineThreshold && centre < lineThreshold && right < lineThreshold",
+            "guard": "left < lineThreshold && center < lineThreshold && right < lineThreshold",
             "effect": "",
             "sourceHandle": "bottom",
             "targetHandle": "top"
@@ -1130,7 +1130,7 @@
             "source": "uUj3Ewz_",
             "target": "Lx3806bj",
             "trigger": "line.readings",
-            "guard": "centre >= lineThreshold",
+            "guard": "center >= lineThreshold",
             "effect": "",
             "sourceHandle": "top",
             "targetHandle": "bottom"
@@ -1140,7 +1140,7 @@
             "source": "ZS-0DQUa",
             "target": "uUj3Ewz_",
             "trigger": "line.readings",
-            "guard": "left >= lineThreshold && centre < lineThreshold && right < lineThreshold",
+            "guard": "left >= lineThreshold && center < lineThreshold && right < lineThreshold",
             "effect": "",
             "sourceHandle": "left",
             "targetHandle": "top"
@@ -1150,7 +1150,7 @@
             "source": "ZS-0DQUa",
             "target": "UgHNKBwk",
             "trigger": "line.readings",
-            "guard": "left < lineThreshold && centre < lineThreshold && right < lineThreshold",
+            "guard": "left < lineThreshold && center < lineThreshold && right < lineThreshold",
             "effect": "",
             "sourceHandle": "bottom",
             "targetHandle": "top"
@@ -1160,7 +1160,7 @@
             "source": "ZS-0DQUa",
             "target": "Lx3806bj",
             "trigger": "line.readings",
-            "guard": "centre >= lineThreshold",
+            "guard": "center >= lineThreshold",
             "effect": "",
             "sourceHandle": "top",
             "targetHandle": "bottom",
@@ -1171,7 +1171,7 @@
             "source": "UgHNKBwk",
             "target": "uUj3Ewz_",
             "trigger": "line.readings",
-            "guard": "left >= lineThreshold && centre < lineThreshold && right < lineThreshold",
+            "guard": "left >= lineThreshold && center < lineThreshold && right < lineThreshold",
             "effect": "",
             "sourceHandle": "left",
             "targetHandle": "top"
@@ -1181,7 +1181,7 @@
             "source": "UgHNKBwk",
             "target": "ZS-0DQUa",
             "trigger": "line.readings",
-            "guard": "right >= lineThreshold && centre < lineThreshold && left < lineThreshold",
+            "guard": "right >= lineThreshold && center < lineThreshold && left < lineThreshold",
             "effect": "",
             "sourceHandle": "right",
             "targetHandle": "top"
@@ -1191,7 +1191,7 @@
             "source": "UgHNKBwk",
             "target": "Lx3806bj",
             "trigger": "line.readings",
-            "guard": "centre >= lineThreshold",
+            "guard": "center >= lineThreshold",
             "effect": "",
             "sourceHandle": "top",
             "targetHandle": "bottom"
@@ -1324,7 +1324,7 @@
             "source": "6YgbCx0x",
             "target": "4svUDBs5",
             "trigger": "line.readings",
-            "guard": "left >= lineThreshold || centre >= lineThreshold || right >= lineThreshold",
+            "guard": "left >= lineThreshold || center >= lineThreshold || right >= lineThreshold",
             "effect": "",
             "sourceHandle": "left",
             "targetHandle": "left",
@@ -1335,7 +1335,7 @@
             "source": "PiqfTApu",
             "target": "4svUDBs5",
             "trigger": "line.readings",
-            "guard": "left >= lineThreshold || centre >= lineThreshold || right >= lineThreshold",
+            "guard": "left >= lineThreshold || center >= lineThreshold || right >= lineThreshold",
             "effect": "",
             "sourceHandle": "bottom",
             "targetHandle": "bottom"
@@ -1515,7 +1515,7 @@
             "source": "pM1OcRzh",
             "target": "ouppeqTM",
             "trigger": "line.readings",
-            "guard": "centre > lineThreshold",
+            "guard": "center > lineThreshold",
             "effect": "",
             "sourceHandle": "bottom",
             "targetHandle": "top"
@@ -1576,7 +1576,7 @@
               },
               {
                 "id": "0k_emnH7",
-                "name": "centre",
+                "name": "center",
                 "type": "INT"
               },
               {
@@ -1593,7 +1593,7 @@
               },
               {
                 "id": "0JxXujr4",
-                "name": "centre",
+                "name": "center",
                 "type": "INT"
               },
               {
