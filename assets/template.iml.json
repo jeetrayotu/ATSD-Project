@@ -213,6 +213,15 @@
             "lowerBound": 1,
             "upperBound": 1,
             "defaultValue": ""
+          },
+          {
+            "id": "DZXl4pGe",
+            "name": "standbyPin",
+            "type": "INT",
+            "visibility": "PUBLIC",
+            "lowerBound": 1,
+            "upperBound": 1,
+            "defaultValue": "3"
           }
         ],
         "ports": [
@@ -1080,7 +1089,7 @@
             "source": "Lx3806bj",
             "target": "uUj3Ewz_",
             "trigger": "line.readings",
-            "guard": "left >= lineThreshold && center < lineThreshold && right < lineThreshold",
+            "guard": "left >= lineThreshold && centre < lineThreshold && right < lineThreshold",
             "effect": "",
             "sourceHandle": "left",
             "targetHandle": "top"
@@ -1090,7 +1099,7 @@
             "source": "Lx3806bj",
             "target": "ZS-0DQUa",
             "trigger": "line.readings",
-            "guard": "right >= lineThreshold && center < lineThreshold && left < lineThreshold",
+            "guard": "right >= lineThreshold && centre < lineThreshold && left < lineThreshold",
             "effect": "",
             "sourceHandle": "right",
             "targetHandle": "top"
@@ -1100,7 +1109,7 @@
             "source": "Lx3806bj",
             "target": "UgHNKBwk",
             "trigger": "line.readings",
-            "guard": "left < lineThreshold && center < lineThreshold && right < lineThreshold",
+            "guard": "left < lineThreshold && centre < lineThreshold && right < lineThreshold",
             "effect": "",
             "sourceHandle": "bottom",
             "targetHandle": "top"
@@ -1110,7 +1119,7 @@
             "source": "uUj3Ewz_",
             "target": "ZS-0DQUa",
             "trigger": "line.readings",
-            "guard": "right >= lineThreshold && center < lineThreshold && left < lineThreshold",
+            "guard": "right >= lineThreshold && centre < lineThreshold && left < lineThreshold",
             "effect": "",
             "sourceHandle": "right",
             "targetHandle": "top"
@@ -1120,7 +1129,7 @@
             "source": "uUj3Ewz_",
             "target": "UgHNKBwk",
             "trigger": "line.readings",
-            "guard": "left < lineThreshold && center < lineThreshold && right < lineThreshold",
+            "guard": "left < lineThreshold && centre < lineThreshold && right < lineThreshold",
             "effect": "",
             "sourceHandle": "bottom",
             "targetHandle": "top"
@@ -1130,7 +1139,7 @@
             "source": "uUj3Ewz_",
             "target": "Lx3806bj",
             "trigger": "line.readings",
-            "guard": "center >= lineThreshold",
+            "guard": "centre >= lineThreshold",
             "effect": "",
             "sourceHandle": "top",
             "targetHandle": "bottom"
@@ -1140,7 +1149,7 @@
             "source": "ZS-0DQUa",
             "target": "uUj3Ewz_",
             "trigger": "line.readings",
-            "guard": "left >= lineThreshold && center < lineThreshold && right < lineThreshold",
+            "guard": "left >= lineThreshold && centre < lineThreshold && right < lineThreshold",
             "effect": "",
             "sourceHandle": "left",
             "targetHandle": "top"
@@ -1150,7 +1159,7 @@
             "source": "ZS-0DQUa",
             "target": "UgHNKBwk",
             "trigger": "line.readings",
-            "guard": "left < lineThreshold && center < lineThreshold && right < lineThreshold",
+            "guard": "left < lineThreshold && centre < lineThreshold && right < lineThreshold",
             "effect": "",
             "sourceHandle": "bottom",
             "targetHandle": "top"
@@ -1160,7 +1169,7 @@
             "source": "ZS-0DQUa",
             "target": "Lx3806bj",
             "trigger": "line.readings",
-            "guard": "center >= lineThreshold",
+            "guard": "centre >= lineThreshold",
             "effect": "",
             "sourceHandle": "top",
             "targetHandle": "bottom",
@@ -1171,7 +1180,7 @@
             "source": "UgHNKBwk",
             "target": "uUj3Ewz_",
             "trigger": "line.readings",
-            "guard": "left >= lineThreshold && center < lineThreshold && right < lineThreshold",
+            "guard": "left >= lineThreshold && centre < lineThreshold && right < lineThreshold",
             "effect": "",
             "sourceHandle": "left",
             "targetHandle": "top"
@@ -1181,7 +1190,7 @@
             "source": "UgHNKBwk",
             "target": "ZS-0DQUa",
             "trigger": "line.readings",
-            "guard": "right >= lineThreshold && center < lineThreshold && left < lineThreshold",
+            "guard": "right >= lineThreshold && centre < lineThreshold && left < lineThreshold",
             "effect": "",
             "sourceHandle": "right",
             "targetHandle": "top"
@@ -1191,7 +1200,7 @@
             "source": "UgHNKBwk",
             "target": "Lx3806bj",
             "trigger": "line.readings",
-            "guard": "center >= lineThreshold",
+            "guard": "centre >= lineThreshold",
             "effect": "",
             "sourceHandle": "top",
             "targetHandle": "bottom"
@@ -1275,7 +1284,8 @@
             "guard": "",
             "effect": "",
             "sourceHandle": "left",
-            "targetHandle": "bottom"
+            "targetHandle": "bottom",
+            "labelT": 0.36666666666666664
           },
           {
             "id": "6GBGFc5m",
@@ -1324,7 +1334,7 @@
             "source": "6YgbCx0x",
             "target": "4svUDBs5",
             "trigger": "line.readings",
-            "guard": "left >= lineThreshold || center >= lineThreshold || right >= lineThreshold",
+            "guard": "left >= lineThreshold || centre >= lineThreshold || right >= lineThreshold",
             "effect": "",
             "sourceHandle": "left",
             "targetHandle": "left",
@@ -1335,7 +1345,7 @@
             "source": "PiqfTApu",
             "target": "4svUDBs5",
             "trigger": "line.readings",
-            "guard": "left >= lineThreshold || center >= lineThreshold || right >= lineThreshold",
+            "guard": "left >= lineThreshold || centre >= lineThreshold || right >= lineThreshold",
             "effect": "",
             "sourceHandle": "bottom",
             "targetHandle": "bottom"
@@ -1349,7 +1359,7 @@
             "effect": "",
             "sourceHandle": "right",
             "targetHandle": "left",
-            "labelT": 0.5
+            "labelT": 0.45
           }
         ]
       },
@@ -1400,20 +1410,22 @@
             "source": "NxSwH7-1",
             "target": "K7wP94pJ",
             "trigger": "button.pressed",
-            "guard": "",
+            "guard": "state == STATE_Idle",
             "effect": "",
             "sourceHandle": "right",
-            "targetHandle": "left"
+            "targetHandle": "left",
+            "labelT": 0.5
           },
           {
             "id": "vnhTxnOJ",
             "source": "K7wP94pJ",
             "target": "NxSwH7-1",
             "trigger": "button.pressed",
-            "guard": "",
+            "guard": "state == STATE_Driving",
             "effect": "",
             "sourceHandle": "top",
-            "targetHandle": "top"
+            "targetHandle": "top",
+            "labelT": 0.5166666666666667
           },
           {
             "id": "iLOuHGib",
@@ -1495,7 +1507,7 @@
             "source": "LTh3dKQL",
             "target": "pM1OcRzh",
             "trigger": "button.pressed",
-            "guard": "",
+            "guard": "state == STATE_Idle",
             "effect": "",
             "sourceHandle": "right",
             "targetHandle": "left"
@@ -1505,17 +1517,18 @@
             "source": "pM1OcRzh",
             "target": "LTh3dKQL",
             "trigger": "button.pressed",
-            "guard": "",
+            "guard": "state == STATE_Driving",
             "effect": "",
             "sourceHandle": "top",
-            "targetHandle": "top"
+            "targetHandle": "top",
+            "labelT": 0.5166666666666667
           },
           {
             "id": "rlweHROh",
             "source": "pM1OcRzh",
             "target": "ouppeqTM",
             "trigger": "line.readings",
-            "guard": "center > lineThreshold",
+            "guard": "centre > lineThreshold",
             "effect": "",
             "sourceHandle": "bottom",
             "targetHandle": "top"
@@ -1576,7 +1589,7 @@
               },
               {
                 "id": "0k_emnH7",
-                "name": "center",
+                "name": "centre",
                 "type": "INT"
               },
               {
@@ -1593,7 +1606,7 @@
               },
               {
                 "id": "0JxXujr4",
-                "name": "center",
+                "name": "centre",
                 "type": "INT"
               },
               {
@@ -1733,6 +1746,1410 @@
   },
   "instanceModels": [
     {
+      "id": "RF1uG96d",
+      "kind": "instancemodel",
+      "name": "ObstacleStop",
+      "objects": [
+        {
+          "id": "RyWnikn0",
+          "classId": "0LlJI8it",
+          "name": "ObstacleStopBot",
+          "attributeValues": {
+            "WwROTlkH": "ObstacleStopBot"
+          }
+        },
+        {
+          "id": "ALtz8U5t",
+          "classId": "vzqeiqv6",
+          "name": "MotorDriver",
+          "attributeValues": {
+            "aB84yL6L": "0",
+            "DZXl4pGe": "3"
+          }
+        },
+        {
+          "id": "IIx2XbX0",
+          "classId": "eXLNsRSB",
+          "name": "LeftMotor",
+          "attributeValues": {
+            "lJHXkt0J": "left",
+            "8VvyV63w": "6",
+            "s8-8KA_W": "8"
+          }
+        },
+        {
+          "id": "CAJ9LM90",
+          "classId": "eXLNsRSB",
+          "name": "RightMotor",
+          "attributeValues": {
+            "lJHXkt0J": "right",
+            "8VvyV63w": "5",
+            "s8-8KA_W": "7"
+          }
+        },
+        {
+          "id": "3S6m9f_W",
+          "classId": "l3bRYsba",
+          "name": "DistanceSensor",
+          "attributeValues": {
+            "lkHgd-yD": "13",
+            "-xZ_Dvyr": "12",
+            "sKmUUnhI": "0",
+            "duS6ikJR": "front"
+          }
+        },
+        {
+          "id": "VJsC30zl",
+          "classId": "PvHhsMsP",
+          "name": "StopDistanceThreshold",
+          "attributeValues": {
+            "ynPXy56N": "Stop",
+            "4MUH7vcn": "20"
+          }
+        },
+        {
+          "id": "rTLsDySb",
+          "classId": "vIqfrfWe",
+          "name": "StatusLED",
+          "attributeValues": {
+            "AtwOfiQP": "4",
+            "jWLSxpSe": "0",
+            "MH_Pvhse": "red",
+            "aL8qstoB": "0"
+          }
+        },
+        {
+          "id": "E9ibNqlY",
+          "classId": "wUY_k4Im",
+          "name": "Controller",
+          "attributeValues": {
+            "HtT5yGIp": "0",
+            "D3DypPCD": "0",
+            "jhde9deH": "0",
+            "LOzAxzXM": "20"
+          }
+        }
+      ],
+      "links": [
+        {
+          "id": "gOa0Y5hU",
+          "relationId": "nEO9jK3F",
+          "source": "ALtz8U5t",
+          "target": "IIx2XbX0",
+          "sourceHandle": "bottom",
+          "targetHandle": "top"
+        },
+        {
+          "id": "LzV0sLgy",
+          "relationId": "nEO9jK3F",
+          "source": "ALtz8U5t",
+          "target": "CAJ9LM90",
+          "sourceHandle": "bottom",
+          "targetHandle": "top"
+        },
+        {
+          "id": "mWs8Vu4G",
+          "relationId": "l5liAAcd",
+          "source": "RyWnikn0",
+          "target": "3S6m9f_W",
+          "sourceHandle": "top",
+          "targetHandle": "left"
+        },
+        {
+          "id": "tzTT2LgM",
+          "relationId": "peCyWRmY",
+          "source": "3S6m9f_W",
+          "target": "VJsC30zl",
+          "sourceHandle": "right",
+          "targetHandle": "left"
+        },
+        {
+          "id": "aE_5F0KZ",
+          "relationId": "r63gtSgU",
+          "source": "RyWnikn0",
+          "target": "E9ibNqlY",
+          "sourceHandle": "left",
+          "targetHandle": "left"
+        },
+        {
+          "id": "kfBpKKdd",
+          "relationId": "Bv_mqiYt",
+          "source": "E9ibNqlY",
+          "target": "ALtz8U5t",
+          "sourceHandle": "bottom",
+          "targetHandle": "top"
+        },
+        {
+          "id": "7GtG8xP7",
+          "relationId": "l5liAAcd",
+          "source": "RyWnikn0",
+          "target": "ALtz8U5t",
+          "sourceHandle": "bottom",
+          "targetHandle": "top"
+        },
+        {
+          "id": "ZT8Av8UR",
+          "relationId": "l5liAAcd",
+          "source": "RyWnikn0",
+          "target": "rTLsDySb",
+          "sourceHandle": "right",
+          "targetHandle": "left"
+        },
+        {
+          "id": "jmvJN5hD",
+          "relationId": "P7NoK1Uk",
+          "source": "E9ibNqlY",
+          "target": "3S6m9f_W",
+          "sourceHandle": "bottom",
+          "targetHandle": "top"
+        },
+        {
+          "id": "UuPOiO0d",
+          "relationId": "Bv_mqiYt",
+          "source": "E9ibNqlY",
+          "target": "rTLsDySb",
+          "sourceHandle": "bottom",
+          "targetHandle": "bottom"
+        }
+      ],
+      "connectors": [
+        {
+          "id": "wS3mvjXV",
+          "sourceObjectId": "E9ibNqlY",
+          "sourcePortId": "575yx8xm",
+          "targetObjectId": "3S6m9f_W",
+          "targetPortId": "VQMq_OWD"
+        },
+        {
+          "id": "iUBcg2TZ",
+          "sourceObjectId": "E9ibNqlY",
+          "sourcePortId": "P4zDL-ak",
+          "targetObjectId": "ALtz8U5t",
+          "targetPortId": "UvxxDRx7"
+        },
+        {
+          "id": "Z62zD3i0",
+          "sourceObjectId": "E9ibNqlY",
+          "sourcePortId": "6J0kGODK",
+          "targetObjectId": "rTLsDySb",
+          "targetPortId": "36iDrs9a"
+        }
+      ]
+    },
+    {
+      "id": "O2ktarLR",
+      "kind": "instancemodel",
+      "name": "LineFollower",
+      "objects": [
+        {
+          "id": "3Wak13td",
+          "classId": "0LlJI8it",
+          "name": "LineTrackerBot",
+          "attributeValues": {
+            "WwROTlkH": "LineTrackerBot"
+          }
+        },
+        {
+          "id": "4lIo4OUk",
+          "classId": "vzqeiqv6",
+          "name": "MotorDriver",
+          "attributeValues": {
+            "aB84yL6L": "0",
+            "DZXl4pGe": "3"
+          }
+        },
+        {
+          "id": "Z6BIX-0v",
+          "classId": "pQYWvsRw",
+          "name": "Controller",
+          "attributeValues": {
+            "HtT5yGIp": "0",
+            "D3DypPCD": "0",
+            "jhde9deH": "0",
+            "cU1vsHiQ": "750"
+          }
+        },
+        {
+          "id": "v_3uNz4P",
+          "classId": "eXLNsRSB",
+          "name": "LeftMotor",
+          "attributeValues": {
+            "lJHXkt0J": "left",
+            "8VvyV63w": "6",
+            "s8-8KA_W": "8"
+          }
+        },
+        {
+          "id": "XiKAqxNp",
+          "classId": "eXLNsRSB",
+          "name": "RightMotor",
+          "attributeValues": {
+            "lJHXkt0J": "right",
+            "8VvyV63w": "5",
+            "s8-8KA_W": "7"
+          }
+        },
+        {
+          "id": "xkUXkMUE",
+          "classId": "8_e5hmF7",
+          "name": "LineTracker",
+          "attributeValues": {
+            "uFmnPeYv": "0",
+            "pOnC1_4E": "20"
+          }
+        },
+        {
+          "id": "12pn4G1j",
+          "classId": "Reshl29f",
+          "name": "LeftLineChannel",
+          "attributeValues": {
+            "nEKXh8O2": "left",
+            "h-nag11G": "16"
+          }
+        },
+        {
+          "id": "U89i-5Hc",
+          "classId": "Reshl29f",
+          "name": "CenterLineChannel",
+          "attributeValues": {
+            "nEKXh8O2": "center",
+            "h-nag11G": "15"
+          }
+        },
+        {
+          "id": "aRC9AeXf",
+          "classId": "Reshl29f",
+          "name": "RightLineChannel",
+          "attributeValues": {
+            "nEKXh8O2": "right",
+            "h-nag11G": "14"
+          }
+        }
+      ],
+      "links": [
+        {
+          "id": "yzKL2hyG",
+          "relationId": "r63gtSgU",
+          "source": "3Wak13td",
+          "target": "Z6BIX-0v",
+          "sourceHandle": "right",
+          "targetHandle": "top"
+        },
+        {
+          "id": "ED6iR10k",
+          "relationId": "Bv_mqiYt",
+          "source": "Z6BIX-0v",
+          "target": "4lIo4OUk",
+          "sourceHandle": "bottom",
+          "targetHandle": "top"
+        },
+        {
+          "id": "DOSQNkjN",
+          "relationId": "l5liAAcd",
+          "source": "3Wak13td",
+          "target": "4lIo4OUk",
+          "sourceHandle": "bottom",
+          "targetHandle": "top"
+        },
+        {
+          "id": "jxnWLRoL",
+          "relationId": "nEO9jK3F",
+          "source": "4lIo4OUk",
+          "target": "v_3uNz4P",
+          "sourceHandle": "bottom",
+          "targetHandle": "top"
+        },
+        {
+          "id": "ViJ79p34",
+          "relationId": "nEO9jK3F",
+          "source": "4lIo4OUk",
+          "target": "XiKAqxNp",
+          "sourceHandle": "bottom",
+          "targetHandle": "top"
+        },
+        {
+          "id": "Yr7aGU4z",
+          "relationId": "92bPY3k9",
+          "source": "xkUXkMUE",
+          "target": "12pn4G1j",
+          "sourceHandle": "bottom",
+          "targetHandle": "top"
+        },
+        {
+          "id": "lDp28CTo",
+          "relationId": "92bPY3k9",
+          "source": "xkUXkMUE",
+          "target": "U89i-5Hc",
+          "sourceHandle": "bottom",
+          "targetHandle": "top"
+        },
+        {
+          "id": "borGOpOV",
+          "relationId": "92bPY3k9",
+          "source": "xkUXkMUE",
+          "target": "aRC9AeXf",
+          "sourceHandle": "bottom",
+          "targetHandle": "top"
+        },
+        {
+          "id": "dynwRmiq",
+          "relationId": "l5liAAcd",
+          "source": "3Wak13td",
+          "target": "xkUXkMUE",
+          "sourceHandle": "top",
+          "targetHandle": "top"
+        },
+        {
+          "id": "MK5-FnlT",
+          "relationId": "P7NoK1Uk",
+          "source": "Z6BIX-0v",
+          "target": "xkUXkMUE",
+          "sourceHandle": "bottom",
+          "targetHandle": "left"
+        }
+      ],
+      "connectors": [
+        {
+          "id": "ytkU9q_t",
+          "sourceObjectId": "Z6BIX-0v",
+          "sourcePortId": "b0prFmbh",
+          "targetObjectId": "xkUXkMUE",
+          "targetPortId": "XOe1SZTN"
+        },
+        {
+          "id": "A2Axl7sW",
+          "sourceObjectId": "Z6BIX-0v",
+          "sourcePortId": "XoY1BaIM",
+          "targetObjectId": "4lIo4OUk",
+          "targetPortId": "UvxxDRx7"
+        }
+      ]
+    },
+    {
+      "id": "6-9TDAay",
+      "kind": "instancemodel",
+      "name": "AllFeatures",
+      "objects": [
+        {
+          "id": "WdgG28hB",
+          "classId": "0LlJI8it",
+          "name": "AllFeaturesBot",
+          "attributeValues": {
+            "WwROTlkH": "AllFeaturesBot"
+          }
+        },
+        {
+          "id": "OYd28NVj",
+          "classId": "t-W-XEe9",
+          "name": "Controller",
+          "attributeValues": {
+            "HtT5yGIp": "0",
+            "D3DypPCD": "0",
+            "jhde9deH": "0"
+          }
+        },
+        {
+          "id": "Re_Bx-aU",
+          "classId": "vzqeiqv6",
+          "name": "MotorDriver",
+          "attributeValues": {
+            "aB84yL6L": "0",
+            "DZXl4pGe": "3"
+          }
+        },
+        {
+          "id": "4OgfwoR3",
+          "classId": "eXLNsRSB",
+          "name": "LeftMotor",
+          "attributeValues": {
+            "lJHXkt0J": "left",
+            "8VvyV63w": "6",
+            "s8-8KA_W": "8"
+          }
+        },
+        {
+          "id": "BFCJDJNY",
+          "classId": "eXLNsRSB",
+          "name": "RightMotor",
+          "attributeValues": {
+            "lJHXkt0J": "right",
+            "8VvyV63w": "5",
+            "s8-8KA_W": "7"
+          }
+        },
+        {
+          "id": "UqqnhLkL",
+          "classId": "l3bRYsba",
+          "name": "DistanceSensor",
+          "attributeValues": {
+            "lkHgd-yD": "13",
+            "-xZ_Dvyr": "12",
+            "sKmUUnhI": "0",
+            "duS6ikJR": "front"
+          }
+        },
+        {
+          "id": "gIpTciR6",
+          "classId": "PvHhsMsP",
+          "name": "StopDistanceThreshold",
+          "attributeValues": {
+            "ynPXy56N": "Stop",
+            "4MUH7vcn": "0"
+          }
+        },
+        {
+          "id": "n2u5l3_K",
+          "classId": "PvHhsMsP",
+          "name": "WarningDistanceThreshold",
+          "attributeValues": {
+            "ynPXy56N": "Warning",
+            "4MUH7vcn": "0"
+          }
+        },
+        {
+          "id": "O4NvKVqc",
+          "classId": "8_e5hmF7",
+          "name": "LineTracker",
+          "attributeValues": {
+            "uFmnPeYv": "0",
+            "pOnC1_4E": "20"
+          }
+        },
+        {
+          "id": "mY6uv5I7",
+          "classId": "Reshl29f",
+          "name": "LineChannel",
+          "attributeValues": {
+            "nEKXh8O2": "center",
+            "h-nag11G": "15"
+          }
+        },
+        {
+          "id": "dylhwoaF",
+          "classId": "vIqfrfWe",
+          "name": "StatusLED",
+          "attributeValues": {
+            "AtwOfiQP": "4",
+            "jWLSxpSe": "0",
+            "MH_Pvhse": "green",
+            "aL8qstoB": "0"
+          }
+        }
+      ],
+      "links": [
+        {
+          "id": "DXSnyib3",
+          "relationId": "r63gtSgU",
+          "source": "WdgG28hB",
+          "target": "OYd28NVj",
+          "sourceHandle": "left",
+          "targetHandle": "left"
+        },
+        {
+          "id": "3mVFuLbg",
+          "relationId": "Bv_mqiYt",
+          "source": "OYd28NVj",
+          "target": "Re_Bx-aU",
+          "sourceHandle": "bottom",
+          "targetHandle": "top"
+        },
+        {
+          "id": "Bro7uHdB",
+          "relationId": "nEO9jK3F",
+          "source": "Re_Bx-aU",
+          "target": "4OgfwoR3",
+          "sourceHandle": "bottom",
+          "targetHandle": "top"
+        },
+        {
+          "id": "620Kx9Yx",
+          "relationId": "nEO9jK3F",
+          "source": "Re_Bx-aU",
+          "target": "BFCJDJNY",
+          "sourceHandle": "bottom",
+          "targetHandle": "top"
+        },
+        {
+          "id": "lZ8yVJpx",
+          "relationId": "l5liAAcd",
+          "source": "WdgG28hB",
+          "target": "Re_Bx-aU",
+          "sourceHandle": "right",
+          "targetHandle": "right"
+        },
+        {
+          "id": "R6jDsvo8",
+          "relationId": "l5liAAcd",
+          "source": "WdgG28hB",
+          "target": "UqqnhLkL",
+          "sourceHandle": "right",
+          "targetHandle": "left"
+        },
+        {
+          "id": "29hLThPq",
+          "relationId": "peCyWRmY",
+          "source": "UqqnhLkL",
+          "target": "gIpTciR6",
+          "sourceHandle": "right",
+          "targetHandle": "left"
+        },
+        {
+          "id": "_tKOZAre",
+          "relationId": "peCyWRmY",
+          "source": "UqqnhLkL",
+          "target": "n2u5l3_K",
+          "sourceHandle": "right",
+          "targetHandle": "left"
+        },
+        {
+          "id": "dHXF2j8O",
+          "relationId": "l5liAAcd",
+          "source": "WdgG28hB",
+          "target": "O4NvKVqc",
+          "sourceHandle": "top",
+          "targetHandle": "bottom"
+        },
+        {
+          "id": "CNXG3lon",
+          "relationId": "92bPY3k9",
+          "source": "O4NvKVqc",
+          "target": "mY6uv5I7",
+          "sourceHandle": "top",
+          "targetHandle": "bottom"
+        },
+        {
+          "id": "uWjfOIko",
+          "relationId": "l5liAAcd",
+          "source": "WdgG28hB",
+          "target": "dylhwoaF",
+          "sourceHandle": "left",
+          "targetHandle": "right"
+        }
+      ],
+      "connectors": []
+    },
+    {
+      "id": "6_cdk1hF",
+      "kind": "instancemodel",
+      "name": "TwoThresholds",
+      "objects": [
+        {
+          "id": "H1i6UBrq",
+          "classId": "0LlJI8it",
+          "name": "TwoThresholdsBot",
+          "attributeValues": {
+            "WwROTlkH": "TwoThresholdsBot"
+          }
+        },
+        {
+          "id": "4F0bYZDb",
+          "classId": "t-W-XEe9",
+          "name": "Controller",
+          "attributeValues": {
+            "HtT5yGIp": "0",
+            "D3DypPCD": "0",
+            "jhde9deH": "0"
+          }
+        },
+        {
+          "id": "BLOJBcze",
+          "classId": "vzqeiqv6",
+          "name": "MotorDriver",
+          "attributeValues": {
+            "aB84yL6L": "0",
+            "DZXl4pGe": "3"
+          }
+        },
+        {
+          "id": "c_QjXqC0",
+          "classId": "eXLNsRSB",
+          "name": "LeftMotor",
+          "attributeValues": {
+            "lJHXkt0J": "left",
+            "8VvyV63w": "6",
+            "s8-8KA_W": "8"
+          }
+        },
+        {
+          "id": "w7amvv5E",
+          "classId": "eXLNsRSB",
+          "name": "RightMotor",
+          "attributeValues": {
+            "lJHXkt0J": "right",
+            "8VvyV63w": "5",
+            "s8-8KA_W": "7"
+          }
+        },
+        {
+          "id": "INTPzxqd",
+          "classId": "l3bRYsba",
+          "name": "DistanceSensor1",
+          "attributeValues": {
+            "lkHgd-yD": "13",
+            "-xZ_Dvyr": "12",
+            "sKmUUnhI": "0",
+            "duS6ikJR": "front"
+          }
+        },
+        {
+          "id": "rfzunYP3",
+          "classId": "PvHhsMsP",
+          "name": "WarningDistanceThreshold",
+          "attributeValues": {
+            "ynPXy56N": "Warning",
+            "4MUH7vcn": "40"
+          }
+        },
+        {
+          "id": "_S_28wa8",
+          "classId": "PvHhsMsP",
+          "name": "DangerDistanceThreshold",
+          "attributeValues": {
+            "ynPXy56N": "Danger",
+            "4MUH7vcn": "15"
+          }
+        },
+        {
+          "id": "Wzw6d_ma",
+          "classId": "vIqfrfWe",
+          "name": "StatusLED1",
+          "attributeValues": {
+            "AtwOfiQP": "4",
+            "jWLSxpSe": "0",
+            "MH_Pvhse": "red",
+            "aL8qstoB": "0"
+          }
+        }
+      ],
+      "links": [
+        {
+          "id": "wLke8pbn",
+          "relationId": "r63gtSgU",
+          "source": "H1i6UBrq",
+          "target": "4F0bYZDb",
+          "sourceHandle": "bottom",
+          "targetHandle": "top"
+        },
+        {
+          "id": "63HHBZ7W",
+          "relationId": "Bv_mqiYt",
+          "source": "4F0bYZDb",
+          "target": "BLOJBcze",
+          "sourceHandle": "right",
+          "targetHandle": "left"
+        },
+        {
+          "id": "0cDT3PHQ",
+          "relationId": "nEO9jK3F",
+          "source": "BLOJBcze",
+          "target": "c_QjXqC0",
+          "sourceHandle": "bottom",
+          "targetHandle": "top"
+        },
+        {
+          "id": "bLqnPcaK",
+          "relationId": "nEO9jK3F",
+          "source": "BLOJBcze",
+          "target": "w7amvv5E",
+          "sourceHandle": "bottom",
+          "targetHandle": "top"
+        },
+        {
+          "id": "BOooMG-d",
+          "relationId": "l5liAAcd",
+          "source": "H1i6UBrq",
+          "target": "BLOJBcze",
+          "sourceHandle": "right",
+          "targetHandle": "top"
+        },
+        {
+          "id": "2pA-_Ans",
+          "relationId": "l5liAAcd",
+          "source": "H1i6UBrq",
+          "target": "INTPzxqd",
+          "sourceHandle": "top",
+          "targetHandle": "bottom"
+        },
+        {
+          "id": "J84fiUen",
+          "relationId": "peCyWRmY",
+          "source": "INTPzxqd",
+          "target": "rfzunYP3",
+          "sourceHandle": "right",
+          "targetHandle": "left"
+        },
+        {
+          "id": "Tmf47uOf",
+          "relationId": "peCyWRmY",
+          "source": "INTPzxqd",
+          "target": "_S_28wa8",
+          "sourceHandle": "right",
+          "targetHandle": "left"
+        },
+        {
+          "id": "wwVmrCyt",
+          "relationId": "l5liAAcd",
+          "source": "H1i6UBrq",
+          "target": "Wzw6d_ma",
+          "sourceHandle": "left",
+          "targetHandle": "right"
+        }
+      ],
+      "connectors": []
+    },
+    {
+      "id": "m3jVXgEC",
+      "kind": "instancemodel",
+      "name": "TwoDistanceSensors",
+      "objects": [
+        {
+          "id": "LY0bjWZD",
+          "classId": "0LlJI8it",
+          "name": "TwoDistanceSensorsBot",
+          "attributeValues": {
+            "WwROTlkH": "TwoDistanceSensorsBot"
+          }
+        },
+        {
+          "id": "cC98Pkbe",
+          "classId": "t-W-XEe9",
+          "name": "Controller",
+          "attributeValues": {
+            "HtT5yGIp": "0",
+            "D3DypPCD": "0",
+            "jhde9deH": "0"
+          }
+        },
+        {
+          "id": "03AzJz72",
+          "classId": "vzqeiqv6",
+          "name": "MotorDriver1",
+          "attributeValues": {
+            "aB84yL6L": "0",
+            "DZXl4pGe": "3"
+          }
+        },
+        {
+          "id": "yzZ7zBJs",
+          "classId": "eXLNsRSB",
+          "name": "LeftMotor",
+          "attributeValues": {
+            "lJHXkt0J": "left",
+            "8VvyV63w": "6",
+            "s8-8KA_W": "8"
+          }
+        },
+        {
+          "id": "a5Ciau8_",
+          "classId": "eXLNsRSB",
+          "name": "RightMotor",
+          "attributeValues": {
+            "lJHXkt0J": "right",
+            "8VvyV63w": "5",
+            "s8-8KA_W": "7"
+          }
+        },
+        {
+          "id": "7bU1wYY4",
+          "classId": "l3bRYsba",
+          "name": "FrontDistanceSensor",
+          "attributeValues": {
+            "lkHgd-yD": "13",
+            "-xZ_Dvyr": "12",
+            "sKmUUnhI": "0",
+            "duS6ikJR": "front"
+          }
+        },
+        {
+          "id": "TW3ygKvh",
+          "classId": "l3bRYsba",
+          "name": "RearDistanceSensor",
+          "attributeValues": {
+            "lkHgd-yD": "2",
+            "-xZ_Dvyr": "11",
+            "sKmUUnhI": "0",
+            "duS6ikJR": "rear"
+          }
+        },
+        {
+          "id": "nFdJa4A5",
+          "classId": "PvHhsMsP",
+          "name": "FrontDistanceThreshold",
+          "attributeValues": {
+            "ynPXy56N": "Front",
+            "4MUH7vcn": "0"
+          }
+        },
+        {
+          "id": "IPtLECCO",
+          "classId": "PvHhsMsP",
+          "name": "RearDistanceThreshold",
+          "attributeValues": {
+            "ynPXy56N": "Rear",
+            "4MUH7vcn": "0"
+          }
+        }
+      ],
+      "links": [
+        {
+          "id": "QChLHlBf",
+          "relationId": "r63gtSgU",
+          "source": "LY0bjWZD",
+          "target": "cC98Pkbe",
+          "sourceHandle": "right",
+          "targetHandle": "left"
+        },
+        {
+          "id": "K33odlil",
+          "relationId": "l5liAAcd",
+          "source": "LY0bjWZD",
+          "target": "03AzJz72",
+          "sourceHandle": "bottom",
+          "targetHandle": "left"
+        },
+        {
+          "id": "D114do_N",
+          "relationId": "Bv_mqiYt",
+          "source": "cC98Pkbe",
+          "target": "03AzJz72",
+          "sourceHandle": "bottom",
+          "targetHandle": "top"
+        },
+        {
+          "id": "OZ7Khpty",
+          "relationId": "nEO9jK3F",
+          "source": "03AzJz72",
+          "target": "yzZ7zBJs",
+          "sourceHandle": "bottom",
+          "targetHandle": "top"
+        },
+        {
+          "id": "_YRx8Mxb",
+          "relationId": "nEO9jK3F",
+          "source": "03AzJz72",
+          "target": "a5Ciau8_",
+          "sourceHandle": "bottom",
+          "targetHandle": "top"
+        },
+        {
+          "id": "4-D0k_Zw",
+          "relationId": "P7NoK1Uk",
+          "source": "cC98Pkbe",
+          "target": "7bU1wYY4",
+          "sourceHandle": "right",
+          "targetHandle": "left"
+        },
+        {
+          "id": "7P_v2Fln",
+          "relationId": "P7NoK1Uk",
+          "source": "cC98Pkbe",
+          "target": "TW3ygKvh",
+          "sourceHandle": "right",
+          "targetHandle": "left"
+        },
+        {
+          "id": "Mokgwexx",
+          "relationId": "peCyWRmY",
+          "source": "7bU1wYY4",
+          "target": "nFdJa4A5",
+          "sourceHandle": "right",
+          "targetHandle": "left"
+        },
+        {
+          "id": "--M76XqF",
+          "relationId": "peCyWRmY",
+          "source": "TW3ygKvh",
+          "target": "IPtLECCO",
+          "sourceHandle": "right",
+          "targetHandle": "left"
+        },
+        {
+          "id": "XsV6WHlJ",
+          "relationId": "l5liAAcd",
+          "source": "LY0bjWZD",
+          "target": "7bU1wYY4",
+          "sourceHandle": "top",
+          "targetHandle": "top"
+        },
+        {
+          "id": "EnSmQKnm",
+          "relationId": "l5liAAcd",
+          "source": "LY0bjWZD",
+          "target": "TW3ygKvh",
+          "sourceHandle": "top",
+          "targetHandle": "top"
+        }
+      ],
+      "connectors": []
+    },
+    {
+      "id": "U-2CcqQl",
+      "kind": "instancemodel",
+      "name": "NoSensors",
+      "objects": [
+        {
+          "id": "nduGQkMZ",
+          "classId": "0LlJI8it",
+          "name": "NoSensorsBot",
+          "attributeValues": {
+            "WwROTlkH": "NoSensorsBot"
+          }
+        },
+        {
+          "id": "bC4RdHIM",
+          "classId": "vzqeiqv6",
+          "name": "MotorDriver",
+          "attributeValues": {
+            "aB84yL6L": "0",
+            "DZXl4pGe": "3"
+          }
+        },
+        {
+          "id": "3fAMwwGS",
+          "classId": "eXLNsRSB",
+          "name": "LeftMotor",
+          "attributeValues": {
+            "lJHXkt0J": "left",
+            "8VvyV63w": "6",
+            "s8-8KA_W": "8"
+          }
+        },
+        {
+          "id": "bc44ZtzS",
+          "classId": "eXLNsRSB",
+          "name": "RightMotor",
+          "attributeValues": {
+            "lJHXkt0J": "right",
+            "8VvyV63w": "5",
+            "s8-8KA_W": "7"
+          }
+        },
+        {
+          "id": "cUoGIuSI",
+          "classId": "t-W-XEe9",
+          "name": "Controller",
+          "attributeValues": {
+            "HtT5yGIp": "0",
+            "D3DypPCD": "0",
+            "jhde9deH": "0"
+          }
+        },
+        {
+          "id": "GvOAzhC5",
+          "classId": "vIqfrfWe",
+          "name": "StatusLED",
+          "attributeValues": {
+            "AtwOfiQP": "4",
+            "jWLSxpSe": "0",
+            "MH_Pvhse": "green",
+            "aL8qstoB": "0"
+          }
+        }
+      ],
+      "links": [
+        {
+          "id": "RbkepOGS",
+          "relationId": "nEO9jK3F",
+          "source": "bC4RdHIM",
+          "target": "3fAMwwGS",
+          "sourceHandle": "bottom",
+          "targetHandle": "top"
+        },
+        {
+          "id": "L4g4vuxy",
+          "relationId": "nEO9jK3F",
+          "source": "bC4RdHIM",
+          "target": "bc44ZtzS",
+          "sourceHandle": "bottom",
+          "targetHandle": "top"
+        },
+        {
+          "id": "1fe8cEBq",
+          "relationId": "r63gtSgU",
+          "source": "nduGQkMZ",
+          "target": "cUoGIuSI",
+          "sourceHandle": "right",
+          "targetHandle": "left"
+        },
+        {
+          "id": "GuI67oVJ",
+          "relationId": "Bv_mqiYt",
+          "source": "cUoGIuSI",
+          "target": "bC4RdHIM",
+          "sourceHandle": "bottom",
+          "targetHandle": "right"
+        },
+        {
+          "id": "KmbyXHBC",
+          "relationId": "l5liAAcd",
+          "source": "nduGQkMZ",
+          "target": "bC4RdHIM",
+          "sourceHandle": "bottom",
+          "targetHandle": "top"
+        },
+        {
+          "id": "ra73mMRa",
+          "relationId": "l5liAAcd",
+          "source": "nduGQkMZ",
+          "target": "GvOAzhC5",
+          "sourceHandle": "top",
+          "targetHandle": "bottom"
+        }
+      ],
+      "connectors": []
+    },
+    {
+      "id": "zfKTohLt",
+      "kind": "instancemodel",
+      "name": "InvalidModel",
+      "objects": [
+        {
+          "id": "e5tg1IvZ",
+          "classId": "0LlJI8it",
+          "name": "InvalidModelBot",
+          "attributeValues": {
+            "WwROTlkH": ""
+          }
+        },
+        {
+          "id": "rC3whpUp",
+          "classId": "t-W-XEe9",
+          "name": "Controller",
+          "attributeValues": {
+            "HtT5yGIp": "yes",
+            "D3DypPCD": "no",
+            "jhde9deH": "maybe"
+          }
+        },
+        {
+          "id": "QOn9Zchf",
+          "classId": "vzqeiqv6",
+          "name": "MotorDriver",
+          "attributeValues": {
+            "aB84yL6L": "0"
+          }
+        }
+      ],
+      "links": [
+        {
+          "id": "XYfxaYOM",
+          "relationId": "r63gtSgU",
+          "source": "e5tg1IvZ",
+          "target": "rC3whpUp",
+          "sourceHandle": "bottom",
+          "targetHandle": "top"
+        },
+        {
+          "id": "-g4CSVMg",
+          "relationId": "l5liAAcd",
+          "source": "e5tg1IvZ",
+          "target": "QOn9Zchf",
+          "sourceHandle": "right",
+          "targetHandle": "right"
+        },
+        {
+          "id": "WmkV-axc",
+          "relationId": "Bv_mqiYt",
+          "source": "rC3whpUp",
+          "target": "QOn9Zchf",
+          "sourceHandle": "bottom",
+          "targetHandle": "top"
+        }
+      ],
+      "connectors": []
+    },
+    {
+      "id": "ccDKTzoT",
+      "kind": "instancemodel",
+      "name": "ScenarioD_Patrol",
+      "objects": [
+        {
+          "id": "9zuGSCzK",
+          "classId": "vzqeiqv6",
+          "name": "MotorDriver1",
+          "attributeValues": {
+            "aB84yL6L": "120",
+            "DZXl4pGe": "3"
+          }
+        },
+        {
+          "id": "AyNW7Xji",
+          "classId": "l3bRYsba",
+          "name": "DistanceSensor1",
+          "attributeValues": {
+            "lkHgd-yD": "13",
+            "-xZ_Dvyr": "12",
+            "sKmUUnhI": "40",
+            "duS6ikJR": "front"
+          }
+        },
+        {
+          "id": "9dEYaHw0",
+          "classId": "8_e5hmF7",
+          "name": "LineTracker1",
+          "attributeValues": {
+            "uFmnPeYv": "750",
+            "pOnC1_4E": "20"
+          }
+        },
+        {
+          "id": "EmS739pj",
+          "classId": "vIqfrfWe",
+          "name": "StatusLED1",
+          "attributeValues": {
+            "AtwOfiQP": "4",
+            "jWLSxpSe": "2",
+            "MH_Pvhse": "blue",
+            "aL8qstoB": "250"
+          }
+        },
+        {
+          "id": "APN6uEsY",
+          "classId": "7OA28lQi",
+          "name": "Controller1",
+          "attributeValues": {
+            "HtT5yGIp": "120",
+            "D3DypPCD": "90",
+            "jhde9deH": "45",
+            "MaRiNTN9": "12",
+            "Ox98whGc": "30",
+            "TZc1UWb5": "750"
+          }
+        },
+        {
+          "id": "l401kmCg",
+          "classId": "PvHhsMsP",
+          "name": "WarningDistanceThreshold",
+          "attributeValues": {
+            "ynPXy56N": "Warning",
+            "4MUH7vcn": "30"
+          }
+        },
+        {
+          "id": "p6r2UGbH",
+          "classId": "PvHhsMsP",
+          "name": "StopDistanceThreshold",
+          "attributeValues": {
+            "ynPXy56N": "Stop",
+            "4MUH7vcn": "12"
+          }
+        },
+        {
+          "id": "uKEUkaNp",
+          "classId": "0LlJI8it",
+          "name": "PatrolBot",
+          "attributeValues": {
+            "WwROTlkH": "PatrolBot"
+          }
+        },
+        {
+          "id": "zwWadw5x",
+          "classId": "eXLNsRSB",
+          "name": "Motor1",
+          "attributeValues": {
+            "lJHXkt0J": "left",
+            "8VvyV63w": "6",
+            "s8-8KA_W": "8"
+          }
+        },
+        {
+          "id": "43TldRaM",
+          "classId": "eXLNsRSB",
+          "name": "Motor2",
+          "attributeValues": {
+            "lJHXkt0J": "right",
+            "8VvyV63w": "5",
+            "s8-8KA_W": "7"
+          }
+        },
+        {
+          "id": "IvSjrdmK",
+          "classId": "Reshl29f",
+          "name": "LineChannel",
+          "attributeValues": {
+            "nEKXh8O2": "center",
+            "h-nag11G": "15"
+          }
+        },
+        {
+          "id": "kjZmhyu2",
+          "classId": "1T2-3xhH",
+          "name": "StartButton",
+          "attributeValues": {
+            "Jp9x7Mj_": "2",
+            "Zz5ocG0d": "20"
+          }
+        }
+      ],
+      "links": [
+        {
+          "id": "lZepyJUq",
+          "relationId": "r63gtSgU",
+          "source": "uKEUkaNp",
+          "target": "APN6uEsY",
+          "sourceHandle": "left",
+          "targetHandle": "right"
+        },
+        {
+          "id": "LMhfhBz3",
+          "relationId": "l5liAAcd",
+          "source": "uKEUkaNp",
+          "target": "EmS739pj",
+          "sourceHandle": "left",
+          "targetHandle": "right"
+        },
+        {
+          "id": "43TovbHz",
+          "relationId": "l5liAAcd",
+          "source": "uKEUkaNp",
+          "target": "AyNW7Xji",
+          "sourceHandle": "top",
+          "targetHandle": "bottom"
+        },
+        {
+          "id": "VHkV1igB",
+          "relationId": "l5liAAcd",
+          "source": "uKEUkaNp",
+          "target": "9dEYaHw0",
+          "sourceHandle": "right",
+          "targetHandle": "left"
+        },
+        {
+          "id": "urAfMFTn",
+          "relationId": "l5liAAcd",
+          "source": "uKEUkaNp",
+          "target": "9zuGSCzK",
+          "sourceHandle": "bottom",
+          "targetHandle": "top"
+        },
+        {
+          "id": "zO8h5MRI",
+          "relationId": "Bv_mqiYt",
+          "source": "APN6uEsY",
+          "target": "9zuGSCzK",
+          "sourceHandle": "bottom",
+          "targetHandle": "left"
+        },
+        {
+          "id": "QFd-6Dv4",
+          "relationId": "nEO9jK3F",
+          "source": "9zuGSCzK",
+          "target": "zwWadw5x",
+          "sourceHandle": "right",
+          "targetHandle": "left"
+        },
+        {
+          "id": "VVSbu-MM",
+          "relationId": "nEO9jK3F",
+          "source": "9zuGSCzK",
+          "target": "43TldRaM",
+          "sourceHandle": "right",
+          "targetHandle": "left"
+        },
+        {
+          "id": "p0vmic5u",
+          "relationId": "peCyWRmY",
+          "source": "AyNW7Xji",
+          "target": "l401kmCg",
+          "sourceHandle": "top",
+          "targetHandle": "bottom"
+        },
+        {
+          "id": "tHEEjvIe",
+          "relationId": "peCyWRmY",
+          "source": "AyNW7Xji",
+          "target": "p6r2UGbH",
+          "sourceHandle": "top",
+          "targetHandle": "bottom"
+        },
+        {
+          "id": "bqYcea36",
+          "relationId": "92bPY3k9",
+          "source": "9dEYaHw0",
+          "target": "IvSjrdmK",
+          "sourceHandle": "top",
+          "targetHandle": "bottom"
+        },
+        {
+          "id": "yiocxZr2",
+          "relationId": "l5liAAcd",
+          "source": "uKEUkaNp",
+          "target": "kjZmhyu2",
+          "sourceHandle": "top",
+          "targetHandle": "bottom"
+        },
+        {
+          "id": "hlKqWrnu",
+          "relationId": "P7NoK1Uk",
+          "source": "APN6uEsY",
+          "target": "AyNW7Xji",
+          "sourceHandle": "bottom",
+          "targetHandle": "top"
+        },
+        {
+          "id": "x1w1yZT3",
+          "relationId": "P7NoK1Uk",
+          "source": "APN6uEsY",
+          "target": "9dEYaHw0",
+          "sourceHandle": "bottom",
+          "targetHandle": "bottom"
+        },
+        {
+          "id": "l9BAgyTf",
+          "relationId": "P7NoK1Uk",
+          "source": "APN6uEsY",
+          "target": "kjZmhyu2",
+          "sourceHandle": "bottom",
+          "targetHandle": "bottom"
+        },
+        {
+          "id": "vEPqwbik",
+          "relationId": "Bv_mqiYt",
+          "source": "APN6uEsY",
+          "target": "EmS739pj",
+          "sourceHandle": "top",
+          "targetHandle": "bottom"
+        }
+      ],
+      "connectors": [
+        {
+          "id": "BxUIv0b7",
+          "sourceObjectId": "APN6uEsY",
+          "sourcePortId": "9rXxtNDF",
+          "targetObjectId": "AyNW7Xji",
+          "targetPortId": "VQMq_OWD"
+        },
+        {
+          "id": "szigaAS0",
+          "sourceObjectId": "APN6uEsY",
+          "sourcePortId": "yuzX9k1g",
+          "targetObjectId": "9dEYaHw0",
+          "targetPortId": "XOe1SZTN"
+        },
+        {
+          "id": "5fxkrFvA",
+          "sourceObjectId": "APN6uEsY",
+          "sourcePortId": "nneGEYG1",
+          "targetObjectId": "kjZmhyu2",
+          "targetPortId": "A9TP0GcA"
+        },
+        {
+          "id": "PUEu2rJZ",
+          "sourceObjectId": "APN6uEsY",
+          "sourcePortId": "_LwiqD9j",
+          "targetObjectId": "9zuGSCzK",
+          "targetPortId": "UvxxDRx7"
+        },
+        {
+          "id": "0Mjbh--b",
+          "sourceObjectId": "APN6uEsY",
+          "sourcePortId": "JBAciI05",
+          "targetObjectId": "EmS739pj",
+          "targetPortId": "36iDrs9a"
+        }
+      ]
+    },
+    {
       "id": "DJRzVT66",
       "kind": "instancemodel",
       "name": "ScenarioE_ObstacleTurn",
@@ -1770,7 +3187,8 @@
           "classId": "vzqeiqv6",
           "name": "MotorDriver1",
           "attributeValues": {
-            "aB84yL6L": "120"
+            "aB84yL6L": "120",
+            "DZXl4pGe": "3"
           }
         },
         {
@@ -1830,7 +3248,7 @@
           "source": "8Nyu0t_a",
           "target": "iVMBtFqn",
           "sourceHandle": "top",
-          "targetHandle": "bottom"
+          "targetHandle": "left"
         },
         {
           "id": "kil-NHCv",
@@ -1845,7 +3263,7 @@
           "relationId": "l5liAAcd",
           "source": "8Nyu0t_a",
           "target": "unksXQHN",
-          "sourceHandle": "bottom",
+          "sourceHandle": "right",
           "targetHandle": "top"
         },
         {
@@ -1854,7 +3272,7 @@
           "source": "8Nyu0t_a",
           "target": "wOsudoaV",
           "sourceHandle": "bottom",
-          "targetHandle": "left"
+          "targetHandle": "bottom"
         },
         {
           "id": "t4q3IQpO",
@@ -1886,7 +3304,7 @@
           "source": "T0ewkMVH",
           "target": "wOsudoaV",
           "sourceHandle": "left",
-          "targetHandle": "bottom"
+          "targetHandle": "left"
         },
         {
           "id": "hZwbIGqQ",
@@ -1974,7 +3392,8 @@
           "classId": "vzqeiqv6",
           "name": "MotorDriver1",
           "attributeValues": {
-            "aB84yL6L": "120"
+            "aB84yL6L": "120",
+            "DZXl4pGe": "3"
           }
         },
         {
@@ -2082,8 +3501,8 @@
           "relationId": "l5liAAcd",
           "source": "rc9UG7zV",
           "target": "q6vxgxt0",
-          "sourceHandle": "right",
-          "targetHandle": "top"
+          "sourceHandle": "top",
+          "targetHandle": "left"
         },
         {
           "id": "T_rnsCT6",
@@ -2106,7 +3525,7 @@
           "relationId": "l5liAAcd",
           "source": "rc9UG7zV",
           "target": "heJMwrIT",
-          "sourceHandle": "bottom",
+          "sourceHandle": "top",
           "targetHandle": "top"
         },
         {
@@ -2115,7 +3534,7 @@
           "source": "JZMBg0iM",
           "target": "q6vxgxt0",
           "sourceHandle": "bottom",
-          "targetHandle": "left"
+          "targetHandle": "bottom"
         },
         {
           "id": "dnYlvGcf",
@@ -2139,7 +3558,7 @@
           "source": "JZMBg0iM",
           "target": "heJMwrIT",
           "sourceHandle": "left",
-          "targetHandle": "right"
+          "targetHandle": "bottom"
         },
         {
           "id": "Fx4yo8W9",
@@ -2283,19 +3702,19 @@
     },
     "im-RF1uG96d": {
       "ALtz8U5t": {
-        "x": 387.42662158695924,
-        "y": 208.53822367223108
+        "x": 408.72026375639837,
+        "y": 199.41237702818577
       },
       "RyWnikn0": {
         "x": -472.0689172973905,
         "y": -43.98333554842628
       },
       "IIx2XbX0": {
-        "x": 158.40170120171433,
-        "y": 457.824952137882
+        "x": 255.7440654048645,
+        "y": 460.8669010192305
       },
       "CAJ9LM90": {
-        "x": 437.32730328318956,
+        "x": 598.550593994657,
         "y": 456.2874672023584
       },
       "3S6m9f_W": {
@@ -2307,8 +3726,8 @@
         "y": -14.706236248217657
       },
       "rTLsDySb": {
-        "x": -52.490576332976715,
-        "y": -164.5150543033577
+        "x": 55.498608954893015,
+        "y": -182.76674759144834
       },
       "E9ibNqlY": {
         "x": -487.52053489793167,
@@ -2317,40 +3736,40 @@
     },
     "im-O2ktarLR": {
       "4lIo4OUk": {
-        "x": 158.5303923999709,
-        "y": 602.8235361768724
+        "x": 145.51858021763542,
+        "y": 625.5942074959594
       },
       "3Wak13td": {
-        "x": 185.3773756137664,
-        "y": 284.03624779361996
+        "x": 150.67920979420512,
+        "y": 273.19307097500706
       },
       "Z6BIX-0v": {
         "x": 331.663075080065,
         "y": 428.0536925103013
       },
       "v_3uNz4P": {
-        "x": 111.42835913330251,
-        "y": 798.1616039275369
+        "x": 109.25972376957992,
+        "y": 791.6556978363692
       },
       "XiKAqxNp": {
         "x": 387.98101856544486,
         "y": 789.3475500999242
       },
       "xkUXkMUE": {
-        "x": 698.3534838172308,
-        "y": 280.5514978765149
+        "x": 742.8105087735436,
+        "y": 245.8533320569536
       },
       "aRC9AeXf": {
-        "x": 1069.5993975900276,
-        "y": 441.306832140109
+        "x": 1297.8479883504576,
+        "y": 472.7520449140864
       },
       "12pn4G1j": {
-        "x": 569.522363429947,
-        "y": 445.52364807913096
+        "x": 779.8799937110372,
+        "y": 476.96886085310837
       },
       "U89i-5Hc": {
-        "x": 812.2269356721208,
-        "y": 442.9391178633087
+        "x": 1029.0904720443787,
+        "y": 474.3843306372861
       }
     },
     "im-6-9TDAay": {
@@ -2363,32 +3782,32 @@
         "y": 362.65588404878054
       },
       "Re_Bx-aU": {
-        "x": 167.76396620731703,
-        "y": 539.2731958067543
+        "x": 174.7766791951662,
+        "y": 553.2986217824526
       },
       "4OgfwoR3": {
-        "x": 17.432513242964404,
-        "y": 664.1432210619137
+        "x": 34.96429571258733,
+        "y": 708.5570699849584
       },
       "BFCJDJNY": {
-        "x": 208.94677111538465,
-        "y": 665.1333786285179
+        "x": 314.13746593312226,
+        "y": 702.5345145637135
       },
       "UqqnhLkL": {
-        "x": 409.3451841010515,
-        "y": 97.87235454189255
+        "x": 447.915105534222,
+        "y": 88.52207055809365
       },
       "gIpTciR6": {
-        "x": 690.9988123456491,
-        "y": 245.3312668359642
+        "x": 796.1895071633866,
+        "y": 211.43648739469316
       },
       "n2u5l3_K": {
-        "x": 688.8771092649982,
-        "y": -22.076317605315424
+        "x": 794.0678040827358,
+        "y": 35.1941717954528
       },
       "O4NvKVqc": {
-        "x": 44.54929436751057,
-        "y": 72.17091141832105
+        "x": 46.8868653634603,
+        "y": 52.30155795274841
       },
       "mY6uv5I7": {
         "x": 38.23118403606745,
@@ -2401,12 +3820,12 @@
     },
     "im-6_cdk1hF": {
       "4F0bYZDb": {
-        "x": 91.3323806074398,
+        "x": 96.3323806074398,
         "y": 205.51998230891743
       },
       "BLOJBcze": {
-        "x": 315.7168053358008,
-        "y": 206.36231859966335
+        "x": 326.2129706693709,
+        "y": 212.4850817109126
       },
       "w7amvv5E": {
         "x": 452.2230895606182,
@@ -2417,25 +3836,25 @@
         "y": 347.99031536820104
       },
       "INTPzxqd": {
-        "x": 33.012729956574134,
-        "y": -127.43270187703297
+        "x": 53.012729956574134,
+        "y": -132.43270187703297
       },
       "rfzunYP3": {
-        "x": 333.3363999704221,
+        "x": 378.3363999704221,
         "y": -203.21152927375607
       },
       "_S_28wa8": {
-        "x": 331.74966678945617,
+        "x": 376.74966678945617,
         "y": -24.82734084224169
       },
       "Wzw6d_ma": {
         "x": -208.7820292691244,
-        "y": 43.80130673317093
+        "y": 47.300028511027634
       }
     },
     "im-m3jVXgEC": {
       "cC98Pkbe": {
-        "x": 622.9874954223633,
+        "x": 612.9874954223633,
         "y": 299
       },
       "03AzJz72": {
@@ -2459,7 +3878,7 @@
         "y": 453.3150490843333
       },
       "nFdJa4A5": {
-        "x": 1260.9096323249996,
+        "x": 1265.9096323249996,
         "y": 74.58803899332824
       },
       "IPtLECCO": {
@@ -2469,24 +3888,24 @@
     },
     "im-U-2CcqQl": {
       "bC4RdHIM": {
-        "x": 195,
+        "x": 135,
         "y": 357.5
       },
       "nduGQkMZ": {
-        "x": 212.00629106622068,
+        "x": 147.00629106622068,
         "y": 215.5
       },
       "cUoGIuSI": {
         "x": 456.98741786755863,
-        "y": 245.97483573511715
+        "y": 192.1720738805842
       },
       "3fAMwwGS": {
         "x": 157.5,
-        "y": 484.5
+        "y": 504.5
       },
       "bc44ZtzS": {
         "x": 335.5,
-        "y": 483.5
+        "y": 503.5
       },
       "GvOAzhC5": {
         "x": 148.30819864048422,
@@ -2509,8 +3928,8 @@
     },
     "im-ccDKTzoT": {
       "AyNW7Xji": {
-        "x": 56.34041959379624,
-        "y": -178.26717848806837
+        "x": 238.9628203340954,
+        "y": -201.09497858060575
       },
       "9dEYaHw0": {
         "x": 419.5437523475306,
@@ -2521,23 +3940,23 @@
         "y": -17.213708718493166
       },
       "APN6uEsY": {
-        "x": -207.9978825620537,
-        "y": 192.1482044468478
+        "x": -315.61465442687285,
+        "y": 197.58339494507098
       },
       "l401kmCg": {
-        "x": -259.43683906804324,
-        "y": -336.4225018619851
+        "x": 82.32831471859623,
+        "y": -457.08373092253987
       },
       "p6r2UGbH": {
-        "x": 240.8785893694632,
-        "y": -334.8019634262298
+        "x": 450.6769426008783,
+        "y": -458.7243067857185
       },
       "uKEUkaNp": {
         "x": 94.5390653719268,
         "y": 92.25849965222503
       },
       "9zuGSCzK": {
-        "x": 393.68849197262966,
+        "x": 291.5069106060338,
         "y": 218.95484922925505
       },
       "43TldRaM": {
@@ -2553,8 +3972,8 @@
         "y": -153.81035717412442
       },
       "kjZmhyu2": {
-        "x": 0,
-        "y": -420
+        "x": -131.5316100570012,
+        "y": -467.82967638436406
       }
     },
     "sm-wUY_k4Im": {
@@ -2653,20 +4072,20 @@
     },
     "im-DJRzVT66": {
       "8Nyu0t_a": {
-        "x": 168.6141779788839,
-        "y": 41.35746606334841
+        "x": 295.67300150829567,
+        "y": 26.153846153846146
       },
       "T0ewkMVH": {
         "x": -175.46666666666667,
         "y": 278.9333333333333
       },
       "rmcBNfYW": {
-        "x": 35.47028657616892,
-        "y": -311.6368024132729
+        "x": 115.47028657616895,
+        "y": -260.43680241327286
       },
       "unksXQHN": {
-        "x": 440.53333333333336,
-        "y": 256.2666666666667
+        "x": 367.7731523378583,
+        "y": 267.126395173454
       },
       "fyuLLKTr": {
         "x": 740,
@@ -2681,8 +4100,8 @@
         "y": -20
       },
       "iVMBtFqn": {
-        "x": 411.6911010558068,
-        "y": -247.2434389140271
+        "x": 532.2340874811462,
+        "y": -262.44705882352935
       }
     },
     "im-O9G_PGe_": {
@@ -2691,16 +4110,16 @@
         "y": 46.61723112299646
       },
       "JZMBg0iM": {
-        "x": -200,
-        "y": 200
+        "x": -243.10415001797358,
+        "y": 216.76272500698974
       },
       "9lP_ORUx": {
-        "x": 16.825035606112095,
-        "y": -197.59344080752444
+        "x": -147.42085196029026,
+        "y": -374.7993908814158
       },
       "jwGXnBd7": {
-        "x": 444.4997416131338,
-        "y": 191.3143126332946
+        "x": 308.0032665562175,
+        "y": 214.06372514278064
       },
       "EA2qBI_r": {
         "x": 740,
@@ -2719,16 +4138,16 @@
         "y": -47.0420600196156
       },
       "_dMCUl70": {
-        "x": 214.85720366997373,
-        "y": -255.3831401213008
+        "x": 195.69980366198547,
+        "y": -444.56246520018476
       },
       "TGQduyl2": {
-        "x": 432.6596314558765,
-        "y": -324.1829995316859
+        "x": 437.4489814578735,
+        "y": -447.50876208311024
       },
       "u226UAN4": {
-        "x": 736.55567560825,
-        "y": -258.23234359101787
+        "x": 734.1610006072515,
+        "y": -447.41166866990187
       }
     }
   }

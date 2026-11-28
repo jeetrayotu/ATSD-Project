@@ -141,15 +141,15 @@ float distance_sensor_0_read() {
 
 {{#LineTracker}}
 // Line tracker functions: raw analog readings, 0 for a channel that is not present
-void line_tracker_read(int &left, int &centre, int &right) {
+void line_tracker_read(int &left, int &center, int &right) {
     left = 0;
-    centre = 0;
+    center = 0;
     right = 0;
     {{#LineChannel0}}
     {
         int value = analogRead(LINE_CHANNEL_0_PIN);
         if (strcmp(LINE_CHANNEL_0_POSITION, "left") == 0) { left = value; }
-        else if (strcmp(LINE_CHANNEL_0_POSITION, "center") == 0) { centre = value; }
+        else if (strcmp(LINE_CHANNEL_0_POSITION, "center") == 0) { center = value; }
         else if (strcmp(LINE_CHANNEL_0_POSITION, "right") == 0) { right = value; }
     }
     {{/LineChannel0}}
@@ -157,7 +157,7 @@ void line_tracker_read(int &left, int &centre, int &right) {
     {
         int value = analogRead(LINE_CHANNEL_1_PIN);
         if (strcmp(LINE_CHANNEL_1_POSITION, "left") == 0) { left = value; }
-        else if (strcmp(LINE_CHANNEL_1_POSITION, "center") == 0) { centre = value; }
+        else if (strcmp(LINE_CHANNEL_1_POSITION, "center") == 0) { center = value; }
         else if (strcmp(LINE_CHANNEL_1_POSITION, "right") == 0) { right = value; }
     }
     {{/LineChannel1}}
@@ -165,7 +165,7 @@ void line_tracker_read(int &left, int &centre, int &right) {
     {
         int value = analogRead(LINE_CHANNEL_2_PIN);
         if (strcmp(LINE_CHANNEL_2_POSITION, "left") == 0) { left = value; }
-        else if (strcmp(LINE_CHANNEL_2_POSITION, "center") == 0) { centre = value; }
+        else if (strcmp(LINE_CHANNEL_2_POSITION, "center") == 0) { center = value; }
         else if (strcmp(LINE_CHANNEL_2_POSITION, "right") == 0) { right = value; }
     }
     {{/LineChannel2}}
@@ -426,8 +426,8 @@ struct Behaviour {
         {{/InitialStateName}}
     }
 
-    // Signal parameters: distance.reading -> cm, line.readings -> left, centre, right
-    void fire(const char* trigger, int cm, int left, int centre, int right) {
+    // Signal parameters: distance.reading -> cm, line.readings -> left, center, right
+    void fire(const char* trigger, int cm, int left, int center, int right) {
         switch (state) {
         {{#States}}
         case STATE_{{StateName}}:
@@ -453,7 +453,7 @@ struct Behaviour {
 Behaviour behaviour;
 
 void setup() {
-    Serial.begin(9600);
+    Serial.begin(115200);
     Serial.println();
     Serial.println("Robot initialized");
     {{#DistanceSensor}}
@@ -519,11 +519,11 @@ void loop() {
         last_line_0 = millis();
 
         int line_left;
-        int line_centre;
+        int line_center;
         int line_right;
-        line_tracker_read(line_left, line_centre, line_right);
+        line_tracker_read(line_left, line_center, line_right);
 
-        behaviour.fire("line.readings", 0, line_left, line_centre, line_right);
+        behaviour.fire("line.readings", 0, line_left, line_center, line_right);
     }
     {{/LineTracker}}
 

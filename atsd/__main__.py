@@ -355,14 +355,24 @@ def generate(model: Path):  # pyright: ignore [reportRedeclaration]
                 behaviours = model.metaModel.behaviours[object_id]
 
                 # TODO: Switch all the mustache checks to this format.
-                render_data["States"] = [{"State" + k[0].upper() + k[1:]:v for k, v in msgspec.structs.asdict(state).items()} for state in behaviours.states if state.name]
+                render_data["States"] = []
+                for state in behaviours.states:
+                    state_data = {}
+                    if state.name:
+                        for k3, v3 in msgspec.structs.asdict(state).items():
+                            d = v3
+                            if k3 in ("entry", "exit"):
+                                for k4, v4 in componentTemplateName.items():
+                                    d = d.replace(k4, v4)
+                            state_data["State" + k3[0].upper() + k3[1:]] = d
+                        render_data["States"].append(state_data)
                 states = {state.id:state for state in behaviours.states}
                 render_data["Transitions"] = []
                 for transition in behaviours.transitions:
                     transition_data = {}
                     for k3, v3 in msgspec.structs.asdict(transition).items():
                         d = states[v3].name if k3 == "target" else v3
-                        if k3 == "guard":
+                        if k3 in ("trigger", "guard", "effect"):
                             for k4, v4 in componentTemplateName.items():
                                 d = d.replace(k4, v4)
                         transition_data["Transition" + k3[0].upper() + k3[1:]] = d
