@@ -1,13 +1,17 @@
+import enum
+import tempfile
+import msgspec
+import os
+import re
+import rich_click as click
+
 from chevron import render
 from collections import defaultdict
 from collections import namedtuple
 from pathlib import Path
 from rich import print
 from rich.pretty import pprint
-import enum
-import msgspec
-import rich_click as click
-import re
+from subprocess import call
 
 # A named tuple of an attribute name and default value.
 # The `name` and `default` values for instances of this tuple
@@ -223,6 +227,9 @@ parent_dir = current_dir.parent
 # The assets directory as a Pathlib Path object.
 assets_dir = parent_dir / "assets"
 
+# The vendor directory as a Pathlib Path object.
+vendor_dir = parent_dir / "vendor"
+
 # The directory to store generated Arduino C++ files
 # as a Pathlib Path object.
 # This directory is made if it doesn't exist yet.
@@ -390,10 +397,18 @@ def generate(model: Path):  # pyright: ignore [reportRedeclaration]
                             state_data["State" + k3[0].upper() + k3[1:]] = d
                         render_data["States"].append(state_data)
 
-        # Read the mustache template and replace all the placeholders with
-        # the provided render data, then write it to the Arduino C++ file.
-        with mustache_template.open() as f:
-            robot_file.write_text(render(f, render_data))
+        with tempfile.NamedTemporaryFile("w+") as tf, mustache_template.open() as f, robot_file.open("w+") as rf:
+
+            # Write the rendered template file to a temporary file.
+            tf.write(render(f, render_data))
+            tf.flush()
+
+            # Format the temporary file and write it to the Arduino C++ file.
+            if os.name == 'nt':
+                call([vendor_dir / "clang-format-windows-x64.exe", tf.name], stdout=rf)
+            else:
+                call(["chmod", "+x", vendor_dir / "clang-format-linux-x64"])
+                call([vendor_dir / "clang-format-linux-x64", tf.name], stdout=rf)
 
 
 # If running as a script, use the entrypoint.
