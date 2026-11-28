@@ -430,14 +430,14 @@ struct Behaviour {
     void fire(const char* trigger, int cm, int left, int center, int right) {
         switch (state) {
         {{#States}}
-        case STATE_{{StateName}}:
+        case STATE_{{{StateName}}}:
             {{#Transitions}}
-            if (strcmp(trigger, "{{TransitionTrigger}}") == 0 &&
+            if (strcmp(trigger, "{{{TransitionTrigger}}}") == 0 &&
                 ({{#TransitionGuard}}{{{TransitionGuard}}}{{/TransitionGuard}}{{^TransitionGuard}}true{{/TransitionGuard}})) {
                 timer.cancel();
                 leave(state);
                 {{{TransitionEffect}}}
-                state = STATE_{{TransitionTarget}};
+                state = STATE_{{{TransitionTarget}}};
                 enter(state);
                 return;
             }

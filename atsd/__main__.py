@@ -14,8 +14,9 @@ import re
 # can be accessed using indices or attribute names.
 AttributeNameDefault = namedtuple("AttributeNameDefaultType", "name,default,type")
 
-
+InstanceNameID = namedtuple("InstanceNameID", "name,id")
 ObjectNameID = namedtuple("ObjectNameID", "name,id")
+
 
 def resolve_path(path):
     """
@@ -195,6 +196,7 @@ class InstanceModelObject(msgspec.Struct):
 # A `msgspec` structure for an instance model,
 # storing a name and a list of instance model objects.
 class InstanceModel(msgspec.Struct):
+    id: str
     name: str
     objects: list[InstanceModelObject]
 
@@ -235,12 +237,14 @@ model_template = assets_dir / "template.iml.json"
 # The list of classes with subclasses
 classes_with_subclasses = ("Controller",)
 
+
 def removeSubclassName(name):
     for cls in classes_with_subclasses:
         if cls in name and not name.startswith(cls):
             cls_index = name.find(cls)
             name = name[cls_index:]
     return name
+
 
 @click.group()
 def main():
@@ -289,10 +293,9 @@ def generate(model: Path):  # pyright: ignore [reportRedeclaration]
                         default = ""
             allAttributeValues[attr.id] = AttributeNameDefault(attr.name, default, t)
 
-    instances = {}
+    instances = defaultdict(dict)
     for instance in model.instanceModels:
-        instances[instance.name] = {}
-
+        instance_name_id = InstanceNameID(instance.name, instance.id)
         # Create a dictionary with a default value of 0
         # for all missing keys and add 1 for every
         # occurence of a particular component.
@@ -309,22 +312,25 @@ def generate(model: Path):  # pyright: ignore [reportRedeclaration]
             originalObjectName = objectName = allClassIDs[object.classId]
             if counts[allClassIDs[object.classId]] > 1:
                 objectName = f"{originalObjectName}{count}"
-                while (objectName, object.classId) in instances[instance.name]:
+                while (objectName, object.classId) in instances[instance_name_id]:
                     count += 1
                     objectName = f"{originalObjectName}{count}"
 
             # For every attribute of every component in an instance model object,
             # replace the attribute ID with the attribute name, and keep the value.
-            instances[instance.name][ObjectNameID(objectName, object.classId)] = {
-                allAttributeValues[k]: v for k, v in object.attributeValues.items()
-            }
+            instances[instance_name_id][
+                ObjectNameID(objectName, object.classId)
+            ] = {allAttributeValues[k]: v for k, v in object.attributeValues.items()}
 
-    for instance_model_name, instance_model_info in instances.items():
+    for (
+        instance_model_name,
+        instance_model_id,
+    ), instance_model_info in instances.items():
         # Set the path of the Arduino C++ file and create its parent diretory.
         robot_file = generated_dir / instance_model_name / f"{instance_model_name}.ino"
         robot_file.parent.mkdir(parents=True, exist_ok=True)
 
-        render_data = {"InstanceModelName": instance_model_name}
+        render_data = {"InstanceModelName": instance_model_name, "States": []}
         for k1, v1 in instance_model_info.items():
             object_name = k1.name
             object_id = k1.id
@@ -342,20 +348,27 @@ def generate(model: Path):  # pyright: ignore [reportRedeclaration]
 
             # Adapted From:
             # Answer: https://stackoverflow.com/a/1176023
-            pattern = re.compile(r"(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])|(?<=[A-Za-z])(?=\d)|(?<=\d)(?=[A-Za-z])")
+            pattern = re.compile(
+                r"(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])|(?<=[A-Za-z])(?=\d)|(?<=\d)(?=[A-Za-z])"
+            )
 
             componentTemplateName = {}
             for k2, v2 in v1.items():
-                componentTemplateName[k2.name] = removeSubclassName(f"{pattern.sub('_', object_name)}_{pattern.sub('_', k2.name)}").upper()
-                name = removeSubclassName(object_name + k2.name[0].upper() + k2.name[1:])
+                componentTemplateName[k2.name] = removeSubclassName(
+                    f"{pattern.sub('_', object_name)}_{pattern.sub('_', k2.name)}"
+                ).upper()
+                name = removeSubclassName(
+                    object_name + k2.name[0].upper() + k2.name[1:]
+                )
                 render_data[name] = f'"{v2}"' if k2.type == "char*" else v2
                 render_data[f"{name}_type"] = k2.type
+            componentTemplateName = dict(sorted(componentTemplateName.items(), key=lambda item: len(item[0]), reverse=True))
 
             if object_id in model.metaModel.behaviours:
                 behaviours = model.metaModel.behaviours[object_id]
 
                 # TODO: Switch all the mustache checks to this format.
-                states = {state.id:state for state in behaviours.states}
+                states = {state.id: state for state in behaviours.states}
                 transitions = defaultdict(list)
                 for transition in behaviours.transitions:
                     transition_data = {}
@@ -366,10 +379,9 @@ def generate(model: Path):  # pyright: ignore [reportRedeclaration]
                                 d = d.replace(k4, v4)
                         transition_data["Transition" + k3[0].upper() + k3[1:]] = d
                     transitions[transition.source].append(transition_data)
-                render_data["States"] = []
                 for state in behaviours.states:
                     if state.name:
-                        state_data = {"Transitions":transitions[state.id]}
+                        state_data = {"Transitions": transitions[state.id]}
                         for k3, v3 in msgspec.structs.asdict(state).items():
                             d = v3
                             if k3 in ("entry", "exit"):
