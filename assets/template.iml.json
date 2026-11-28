@@ -1442,7 +1442,7 @@
             "source": "mBDal6Q0",
             "target": "K7wP94pJ",
             "trigger": "timer.timeout",
-            "guard": "",
+            "guard": "state == STATE_Turning",
             "effect": "",
             "sourceHandle": "right",
             "targetHandle": "right"
@@ -1452,7 +1452,7 @@
             "source": "K7wP94pJ",
             "target": "NxSwH7-1",
             "trigger": "timer.timeout",
-            "guard": "",
+            "guard": "state == STATE_Driving",
             "effect": "log.log(\"time up\");",
             "sourceHandle": "bottom",
             "targetHandle": "bottom",

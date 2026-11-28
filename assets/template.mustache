@@ -431,17 +431,17 @@ struct Behaviour {
         switch (state) {
         {{#States}}
         case STATE_{{StateName}}:
-            {{#Transitions}}
-            if (strcmp(trigger, "{{TransitionTrigger}}") == 0 &&
-                ({{#TransitionGuard}}{{{TransitionGuard}}}{{/TransitionGuard}}{{^TransitionGuard}}true{{/TransitionGuard}})) {
+            {{#StateTransitions}}
+            if (strcmp(trigger, "{{StateTransitionTrigger}}") == 0 &&
+                ({{#StateTransitionGuard}}{{{StateTransitionGuard}}}{{/StateTransitionGuard}}{{^StateTransitionGuard}}true{{/StateTransitionGuard}})) {
                 timer.cancel();
                 leave(state);
-                {{{TransitionEffect}}}
-                state = STATE_{{TransitionTarget}};
+                {{{StateTransitionEffect}}}
+                state = STATE_{{StateTransitionTarget}};
                 enter(state);
                 return;
             }
-            {{/Transitions}}
+            {{/StateTransitions}}
             break;
         {{/States}}
         default:
