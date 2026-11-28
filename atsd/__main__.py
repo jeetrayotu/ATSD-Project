@@ -1,9 +1,9 @@
 import enum
-import tempfile
 import msgspec
-import os
+import platform
 import re
 import rich_click as click
+import tempfile
 
 from chevron import render
 from collections import defaultdict
@@ -325,9 +325,9 @@ def generate(model: Path):  # pyright: ignore [reportRedeclaration]
 
             # For every attribute of every component in an instance model object,
             # replace the attribute ID with the attribute name, and keep the value.
-            instances[instance_name_id][
-                ObjectNameID(objectName, object.classId)
-            ] = {allAttributeValues[k]: v for k, v in object.attributeValues.items()}
+            instances[instance_name_id][ObjectNameID(objectName, object.classId)] = {
+                allAttributeValues[k]: v for k, v in object.attributeValues.items()
+            }
 
     for (
         instance_model_name,
@@ -369,7 +369,13 @@ def generate(model: Path):  # pyright: ignore [reportRedeclaration]
                 )
                 render_data[name] = f'"{v2}"' if k2.type == "char*" else v2
                 render_data[f"{name}_type"] = k2.type
-            componentTemplateName = dict(sorted(componentTemplateName.items(), key=lambda item: len(item[0]), reverse=True))
+            componentTemplateName = dict(
+                sorted(
+                    componentTemplateName.items(),
+                    key=lambda item: len(item[0]),
+                    reverse=True,
+                )
+            )
 
             if object_id in model.metaModel.behaviours:
                 behaviours = model.metaModel.behaviours[object_id]
@@ -397,18 +403,30 @@ def generate(model: Path):  # pyright: ignore [reportRedeclaration]
                             state_data["State" + k3[0].upper() + k3[1:]] = d
                         render_data["States"].append(state_data)
 
-        with tempfile.NamedTemporaryFile("w+") as tf, mustache_template.open() as f, robot_file.open("w+") as rf:
+        with (
+            tempfile.NamedTemporaryFile("w+") as tf,
+            mustache_template.open() as f,
+            robot_file.open("w+") as rf,
+        ):
+            render_text = render(f, render_data)
+            system = platform.system()
+            if system in ("Windows", "Linux"):
+                # Write the rendered template file to a temporary file.
+                tf.write(render_text)
+                tf.flush()
 
-            # Write the rendered template file to a temporary file.
-            tf.write(render(f, render_data))
-            tf.flush()
+                # Format the temporary file and write it to the Arduino C++ file.
+                if system == "Windows":
+                    call(
+                        [vendor_dir / "clang-format-windows-x64.exe", tf.name],
+                        stdout=rf,
+                    )
+                else:
+                    call(["chmod", "+x", vendor_dir / "clang-format-linux-x64"])
+                    call([vendor_dir / "clang-format-linux-x64", tf.name], stdout=rf)
 
-            # Format the temporary file and write it to the Arduino C++ file.
-            if os.name == 'nt':
-                call([vendor_dir / "clang-format-windows-x64.exe", tf.name], stdout=rf)
             else:
-                call(["chmod", "+x", vendor_dir / "clang-format-linux-x64"])
-                call([vendor_dir / "clang-format-linux-x64", tf.name], stdout=rf)
+                rf.write(render_text)
 
 
 # If running as a script, use the entrypoint.
