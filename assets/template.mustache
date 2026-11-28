@@ -431,17 +431,17 @@ struct Behaviour {
         switch (state) {
         {{#States}}
         case STATE_{{StateName}}:
-            {{#StateTransitions}}
-            if (strcmp(trigger, "{{StateTransitionTrigger}}") == 0 &&
-                ({{#StateTransitionGuard}}{{{StateTransitionGuard}}}{{/StateTransitionGuard}}{{^StateTransitionGuard}}true{{/StateTransitionGuard}})) {
+            {{#Transitions}}
+            if (strcmp(trigger, "{{TransitionTrigger}}") == 0 &&
+                ({{#TransitionGuard}}{{{TransitionGuard}}}{{/TransitionGuard}}{{^TransitionGuard}}true{{/TransitionGuard}})) {
                 timer.cancel();
                 leave(state);
-                {{{StateTransitionEffect}}}
-                state = STATE_{{StateTransitionTarget}};
+                {{{TransitionEffect}}}
+                state = STATE_{{TransitionTarget}};
                 enter(state);
                 return;
             }
-            {{/StateTransitions}}
+            {{/Transitions}}
             break;
         {{/States}}
         default:
@@ -483,6 +483,15 @@ void setup() {
     pinMode(MOTOR_1_PWM_PIN, OUTPUT);
     pinMode(MOTOR_1_DIRECTION_PIN, OUTPUT);
     {{/Motor1}}
+
+    {{#MotorDriver}}
+    {{#MotorDriverStandbyPin}}
+    // Take the motor driver out of standby; the TB6612 drives nothing while STBY is low.
+    pinMode(MOTOR_DRIVER_STANDBY_PIN, OUTPUT);
+    digitalWrite(MOTOR_DRIVER_STANDBY_PIN, HIGH);
+    {{/MotorDriverStandbyPin}}
+    {{/MotorDriver}}
+
     {{#StatusLED}}
     status_led_0_init();
     {{/StatusLED}}
